@@ -35,10 +35,6 @@
       - id: BoxFlashbang
       - id: Flash
         amount: 3
-      - id: WeaponShotgun39NonLethal #Backmen Rebalance Start
-        amount: 2
-      - id: BoxBeanbag
-        amount: 2 #Backmen Rebalance End
 #      - Pepperspray
 #      - GrenadeTeargas
 
@@ -54,12 +50,10 @@
         amount: 2
       - id: ClothingHeadHelmetRiot
         amount: 2
-      - id: WeaponLauncherM81 #Backmen Rebalance Start
+      - id: WeaponShotgunEnforcerRubber
         amount: 2
-      - id: BoxGrenadeTearGas
+      - id: BoxBeanbag
         amount: 2
-      - id: BoxGrenadeNonLetal
-        amount: 2 #Backmen Rebalance End
       - id: RiotShield
         amount: 2
 #      - SecGasmask

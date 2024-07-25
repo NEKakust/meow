@@ -11,14 +11,14 @@
 - type: entity
   id: BriefcaseSyndieSniperBundleFilled
   parent: BriefcaseSyndie
-  noSpawn: true
   suffix: Syndicate, Sniper Bundle
   components:
   - type: Item
     size: Ginormous
   - type: Storage
+    maxItemSize: Huge
     grid:
-    - 0,0,6,4
+    - 0,0,6,3
   - type: StorageFill
     contents:
       - id: WeaponSniperHristov
@@ -36,7 +36,7 @@
   - type: StorageFill
     contents:
       - id: ClothingEyesGlassesSunglasses
-      - id: CargoCash30000
+      - id: SpaceCash30000
         amount: 1
       - id: EncryptionKeySyndie
       - id: RubberStampTrader
@@ -55,7 +55,7 @@
   - type: StorageFill
     contents:
       - id: ClothingEyesGlassesSunglasses
-      - id: CargoCash20000
+      - id: SpaceCash20000
         amount: 1
       - id: ClothingOuterCoatJensen
       - id: ClothingHandsGlovesColorBlack

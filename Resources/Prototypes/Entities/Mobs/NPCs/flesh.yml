@@ -15,7 +15,7 @@
         true
   - type: NpcFactionMember
     factions:
-    - Flesh
+    - SimpleHostile
   - type: Tag
     tags:
     - DoorBumpOpener

@@ -70,22 +70,7 @@
     - BorgModuleClowning
     - DawInstrumentMachineCircuitboard
     - MassMediaCircuitboard
-    - ShipyardCircuitboard
     - JukeboxCircuitBoard
-
-- type: technology
-  id: JewelryCase
-  name: research-technology-jewelry-case
-  icon:
-    sprite: Backmen/Clothing/Hands/Rings/rings.rsi
-    state: goldring
-  discipline: CivilianServices
-  tier: 1
-  cost: 1000
-  recipeUnlocks:
-    - Ring
-    - SapphireRing
-    - GoldenRing
 
 - type: technology
   id: RoboticCleanliness
@@ -244,4 +229,3 @@
   recipeUnlocks:
   - BluespaceBeaker
   - SyringeBluespace
-  - BluespacePillCanister # backmen

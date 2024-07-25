@@ -510,9 +510,6 @@
   id: DiscreteHealthAnalyzer #So construction recipes don't eat medical PDAs
 
 - type: Tag
-  id: Directional
-
-- type: Tag
   id: DockArrivals
 
 - type: Tag
@@ -546,13 +543,7 @@
   id: DrinkCan
 
 - type: Tag
-  id: DrinkGlass
-
-- type: Tag
   id: DrinkSpaceGlue
-
-- type: Tag 
-  id: Dropper
 
 - type: Tag
   id: Duck
@@ -627,13 +618,7 @@
   id: Galaxythistle
 
 - type: Tag
-  id: FullBodyOuter # this outerclothing wraps around the feet and legs
-
-- type: Tag
   id: GasScrubber
-
-- type: Tag
-  id: GasTank
 
 - type: Tag
   id: GasVent
@@ -723,9 +708,6 @@
   id: HidesHair # for headwear.
 
 - type: Tag
-  id: HidesLegs # for spider legs.
-
-- type: Tag
   id: HidesNose # for non-standard noses.
 
 - type: Tag
@@ -775,9 +757,6 @@
 
 - type: Tag
   id: Igniter
-
-- type: Tag
-  id: Ingredient
 
 - type: Tag #Drop this innate tool instead of deleting it.
   id: InnateDontDelete
@@ -1119,9 +1098,6 @@
 
 - type: Tag
   id: SalvageExperiment
-
-- type: Tag
-  id: Scarf
 
 - type: Tag
   id: Screwdriver

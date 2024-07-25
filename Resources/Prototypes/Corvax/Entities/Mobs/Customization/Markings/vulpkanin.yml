@@ -1,5 +1,5 @@
 - type: marking
-  id: PawSocksV
+  id: PawSocks
   markingCategory: Overlay
   bodyPart: RFoot #highest possible layer
   speciesRestriction: [Vulpkanin]
@@ -8,7 +8,7 @@
       state: pawsocks
 
 - type: marking
-  id: FoxTailV
+  id: FoxTail
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Vulpkanin]
@@ -19,7 +19,7 @@
       state: vulp_tail_inner
 
 - type: marking
-  id: FoxEarV
+  id: FoxEar
   bodyPart: HeadTop
   markingCategory: HeadTop
   speciesRestriction: [Vulpkanin]
@@ -30,7 +30,7 @@
       state: vulp_ear_inner
 
 - type: marking
-  id: WolfTailV
+  id: WolfTail
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Vulpkanin]
@@ -41,7 +41,7 @@
       state: wolf_tail_inner
 
 - type: marking
-  id: FoxBellyV
+  id: FoxBelly
   bodyPart: Chest
   markingCategory: Chest
   speciesRestriction: [Vulpkanin]
@@ -50,7 +50,7 @@
       state: vulp_belly-torso
 
 - type: marking
-  id: FoxSnoutV
+  id: FoxSnout
   bodyPart: Snout
   markingCategory: Snout
   speciesRestriction: [Vulpkanin]
@@ -65,10 +65,10 @@
   markingCategory: Tail
   speciesRestriction: []
   sprites:
-    - sprite: Backmen/Mobs/Customization/fox_markings.rsi # backmen
+    - sprite: Corvax/Mobs/Customization/vulpkanin.rsi
       state: tail_fox_waggin
-    # - sprite: Corvax/Mobs/Customization/vulpkanin.rsi # backmen
-      # state: tail_fox_inner_waggin
+    - sprite: Corvax/Mobs/Customization/vulpkanin.rsi
+      state: tail_fox_inner_waggin
 
 - type: marking
   id: WolfTailAnimated

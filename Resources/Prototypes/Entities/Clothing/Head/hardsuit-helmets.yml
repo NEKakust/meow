@@ -61,7 +61,6 @@
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
     coefficient: 0.005
-  - type: EyeProtection
   - type: FireProtection
     reduction: 0.2
 
@@ -81,7 +80,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.1
     lowPressureMultiplier: 1000
-  - type: EyeProtection
 
 #Spationaut Hardsuit
 - type: entity
@@ -113,8 +111,6 @@
       - state: equipped-head
       - state: equipped-head-unshaded
         shader: unshaded
-  - type: PointLight
-    radius: 6
   - type: PressureProtection
     highPressureMultiplier: 0.72
     lowPressureMultiplier: 1000
@@ -182,7 +178,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: FlashImmunity
 
 #Brigmedic Hardsuit
 - type: entity
@@ -209,7 +204,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
-  - type: FlashImmunity
 
 #Warden's Hardsuit
 - type: entity
@@ -223,7 +217,7 @@
   - type: Clothing
     sprite: Clothing/Head/Hardsuits/security-warden.rsi
   - type: PointLight
-    color: "#ffeead"
+    color: cyan # Corvax-Resprite
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
@@ -234,7 +228,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: FlashImmunity
 
 #Captain's Hardsuit
 - type: entity
@@ -262,14 +255,11 @@
     sprite: Clothing/Head/Hardsuits/engineering-white.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardsuits/engineering-white.rsi
-  - type: PointLight
-    color: "#daffad"
+  - type: PointLight # Corvax-Resprite
+    color: "#e6aa5c"
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: EyeProtection
-  - type: FireProtection
-    reduction: 0.2
 
 #Chief Medical Officer's Hardsuit
 - type: entity
@@ -299,8 +289,8 @@
     sprite: Clothing/Head/Hardsuits/rd.rsi
   - type: Clothing
     sprite: Clothing/Head/Hardsuits/rd.rsi
-  - type: PointLight
-    color: "#d6adff"
+  - type: PointLight # Corvax-Resprite
+    color: "#a4fef4"
   - type: PressureProtection
     highPressureMultiplier: 0.60
     lowPressureMultiplier: 1000
@@ -328,7 +318,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: FlashImmunity
 
 #Luxury Mining Hardsuit
 - type: entity
@@ -357,9 +346,9 @@
   description: A heavily armored helmet designed for work in special operations. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Backmen/Clothing/Head/Hardsuits/syndicate.rsi #backmen resprite
+    sprite: Clothing/Head/Hardsuits/syndicate.rsi
   - type: Clothing
-    sprite: Backmen/Clothing/Head/Hardsuits/syndicate.rsi #backmen resprite
+    sprite: Clothing/Head/Hardsuits/syndicate.rsi
   - type: PointLight
     color: green
   - type: PressureProtection
@@ -372,8 +361,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: TinfoilHat
-    destroyOnFry: false
 
 #Blood-red Medic Hardsuit
 - type: entity
@@ -398,8 +385,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: TinfoilHat
-    destroyOnFry: false
 
 #Syndicate Elite Hardsuit
 - type: entity
@@ -409,9 +394,9 @@
   description: An elite version of the blood-red hardsuit's helmet, with improved armor and fireproofing. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Backmen/Clothing/Head/Hardsuits/syndieelite.rsi #backmen resprite
+    sprite: Clothing/Head/Hardsuits/syndieelite.rsi
   - type: Clothing
-    sprite: Backmen/Clothing/Head/Hardsuits/syndieelite.rsi #backmen resprite
+    sprite: Clothing/Head/Hardsuits/syndieelite.rsi
   - type: PointLight
     color: red
   - type: PressureProtection
@@ -428,8 +413,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: TinfoilHat
-    destroyOnFry: false
 
 #Syndicate Commander Hardsuit
 - type: entity
@@ -439,9 +422,9 @@
   description: A bulked up version of the blood-red hardsuit's helmet, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights.
   components:
   - type: Sprite
-    sprite: Backmen/Clothing/Head/Hardsuits/syndiecommander.rsi #backmen resprite
+    sprite: Clothing/Head/Hardsuits/syndiecommander.rsi
   - type: Clothing
-    sprite: Backmen/Clothing/Head/Hardsuits/syndiecommander.rsi #backmen resprite
+    sprite: Clothing/Head/Hardsuits/syndiecommander.rsi
   - type: PointLight
     color: green
   - type: PressureProtection
@@ -454,8 +437,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: TinfoilHat
-    destroyOnFry: false
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
@@ -465,9 +446,9 @@
   description: Made of compressed red matter, this helmet was designed in the Tau chromosphere facility.
   components:
   - type: Sprite
-    sprite: Backmen/Clothing/Head/Hardsuits/cybersun.rsi #backmen resprite
+    sprite: Clothing/Head/Hardsuits/cybersun.rsi
   - type: Clothing
-    sprite: Backmen/Clothing/Head/Hardsuits/cybersun.rsi #backmen resprite
+    sprite: Clothing/Head/Hardsuits/cybersun.rsi
   - type: PointLight # Corvax-Resprite
     color: red
   - type: PressureProtection
@@ -480,8 +461,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: TinfoilHat
-    destroyOnFry: false
 
 #Wizard Hardsuit
 - type: entity
@@ -491,11 +470,11 @@
   description: A bizarre gem-encrusted helmet that radiates magical energies.
   components:
   - type: Sprite
-    sprite: Backmen/Clothing/Head/Hardsuits/wizard.rsi #backmen resprite
+    sprite: Clothing/Head/Hardsuits/wizard.rsi
   - type: Clothing
-    sprite: Backmen/Clothing/Head/Hardsuits/wizard.rsi #backmen resprite
+    sprite: Clothing/Head/Hardsuits/wizard.rsi
   - type: PointLight
-    color: "#ffadfb"
+    color: "#a4fef4" # Corvax-Resprite
   - type: PressureProtection
     highPressureMultiplier: 0.27
     lowPressureMultiplier: 1000
@@ -506,7 +485,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: HeadCage
 
 #Organic Space Suit
 - type: entity
@@ -603,7 +581,7 @@
   - type: Clothing
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertengineer.rsi
   - type: PointLight
-    color: "#f4ffad"
+    color: cyan # Corvax-Resprite
   - type: Armor
     modifiers:
       coefficients:
@@ -638,7 +616,7 @@
   - type: Clothing
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertsecurity.rsi
   - type: PointLight
-    color: "#ffadc6"
+    color: cyan # Corvax-Resprite
   - type: Armor
     modifiers:
       coefficients:
@@ -685,7 +663,7 @@
       - state: equipped-head-unshaded
         shader: unshaded
   - type: PointLight
-    color: orange # Corvax-Resprite
+    color: "#a4fef4" # Corvax-Resprite
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -743,6 +721,8 @@
     sprite: Clothing/Head/Hardsuits/clown.rsi
     equipSound: /Audio/Mecha/mechmove03.ogg
     unequipSound: /Audio/Effects/Emotes/parp1.ogg
+  - type: PointLight # Corvax-Resprite
+    color: "#ff3399"
 
 #Mime Hardsuit
 - type: entity
@@ -753,9 +733,9 @@
   components:
   - type: BreathMask
   - type: Sprite
-    sprite: Backmen/Clothing/Head/Hardsuits/mime.rsi
+    sprite: Clothing/Head/Hardsuits/mime.rsi
   - type: Clothing
-    sprite: Backmen/Clothing/Head/Hardsuits/mime.rsi
+    sprite: Clothing/Head/Hardsuits/mime.rsi
 
 #Santas Hardsuit
 - type: entity

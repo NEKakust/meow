@@ -59,7 +59,6 @@
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: Airtight
-    fixVacuum: true
   - type: RadiationBlocker
     resistance: 2
   - type: Damageable

@@ -13,6 +13,9 @@
     shoes: ClothingShoesBootsJack
     id: PassengerPDA
     ears: ClothingHeadsetGrey
+  storage:
+    back:
+    - BoxSurvival
 
 #Deathsquad Outfit
 - type: startingGear
@@ -25,7 +28,7 @@
     ears: ClothingHeadsetAltCentCom
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitDeathsquad
-    suitstorage: AirTankFilled
+    suitstorage: JetpackVoidFilled
     shoes: ClothingShoesBootsMagAdv
     id: DeathsquadPDA
     pocket1: EnergySword
@@ -153,7 +156,7 @@
 #Brigmedic
 
 - type: startingGear
-  id: BrigmedicGearOld
+  id: BrigmedicGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitBrigmedic
     outerClothing: ClothingOuterCoatAMG

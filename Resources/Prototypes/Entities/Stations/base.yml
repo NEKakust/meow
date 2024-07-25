@@ -46,18 +46,17 @@
       path: /Maps/Shuttles/cargo.yml
     - type: GridSpawn
       groups:
-        trade: !type:GridSpawnGroup
+        trade:
           addComponents:
-            - type: ArrivalsProtectGrid
             - type: ProtectedGrid
             - type: TradeStation
           paths:
             - /Maps/Shuttles/trading_outpost.yml
-        mining: !type:GridSpawnGroup
+        mining:
           paths:
-          - /Maps/Backmen/Grids/pts.yml # backmen-salvage-shuttle
+          - /Maps/Shuttles/corvax_mining.yml # Corvax-Mapping
         # Spawn last
-        ruins: !type:GridSpawnGroup
+        ruins:
           hide: true
           nameGrid: true
           minCount: 2
@@ -73,22 +72,13 @@
           - /Maps/Ruins/syndicate_dropship.yml
           - /Maps/Ruins/whiteship_ancient.yml
           - /Maps/Ruins/whiteship_bluespacejumper.yml
-        vgroid: !type:DungeonSpawnGroup
-          minimumDistance: 1000
-          nameDataset: names_borer
-          stationGrid: false
-          addComponents:
-          - type: Gravity
-            enabled: true
-            inherent: true
-          protos:
-          - VGRoid
 
 - type: entity
   id: BaseStationCentcomm
   abstract: true
   components:
     - type: StationCentcomm
+      map: "/Maps/corvax_centcomm.yml" # Corvax-Mapping
 
 - type: entity
   id: BaseStationEvacuation

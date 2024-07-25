@@ -1,6 +1,6 @@
-- type: entity
+﻿- type: entity
   id: ActionForceWall
-  name: forcewall
+  name: Forcewall
   description: Creates a magical barrier.
   components:
   - type: InstantAction
@@ -13,4 +13,5 @@
       state: shield
     event: !type:InstantSpawnSpellEvent
       prototype: WallForce
+      posData: !type:TargetInFront
       speech: action-speech-spell-forcewall

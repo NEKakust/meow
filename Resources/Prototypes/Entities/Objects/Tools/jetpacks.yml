@@ -22,8 +22,8 @@
   parent: GasTankBase
   abstract: true
   id: BaseJetpack
-  name: jetpack
-  description: It's a jetpack. It can hold 5 L of gas.
+  name: Jetpack
+  description: It's a jetpack.
   components:
     - type: InputMover
       toParent: true
@@ -148,9 +148,6 @@
     sprite: Objects/Tanks/Jetpacks/captain.rsi
   - type: Clothing
     sprite: Objects/Tanks/Jetpacks/captain.rsi
-    clothingVisuals:
-      suitstorage:
-      - state: equipped-BACKPACK
     slots:
       - Back
       - SuitStorage
@@ -185,7 +182,6 @@
   id: JetpackMini
   parent: BaseJetpack
   name: mini jetpack
-  description: It's a jetpack. It can hold 1.5 L of gas.
   suffix: Empty
   components:
     - type: Item
@@ -194,9 +190,6 @@
       sprite: Objects/Tanks/Jetpacks/mini.rsi
     - type: Clothing
       sprite: Objects/Tanks/Jetpacks/mini.rsi
-      clothingVisuals:
-        suitstorage:
-        - state: equipped-BACKPACK
       slots:
         - Back
         - suitStorage
@@ -269,9 +262,6 @@
     sprite: Objects/Tanks/Jetpacks/void.rsi
   - type: Clothing
     sprite: Objects/Tanks/Jetpacks/void.rsi
-    clothingVisuals:
-      suitstorage:
-      - state: equipped-BACKPACK
     slots:
       - Back
       - suitStorage

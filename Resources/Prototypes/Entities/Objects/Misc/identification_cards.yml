@@ -442,8 +442,6 @@
     layers:
     - state: default
     - state: idbrigmedic
-  - type: PresetIdCard
-    job: Brigmedic
 
 - type: entity
   parent: IDCardStandard
@@ -468,7 +466,6 @@
 - type: entity
   parent: CentcomIDCard
   id: ERTLeaderIDCard
-  noSpawn: true
   name: ERT leader ID card
   components:
   - type: Sprite
@@ -483,7 +480,6 @@
 - type: entity
   parent: ERTLeaderIDCard
   id: ERTChaplainIDCard
-  noSpawn: true
   name: ERT chaplain ID card
   components:
   - type: Sprite
@@ -498,7 +494,6 @@
 - type: entity
   parent: ERTChaplainIDCard
   id: ERTEngineerIDCard
-  noSpawn: true
   name: ERT engineer ID card
   components:
   - type: Sprite
@@ -511,7 +506,6 @@
 - type: entity
   parent: ERTChaplainIDCard
   id: ERTJanitorIDCard
-  noSpawn: true
   name: ERT janitor ID card
   components:
   - type: Sprite
@@ -524,7 +518,6 @@
 - type: entity
   parent: ERTChaplainIDCard
   id: ERTMedicIDCard
-  noSpawn: true
   name: ERT medic ID card
   components:
   - type: Sprite
@@ -537,7 +530,6 @@
 - type: entity
   parent: ERTChaplainIDCard
   id: ERTSecurityIDCard
-  noSpawn: true
   name: ERT security ID card
   components:
   - type: Sprite

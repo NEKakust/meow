@@ -26,7 +26,6 @@
       - id: PlushieXeno
       - id: PlushieHampter
       - id: PlushieMoth
-      - id: RubberPig
       - id: PlushieArachind
       - id: PlushiePenguin
 
@@ -306,7 +305,6 @@
       - id: ClothingShoesClownLarge
       - id: ClothingHeadHatMagician
       - id: BeachBall
-      - id: RubberPig
       - id: ClothingShoesSkates
 
 - type: entity

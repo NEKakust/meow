@@ -78,7 +78,6 @@
         - ClothingHeadHatCowboyBountyHunter
         - ClothingNeckAutismPin
         - ClothingNeckGoldAutismPin
-        - WristwatchGold
       rareChance: 0.01
       prototypes:
         - Lighter
@@ -140,7 +139,6 @@
         - ClothingShoesTourist
         - ClothingUniformJumpsuitLoungewear
         - ClothingHeadHatCowboyRed
-        - Wristwatch
       chance: 0.6
       offset: 0.0
 
@@ -164,7 +162,6 @@
         - WelderIndustrial
         - SheetPlasteel10
         - ClothingMaskGasExplorer
-        - SheetUranium
       rareChance: 0.08
       prototypes:
         - FlashlightLantern
@@ -218,7 +215,6 @@
         - CableHVStack10
         - CableMVStack10
         - CableApcStack10
-        - SheetUranium1
         - PetCarrier
       chance: 0.6
       offset: 0.0
@@ -272,7 +268,6 @@
         - Shiv
         - SawImprov
         - HydroponicsToolMiniHoe
-        - SheetUranium1
       chance: 0.6
       offset: 0.0
 

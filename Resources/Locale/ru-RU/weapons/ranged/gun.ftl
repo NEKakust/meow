@@ -39,9 +39,9 @@ gun-chamber-rack = Передёрнуть затвор
 # MagazineAmmoProvider
 gun-magazine-examine =
     Тут [color={ $color }]{ $count }[/color] { $count ->
-        [one] штука
-        [few] штуки
-       *[other] штук
+        [one] патрон
+        [few] патрона
+       *[other] патронов
     }.
 # RevolverAmmoProvider
 gun-revolver-empty = Разрядить револьвер

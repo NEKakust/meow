@@ -7,7 +7,7 @@
   components:
   - type: Sprite
   - type: Item
-    size: LargeHuge
+    size: Huge
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/ak.rsi
     quickEquip: false
@@ -36,7 +36,6 @@
         whitelist:
           tags:
             - MagazineLightRifle
-        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: CartridgeLightRifle
@@ -56,7 +55,6 @@
   parent: BaseWeaponRifle
   id: WeaponRifleAk
   description: An iconic weapon of war. Uses .30 rifle ammo.
-  noSpawn: true
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/ak.rsi
@@ -83,7 +81,6 @@
         whitelist:
           tags:
             - MagazineLightRifle
-        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: CartridgeLightRifle
@@ -106,7 +103,6 @@
   parent: BaseWeaponRifle
   id: WeaponRifleM90GrenadeLauncher
   description: An older bullpup carbine model, with an attached underbarrel grenade launcher. Uses .20 rifle ammo.
-  noSpawn: true
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/carbine.rsi
@@ -128,7 +124,6 @@
         whitelist:
           tags:
             - MagazineRifle
-        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: CartridgeRifle
@@ -151,7 +146,6 @@
   parent: BaseWeaponRifle
   id: WeaponRifleLecter
   description: A high end military grade assault rifle. Uses .20 rifle ammo.
-  noSpawn: true
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/lecter.rsi
@@ -176,7 +170,6 @@
         whitelist:
           tags:
             - MagazineRifle
-        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: CartridgeRifle
@@ -206,7 +199,7 @@
     sprite: Objects/Weapons/Guns/Rifles/foam_rifle.rsi
   - type: Item
     sprite: Objects/Weapons/Guns/Rifles/foam_rifle_inhand_64x.rsi
-  - type: BallisticAmmoProvider
+  - type: BallisticAmmoProvider    
     whitelist:
       tags:
       - BulletFoam
@@ -223,4 +216,3 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
     clumsyProof: true
-  - type: PacifismAllowedGun

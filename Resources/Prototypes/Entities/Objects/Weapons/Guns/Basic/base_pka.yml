@@ -42,9 +42,6 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
     quickEquip: false
-    clothingVisuals:
-      suitstorage:
-      - state: equipped-BELT
     slots:
     - suitStorage
     - Belt

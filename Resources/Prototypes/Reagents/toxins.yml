@@ -185,42 +185,6 @@
             Caustic: 1
 
 - type: reagent
-  id: FleshAcid
-  name: reagent-name-flesh-acid
-  group: Toxins
-  desc: reagent-desc-flesh-acid
-  physicalDesc: reagent-physical-desc-strong-smelling
-  flavor: acidic
-  color: "#c9000e"
-  boilingPoint: 78.2 # This isn't a real chemical...
-  meltingPoint: -19.4
-  reactiveEffects:
-    Acidic:
-      methods: [ Touch ]
-      effects:
-        - !type:HealthChange
-          scaleByQuantity: true
-          ignoreResistances: false
-          damage:
-            types:
-              Caustic: 3
-        - !type:Emote
-          emote: Scream
-          probability: 1
-  metabolisms:
-    Poison:
-      effects:
-        - !type:HealthChange
-          damage:
-            types:
-              Caustic: 5
-        - !type:PopupMessage
-          type: Local
-          visualType: Large
-          messages: [ "generic-reagent-effect-burning-insides" ]
-          probability: 0.33
-
-- type: reagent
   id: FluorosulfuricAcid
   name: reagent-name-fluorosulfuric-acid
   group: Toxins
@@ -259,15 +223,6 @@
       - !type:Emote
         emote: Scream
         probability: 0.25
-# start-backmen: Disease
-      - !type:ChemCauseDisease
-        conditions:
-        - !type:ReagentThreshold
-          reagent: FluorosulfuricAcid
-          min: 5
-        causeChance: 0.3
-        disease: XenoVirus
-# end-backmen: Disease
 
 - type: reagent
   id: SulfuricAcid
@@ -391,13 +346,6 @@
         type: Add
         time: 10
         refresh: false
-        # start-backmen: psionic
-      - !type:ChemRemovePsionic
-        conditions:
-        - !type:ReagentThreshold
-          reagent: MindbreakerToxin
-          min: 20
-        # end-backmen: psionic
   # TODO: PROPER hallucinations
 
 - type: reagent

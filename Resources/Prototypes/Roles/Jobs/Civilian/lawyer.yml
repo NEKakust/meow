@@ -15,12 +15,6 @@
   - Lawyer
   - Brig
   - Maintenance
-  #start-backmen: currency
-  minBankBalance: 150
-  maxBankBalance: 250
-  wageDepartment: Civilian
-  wage: 50
-  #end-backmen: currency
 
 - type: startingGear
   id: LawyerGear
@@ -28,9 +22,9 @@
     shoes: ClothingShoesBootsLaceup
     id: LawyerPDA
     ears: ClothingHeadsetSecurity
+    # TODO add copy of space law
   inhand:
     - BriefcaseBrownFilled
   storage:
     back:
     - RubberStampLawyer
-    - BookSpaceLaw

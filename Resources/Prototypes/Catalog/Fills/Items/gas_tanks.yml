@@ -47,11 +47,6 @@
       moles:
         - 0.270782035 # oxygen
       temperature: 293.15
-  - type: Clothing
-    sprite: Objects/Tanks/emergency.rsi
-    clothingVisuals:
-      suitstorage:
-      - state: equipped-BELT
 
 - type: entity
   id: EmergencyNitrogenTankFilled
@@ -67,11 +62,7 @@
         - 0 # oxygen
         - 0.270782035 # nitrogen
       temperature: 293.15
-  - type: Clothing
-    sprite: Objects/Tanks/emergency.rsi
-    clothingVisuals:
-      suitstorage:
-      - state: equipped-BELT
+
 
 - type: entity
   id: ExtendedEmergencyOxygenTankFilled
@@ -86,11 +77,6 @@
       moles:
         - 0.615413715 # oxygen
       temperature: 293.15
-  - type: Clothing
-    sprite: Objects/Tanks/emergency.rsi
-    clothingVisuals:
-      suitstorage:
-      - state: equipped-BELT
 
 - type: entity
   id: ExtendedEmergencyNitrogenTankFilled
@@ -106,11 +92,7 @@
         - 0 # oxygen
         - 0.615413715 # nitrogen
       temperature: 293.15
-  - type: Clothing
-    sprite: Objects/Tanks/emergency.rsi
-    clothingVisuals:
-      suitstorage:
-      - state: equipped-BELT
+
 
 - type: entity
   id: DoubleEmergencyOxygenTankFilled
@@ -125,11 +107,6 @@
       moles:
         - 1.025689525 # oxygen
       temperature: 293.15
-  - type: Clothing
-    sprite: Objects/Tanks/emergency.rsi
-    clothingVisuals:
-      suitstorage:
-      - state: equipped-BELT
 
 - type: entity
   id: DoubleEmergencyNitrogenTankFilled
@@ -145,11 +122,6 @@
         - 0 # oxygen
         - 1.025689525 # nitrogen
       temperature: 293.15
-  - type: Clothing
-    sprite: Objects/Tanks/emergency.rsi
-    clothingVisuals:
-      suitstorage:
-      - state: equipped-BELT
 
 - type: entity
   id: EmergencyFunnyOxygenTankFilled
@@ -170,13 +142,8 @@
         - 0 # water vapor
         - 0 # ammonia
         - 0.014251686 # 5% N2O
-        # 0.285033721       total
+        # 0.285033721       total 
       temperature: 293.15
-  - type: Clothing
-    sprite: Objects/Tanks/emergency.rsi
-    clothingVisuals:
-      suitstorage:
-      - state: equipped-BELT
 
 - type: entity
   id: AirTankFilled

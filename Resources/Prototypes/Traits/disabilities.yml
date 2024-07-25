@@ -7,11 +7,6 @@
   whitelist:
     components:
       - Blindable
-  blacklist:
-    components:
-      - BSSDrone #backmen: bssdrone
-      - StationAI # backmen: AI
-      - BorgChassis
   components:
     - type: PermanentBlindness
 
@@ -21,11 +16,6 @@
   description: trait-poor-vision-desc
   traitGear: ClothingEyesGlasses
   category: Disabilities
-  blacklist:
-    components:
-    - BSSDrone #backmen: bssdrone
-    - StationAI # backmen: AI
-    - BorgChassis
   whitelist:
     components:
       - Blindable
@@ -36,11 +26,6 @@
 - type: trait
   id: Narcolepsy
   name: trait-narcolepsy-name
-  blacklist:
-    components:
-      - BSSDrone #backmen: bssdrone
-      - StationAI # backmen: AI
-      - BorgChassis
   description: trait-narcolepsy-desc
   category: Disabilities
   components:
@@ -49,14 +34,17 @@
       durationOfIncident: 10, 30
 
 - type: trait
+  id: Pacifist
+  name: trait-pacifist-name
+  description: trait-pacifist-desc
+  category: Disabilities
+  components:
+    - type: Pacified
+
+- type: trait
   id: Unrevivable
   name: trait-unrevivable-name
   description: trait-unrevivable-desc
-  blacklist:
-    components:
-    - BSSDrone #backmen: bssdrone
-    - StationAI # backmen: AI
-    - BorgChassis
   category: Disabilities
   components:
     - type: Unrevivable
@@ -68,21 +56,23 @@
   category: Disabilities
   blacklist:
     components:
-    - BSSDrone #backmen: bssdrone
-    - StationAI # backmen: AI
-    - BorgChassis
+      - BorgChassis
   components:
     - type: Muted
+
+- type: trait
+  id: LightweightDrunk
+  name: trait-lightweight-name
+  description: trait-lightweight-desc
+  category: Disabilities
+  components:
+    - type: LightweightDrunk
+      boozeStrengthMultiplier: 2
 
 - type: trait
   id: Paracusia
   name: trait-paracusia-name
   description: trait-paracusia-desc
-  blacklist:
-    components:
-      - BSSDrone #backmen: bssdrone
-      - StationAI # backmen: AI
-      - BorgChassis
   category: Disabilities
   components:
     - type: Paracusia
@@ -91,3 +81,11 @@
       maxSoundDistance: 7
       sounds:
         collection: Paracusia
+
+- type: trait
+  id: Snoring
+  name: trait-snoring-name
+  description: trait-snoring-desc
+  category: Disabilities
+  components:
+    - type: Snoring

@@ -1,4 +1,4 @@
-[game]
+﻿[game]
 # Straight in-game baby
 lobbyenabled = false
 # Dev map for faster loading & convenience
@@ -27,6 +27,3 @@ preload_grids = false
 
 [admin]
 see_own_notes = true
-
-[net]
-tickrate = 20

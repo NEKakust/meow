@@ -57,7 +57,6 @@
     - idcard
     - Belt
   - type: UnpoweredFlashlight
-  - type: ShadowkinLight
   - type: PointLight
     enabled: false
     radius: 1.5
@@ -75,8 +74,6 @@
     preinstalled:
       - CrewManifestCartridge
       - NotekeeperCartridge
-      - BankCartridge
-      - GlimmerMonitorCartridge
       - NewsReaderCartridge
     cartridgeSlot:
       priority: -1
@@ -112,9 +109,6 @@
   id: BaseMedicalPDA
   abstract: true
   components:
-  - type: ItemToggle
-    toggleLight: false
-    onUse: false
   - type: HealthAnalyzer
     scanDelay: 1
     scanningEndSound:
@@ -260,7 +254,9 @@
     borderColor: "#C18199"
   - type: Icon
     state: pda-clown
-  - type: Slippery # secretly made of bananium
+  - type: Slippery
+    paralyzeTime: 4
+    launchForwardsMultiplier: 1.5
   - type: StepTrigger
   - type: CollisionWake
     enabled: false
@@ -671,7 +667,6 @@
     scanDelay: 0
   - type: CartridgeLoader
     uiKey: enum.PdaUiKey.Key
-    notificationsEnabled: false
     preinstalled:
       - CrewManifestCartridge
       - NotekeeperCartridge

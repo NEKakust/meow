@@ -38,26 +38,16 @@
   materials:
     Steel: 250
     Plastic: 100
-
+    
 - type: latheRecipe
   id: WeaponLaserCarbine
-  result: WeaponEarthGovLaserCarbine
+  result: WeaponLaserCarbine
   category: Weapons
   completetime: 8
   materials:
     Steel: 2000
     Glass: 800
     Plastic: 500
-
-- type: latheRecipe
-  id: WeaponLaserPistol
-  result: WeaponEarthGovLaserPistol
-  category: Weapons
-  completetime: 8
-  materials:
-    Steel: 500
-    Glass: 100
-    Plastic: 200
 
 - type: latheRecipe
   id: WeaponAdvancedLaser
@@ -71,7 +61,7 @@
 
 - type: latheRecipe
   id: WeaponLaserCannon
-  result: WeaponEarthGovLaserSniper
+  result: WeaponLaserCannon
   category: Weapons
   completetime: 5
   materials:
@@ -90,7 +80,7 @@
 
 - type: latheRecipe
   id: WeaponXrayCannon
-  result: WeaponEarthGovXRay
+  result: WeaponXrayCannon
   category: Weapons
   completetime: 5
   materials:
@@ -253,7 +243,7 @@
 
 - type: latheRecipe
   id: MagazinePistolSubMachineGunTopMounted
-  result: MagazinePistolTopSubMachineGun
+  result: MagazinePistolSubMachineGunTopMounted
   category: Ammo
   completetime: 5
   materials:
@@ -665,7 +655,7 @@
     Steel: 1000
     Glass: 500
     Plastic: 500
-
+     
 - type: latheRecipe
   id: MagazineGrenadeEmpty
   result: MagazineGrenadeEmpty
@@ -673,7 +663,7 @@
   materials:
      Steel: 150
      Plastic: 50
-
+     
 - type: latheRecipe
   id: GrenadeEMP
   result: GrenadeEMP
@@ -682,7 +672,7 @@
      Steel: 150
      Plastic: 100
      Glass: 20
-
+     
 - type: latheRecipe
   id: GrenadeBlast
   result: GrenadeBlast
@@ -691,7 +681,7 @@
      Steel: 450
      Plastic: 300
      Gold: 150
-
+     
 - type: latheRecipe
   id: GrenadeFlash
   result: GrenadeFlash

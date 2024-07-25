@@ -145,8 +145,8 @@
 - type: entity
   parent: DoorRemoteDefault
   id: DoorRemoteAll
-  name: Пульт от дверей станции
-  suffix: Station
+  name: super door remote
+  suffix: Admeme
   components:
   - type: Sprite
     layers:
@@ -160,5 +160,3 @@
     - AllAccess
     tags:
     - CentralCommand
-    - NuclearOperative
-    - SyndicateAgent

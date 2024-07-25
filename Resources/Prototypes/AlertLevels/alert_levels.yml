@@ -1,23 +1,15 @@
----
 - type: alertLevels
   id: stationAlerts
   defaultLevel: green
   levels:
     green:
       announcement: alert-level-green-announcement
-      sound:
-        path: /Audio/Misc/greenalert.ogg
-        params:
-            volume: -4
       color: Green
       emergencyLightColor: LawnGreen
       shuttleTime: 600
     blue:
       announcement: alert-level-blue-announcement
-      sound:
-        path: /Audio/Misc/bluealert.ogg
-        params:
-            volume: -4
+      sound: /Audio/Misc/bluealert.ogg
       color: DodgerBlue
       forceEnableEmergencyLights: true
       emergencyLightColor: DodgerBlue
@@ -38,10 +30,7 @@
       shuttleTime: 600
     red:
       announcement: alert-level-red-announcement
-      sound:
-        path: /Audio/Misc/redalert.ogg
-        params:
-          volume: -4
+      sound: /Audio/Misc/redalert.ogg
       color: Red
       emergencyLightColor: Red
       forceEnableEmergencyLights: true
@@ -50,9 +39,9 @@
       announcement: alert-level-gamma-announcement
       selectable: false
       sound:
-        path: /Audio/Corvax/Misc/siren.ogg # Corvax: Return of the old siren sound
+        path: /Audio/Misc/siren.ogg
         params:
-          volume: -4
+          volume: -2
       disableSelection: true
       color: PaleVioletRed
       emergencyLightColor: PaleVioletRed
@@ -75,39 +64,9 @@
       sound:
         path: /Audio/Misc/epsilon.ogg
         params:
-          volume: -4
+          volume: -2
       disableSelection: true
       color: DarkViolet
       emergencyLightColor: DarkViolet
       forceEnableEmergencyLights: true
       shuttleTime: 1200
-    sintwave:
-      announcement: alert-level-sintwave-announcement
-      selectable: false
-      sound:
-        path: /Audio/Misc/sintwave.ogg
-        params:
-          volume: -4
-      disableSelection: false
-      color: Violet
-      emergencyLightColor: Violet
-      forceEnableEmergencyLights: false
-      shuttleTime: 400
-    sigma:
-      announcement: alert-level-sigma-announcement
-      selectable: false
-      sound:
-        path: /Audio/Misc/sigma.ogg
-        params:
-          volume: -4
-      disableSelection: true
-      color: Pink
-      emergencyLightColor: Violet
-      forceEnableEmergencyLights: true
-      shuttleTime: 1200
-    white:
-      announcement: alert-level-white-announcement
-      sound: /Audio/Misc/white.ogg
-      color: White
-      emergencyLightColor: PaleVioletRed
-      shuttleTime: 600

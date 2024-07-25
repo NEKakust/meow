@@ -312,7 +312,7 @@
 
 - type: reaction
   id: MindbreakerToxin
-  minTemp: 340
+  minTemp: 370
   reactants:
     Silicon:
       amount: 1

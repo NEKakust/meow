@@ -2,7 +2,7 @@
   id: Oasis
   mapName: 'Oasis'
   mapPath: /Maps/oasis.yml
-  minPlayers: 30
+  minPlayers: 0
   stations:
     Oasis:
       stationProto: StandardNanotrasenStation
@@ -21,7 +21,7 @@
             IAA: [ 1, 1 ] # Corvax-IAA
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 2, 2 ]
-            Botanist: [ 2, 3 ]
+            Botanist: [ 4, 4 ]
             Chef: [ 2, 2 ]
             Janitor: [ 3, 3 ]
             Chaplain: [ 1, 1 ]
@@ -62,10 +62,3 @@
             Clown: [ 1, 1 ]
             Mime: [ 1, 1 ]
             Musician: [ 1, 1 ]
-            #backmen
-            Brigmedic: [ 0, 1 ] # backmen-Brigmedic
-            #BKBPLATech: [0, 3] # backmen-BPLA-Silicons
-            #BKBPLAMED: [0, 3] # backmen-BPLAMED-Silicons
-            Deliveryman: [ 0, 1 ]
-            Prisoner: [ 2, 3]
-            SAI: [1, 1] # backmen-SAI

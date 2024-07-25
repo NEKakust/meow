@@ -191,7 +191,7 @@
 - type: entity
   id: ProjectileIcicle
   parent: BaseBullet
-  name: icicle
+  name: Icicle
   description: Brrrrr.
   noSpawn: true
   components:

@@ -5,7 +5,7 @@
   noSpawn: true
   components:
   - type: ContentEye
-    maxZoom: 8.916104, 8.916104
+    maxZoom: 12, 12
   - type: Tag
     tags:
     - InstantDoAfters
@@ -29,8 +29,6 @@
   - type: Access
     groups:
     - AllAccess
-    - CentCom
-    - MTFLeader
     tags:
     - NuclearOperative
     - SyndicateAgent
@@ -71,7 +69,6 @@
   - type: RadarConsole
     followEntity: true
   - type: CargoOrderConsole
-  - type: BankClient
   - type: CrewMonitoringConsole
   - type: GeneralStationRecordConsole
     canDeleteEntries: true
@@ -93,7 +90,6 @@
   - type: Loadout
     prototypes: [ MobAghostGear ]
   - type: BypassInteractionChecks
-  - type: BkmSupermatterImmune
 
 - type: entity
   id: ActionAGhostShowSolar

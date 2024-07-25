@@ -173,15 +173,6 @@ ghost-role-information-loneop-rules = You are a [color=red][bold]Team Antagonist
 ghost-role-information-behonker-name = Behonker
 ghost-role-information-behonker-description = You are an antagonist, bring death and honks to those who do not follow the honkmother.
 
-ghost-role-information-taxibot-name = TaxiBot
-ghost-role-information-taxibot-description = Drive the station crew to their destination.
-
-ghost-role-information-blobbernaut-name = Blobbernaut
-ghost-role-information-blobbernaut-description = You are a Blobbernaut. You must defend blob core.
-
-ghost-role-information-blob-name = Blob
-ghost-role-information-blob-description = You are a Blob. You must consume the station.
-
 ghost-role-information-hellspawn-name = Hellspawn
 ghost-role-information-hellspawn-description = Bring death to those who do not follow the great god Nar'Sie.
 
@@ -205,16 +196,6 @@ ghost-role-information-space-ninja-description = Use stealth and deception to sa
 ghost-role-information-syndicate-reinforcement-name = Syndicate Agent
 ghost-role-information-syndicate-reinforcement-description = Someone needs reinforcements. You, the first person the syndicate could find, will help them.
 ghost-role-information-syndicate-reinforcement-rules = You are a [color=red][bold]Team Antagonist[/bold][/color] with the agent who summoned you.
-
-ghost-role-information-syndicate-reinforcement-medic-name = Syndicate Medic
-ghost-role-information-syndicate-reinforcement-medic-description = Someone needs reinforcements. Your task is to keep the agent who called you alive.
-
-ghost-role-information-syndicate-reinforcement-spy-name = Syndicate Spy
-ghost-role-information-syndicate-reinforcement-spy-description = Someone needs reinforcements. Your speciality lies in espionage, do not be discovered.
-
-ghost-role-information-syndicate-reinforcement-thief-name = Syndicate Thief
-ghost-role-information-syndicate-reinforcement-thief-description = Someone needs reinforcements. Your job is to break in and retrieve something valuable for your agent.
-
 
 ghost-role-information-syndicate-monkey-reinforcement-name = Syndicate Monkey Agent
 ghost-role-information-syndicate-monkey-reinforcement-description = Someone needs reinforcements. You, a trained monkey, will help them.

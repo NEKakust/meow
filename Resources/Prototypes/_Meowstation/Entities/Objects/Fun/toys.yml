@@ -1,0 +1,24 @@
+- type: entity
+  parent: PlushieGhost
+  id: PlushieFospas
+  name: Плюшевая игрушка Фоспас
+  description: Мягкая, плюшевая игрушка девушки с фиолетовыми волосами, и очками СБ. Пахнет вишней
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      sprite: _Meowstation/Objects/Fun/toys/fospas.rsi
+      state: plushie_fospas
+    - type: EmitSoundOnUse
+      sound:
+        path: /Audio/Animals/cat_meow.ogg
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/Animals/cat_meow.ogg
+    - type: EmitSoundOnActivate
+      sound:
+        path: /Audio/Animals/cat_meow.ogg
+    - type: MeleeWeapon
+      wideAnimationRotation: 180
+      soundHit:
+        path: /Audio/Animals/cat_meow.ogg

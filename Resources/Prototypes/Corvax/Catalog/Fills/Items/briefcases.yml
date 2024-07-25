@@ -3,9 +3,6 @@
   parent: BriefcaseBrown
   suffix: IAA
   components:
-    - type: Item
-      sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
-      size: Huge
     - type: StorageFill
       contents:
         - id: Paper

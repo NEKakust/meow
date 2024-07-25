@@ -36,12 +36,6 @@
     - BaseStation
     - BaseStationAlertLevels
     - BaseStationNanotrasen
-    - BaseStationCargo #Backmen
-    - BaseStationJobsSpawning #Backmen
-    - BaseStationRecords #Backmen
-    - BaseStationShuttles #Backmen
-    - BaseStationExpeditions #Backmen
-    - BaseStationMagnet #Backmen
   noSpawn: true
   components:
     - type: Transform

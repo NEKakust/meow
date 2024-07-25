@@ -25,7 +25,6 @@
   parent: [BaseWeaponLauncher, BaseGunWieldable]
   id: WeaponLauncherChinaLake
   description: PLOOP
-  noSpawn: true
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
@@ -58,7 +57,6 @@
   name: RPG-7
   parent: BaseWeaponLauncher
   id: WeaponLauncherRocket
-  noSpawn: true
   description: A modified ancient rocket-propelled grenade launcher.
   components:
   - type: Sprite
@@ -168,8 +166,6 @@
     - type: TetherGun
       frequency: 5
       dampingRatio: 4
-    - type: ItemToggle
-      onUse: false
     - type: PowerCellDraw
     - type: Sprite
       sprite: Objects/Weapons/Guns/Launchers/tether_gun.rsi
@@ -215,8 +211,6 @@
         path: /Audio/Weapons/soup.ogg
         params:
           volume: 2
-    - type: ItemToggle
-      onUse: false
     - type: PowerCellDraw
     - type: Sprite
       sprite: Objects/Weapons/Guns/Launchers/force_gun.rsi
@@ -253,7 +247,6 @@
     - type: Gun
       soundGunshot: /Audio/Weapons/Guns/Gunshots/harpoon.ogg
       fireRate: 0.5
-      clumsyProof: true
     - type: BasicEntityAmmoProvider
       proto: GrapplingHook
       capacity: 1

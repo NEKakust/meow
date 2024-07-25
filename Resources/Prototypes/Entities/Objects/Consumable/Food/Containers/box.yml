@@ -535,8 +535,6 @@
         orGroup: GiftPool
       - id: ToySword
         orGroup: GiftPool
-      - id: DoubleToySword # Backmen
-        orGroup: GiftPool
       - id: RevolverCapGun
         orGroup: GiftPool
       - id: ToyRubberDuck
@@ -590,8 +588,6 @@
       - id: ToyNuke
         orGroup: GiftPool
       - id: ToySword
-        orGroup: GiftPool
-      - id: DoubleToySword # Backmen
         orGroup: GiftPool
       - id: BalloonSyn
         prob: 0.6

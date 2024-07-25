@@ -11,12 +11,12 @@
         state: snack
   - type: RandomSpawner
     prototypes:
-      - BackmenVendingMachineDiscount
-      - BackmenVendingMachineSnack
-      - BackmenVendingMachineSnackBlue
-      - BackmenVendingMachineSnackGreen
-      - BackmenVendingMachineSnackOrange
-      - BackmenVendingMachineSnackTeal
-      - BackmenVendingMachineChang
-      - BackmenVendingMachineDonut
+      - VendingMachineDiscount
+      - VendingMachineSnack
+      - VendingMachineSnackBlue
+      - VendingMachineSnackGreen
+      - VendingMachineSnackOrange
+      - VendingMachineSnackTeal
+      - VendingMachineChang
+      - VendingMachineDonut
     chance: 1

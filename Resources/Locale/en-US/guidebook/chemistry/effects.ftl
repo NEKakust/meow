@@ -343,7 +343,7 @@ reagent-effect-guidebook-reduce-rotting =
     { $chance ->
         [1] Regenerates
         *[other] regenerate
-    } {$time} {MANY("second", $time)} of rotting
+    } {NATURALFIXED($time, 3)} {MANY("second", $time)} of rotting
 
 reagent-effect-guidebook-area-reaction =
     { $chance ->

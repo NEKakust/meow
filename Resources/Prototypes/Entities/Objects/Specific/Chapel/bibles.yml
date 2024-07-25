@@ -9,9 +9,8 @@
   - type: Bible
     damage:
       groups:
-        Brute: -35
-        Burn: -35
-        Immaterial: -10
+        Brute: -15
+        Burn: -15
     damageOnFail:
       groups:
         Brute: 15
