@@ -17,6 +17,7 @@
   - type: Transform
     anchored: true
   - type: Clickable
+  - type: ShadowkinLight #backmen: shadowkin
   - type: InteractionOutline
   - type: Construction
     graph: LightFixture

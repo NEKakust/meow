@@ -12,6 +12,7 @@
       - state: server_o
         map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: ResearchServer
+  - type: DiseaseServer
   - type: TechnologyDatabase
     supportedDisciplines:
     - Industrial
@@ -48,6 +49,7 @@
             min: 1
             max: 2
   - type: Appearance
+  - type: AmbientOnPowered
   - type: AmbientSound
     volume: -9
     range: 5

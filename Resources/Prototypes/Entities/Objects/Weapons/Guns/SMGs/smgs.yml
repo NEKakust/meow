@@ -41,6 +41,7 @@
         whitelist:
           tags:
             - MagazinePistolSubMachineGun
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: CartridgePistol
@@ -60,6 +61,7 @@
   parent: BaseWeaponSubMachineGun
   id: WeaponSubMachineGunAtreides
   description: Pla-ket-ket-ket-ket! Uses .35 auto ammo.
+  noSpawn: true
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/atreides.rsi
@@ -83,6 +85,7 @@
   parent: BaseWeaponSubMachineGun
   id: WeaponSubMachineGunC20r
   description: A firearm that is often used by the infamous nuclear operatives. Uses .35 auto ammo.
+  noSpawn: true
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
@@ -100,7 +103,7 @@
     maxAngle: -16
   - type: Gun
     minAngle: 21
-    maxAngle: 32 
+    maxAngle: 32
     shotsPerBurst: 5
     availableModes:
     - SemiAuto
@@ -121,6 +124,7 @@
   parent: BaseWeaponSubMachineGun
   id: WeaponSubMachineGunDrozd
   description: An excellent fully automatic Heavy SMG.
+  noSpawn: true
   components:
     - type: Sprite
       sprite: Objects/Weapons/Guns/SMGs/drozd.rsi
@@ -156,6 +160,7 @@
           whitelist:
             tags:
               - MagazinePistolSubMachineGun
+          whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
           startingItem: CartridgePistol
@@ -175,6 +180,7 @@
   id: WeaponSubMachineGunVector
   suffix: Deprecated use Drozd
   description: An excellent fully automatic Heavy SMG. Uses .45 magnum ammo.
+  noSpawn: true
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/vector.rsi
@@ -210,6 +216,7 @@
         whitelist:
           tags:
             - CartridgeMagnum
+        whitelistFailPopup: gun-magazine-whitelist-fail
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -221,6 +228,7 @@
   parent: BaseWeaponSubMachineGun
   id: WeaponSubMachineGunWt550
   description: An excellent SMG, produced by NanoTrasen's Small Arms Division. Uses .35 auto ammo.
+  noSpawn: true
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
@@ -262,6 +270,7 @@
         whitelist:
           tags:
             - MagazinePistolSubMachineGunTopMounted
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: CartridgePistol
@@ -274,3 +283,57 @@
     steps: 6
     zeroVisible: true
   - type: Appearance
+
+# Rubber
+- type: entity
+  name: Drozd
+  parent: WeaponSubMachineGunDrozd
+  id: WeaponSubMachineGunDrozdRubber
+  noSpawn: true
+  suffix: Non-Lethal
+  components:
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazinePistolSubMachineGun
+          insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+              - MagazinePistolSubMachineGun
+        gun_chamber:
+          name: Chamber
+          startingItem: CartridgePistol
+          priority: 1
+          whitelist:
+            tags:
+              - CartridgePistol
+
+- type: entity
+  name: Vector
+  parent: WeaponSubMachineGunVector
+  id: WeaponSubMachineGunVectorRubber
+  description: An excellent fully automatic Heavy SMG. Uses .45 magnum ammo.
+  noSpawn: true
+  suffix: Non-Lethal
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineMagnumSubMachineGun
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineMagnumSubMachineGun
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeMagnum
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeMagnum

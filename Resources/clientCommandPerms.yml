@@ -8,7 +8,6 @@
     - hardquit
     - svbind
     - bind
-    - exec # macro moment
     - cls
     - vram
     - monitor
@@ -28,6 +27,7 @@
     - cvar
     - fuckrules
     - midipanic
+    - reloadui
     - replay_recording_start
     - replay_recording_stop
     - replay_recording_stats
@@ -39,6 +39,10 @@
     - replay_stop
     - replay_load
     - saveconfig
+
+- Flags: ADMIN
+  Commands:
+    - exec
 
 - Flags: DEBUG
   Commands:

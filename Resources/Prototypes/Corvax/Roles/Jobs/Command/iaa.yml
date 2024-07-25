@@ -15,12 +15,18 @@
   supervisors: job-supervisors-centcom
   canBeAntag: false
   access:
-  - Service
-  - Brig
-  - Maintenance
-  - Command
-  - External
-  - Lawyer
+    - Service
+    - Brig
+    - Maintenance
+    - Command
+    - External
+    - Lawyer
+  #start-backmen: currency
+  minBankBalance: 800
+  maxBankBalance: 1200
+  wageDepartment: Specific
+  wage: 200
+  #end-backmen: currency
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -32,7 +38,7 @@
     id: IAAPDA
     eyes: ClothingEyesGlassesSunglasses
     ears: ClothingHeadsetIAA
-    pocket2: HyperLinkBookCorporateLaw
+    pocket2: BookSpaceLaw
   inhand:
     - BriefcaseIAAFilled
   storage:

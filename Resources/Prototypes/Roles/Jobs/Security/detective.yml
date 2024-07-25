@@ -6,7 +6,7 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: Security
-    time: 36000 #10 hrs
+    time: 72000 #20 hrs # Corvax-RoleTime
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
@@ -27,9 +27,12 @@
     eyes: ClothingEyesGlassesSecurity
     id: DetectivePDA
     ears: ClothingHeadsetSecurity
-    belt: ClothingBeltHolsterFilled
+    belt: ClothingBeltHolster
   storage:
     back:
     - Flash
     - ForensicPad
     - ForensicScanner
+    belt:
+    - SpeedLoaderMagnum
+

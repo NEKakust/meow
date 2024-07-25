@@ -161,6 +161,10 @@
     - state: heart
   - type: Item
     heldPrefix: hug
+  - type: Storage
+    maxItemSize: Small
+    grid:
+      - 0,0,2,3
   - type: StorageFill
     contents:
     - id: ClothingMaskBreath
@@ -169,6 +173,7 @@
     - id: Flare
     - id: FoodSnackNutribrick
     - id: DrinkWaterBottleFull
+    - id: FoodTinClownSoupcan # backmen
   - type: Tag
     tags:
     - BoxHug

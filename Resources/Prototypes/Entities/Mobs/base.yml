@@ -44,6 +44,7 @@
   - type: Polymorphable
   - type: StatusIcon
   - type: TTS # Corvax-TTS
+  - type: CanBeBorgNTEnemy
   - type: RequireProjectileTarget
     active: False
 
@@ -100,6 +101,8 @@
     - Piercing
     - Heat
     - Shock
+    - Cold
+    - Caustic
   - type: DamageOnHighSpeedImpact
     damage:
       types:

@@ -4,7 +4,7 @@
     entity: MobReptilian
     forced: true
     transferName: true
-    transferHumanoidAppearance: false
+    transferHumanoidAppearance: true
     inventory: Transfer
     allowRepeatedMorphs: true
 

@@ -18,23 +18,16 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - shader: StencilClear
-      sprite: Mobs/Species/Human/parts.rsi #PJB on stencil clear being on the left leg: "...this is 'fine'" -https://github.com/space-wizards/space-station-14/pull/12217#issuecomment-1291677115
-      # its fine, but its still very stupid that it has to be done like this instead of allowing sprites to just directly insert a stencil clear.
-      # sprite refactor when
-      state: l_leg
-    - shader: StencilMask
-      map: ["enum.HumanoidVisualLayers.StencilMask"]
-      sprite: Mobs/Customization/masking_helpers.rsi
-      state: unisex_full
-      visible: false
-    - map: ["jumpsuit"]
+#    - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
+    - map: ["socks"] #backmen:underclothing
+    - map: ["underpants"] #backmen:underclothing
+    - map: ["undershirt"] #backmen:underclothing
+    - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LHand"]
     - map: ["enum.HumanoidVisualLayers.RHand"]
     - map: [ "gloves" ]
-    - map: [ "socks" ]
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "outerClothing" ]
@@ -142,10 +135,10 @@
     - TemporaryBlindness
     - Pacified
     - StaminaModifier
+    - PsionicsDisabled
+    - PsionicallyInsulated
+    - SeeAll
     - Flashed
-  - type: Reflect
-    enabled: false
-    reflectProb: 0
   - type: Body
     prototype: Human
     requiredLegs: 2
@@ -199,6 +192,8 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
   - type: Puller
   - type: Speech
     speechSounds: Alto
@@ -217,11 +212,15 @@
   - type: MobPrice
     price: 1500 # Kidnapping a living person and selling them for cred is a good move.
     deathPenalty: 0.01 # However they really ought to be living and intact, otherwise they're worth 100x less.
+  - type: PotentialPsionic
   - type: Tag
     tags:
     - CanPilot
     - FootstepSound
     - DoorBumpOpener
+  - type: CameraFollow # Backmen-Changes-End
+    backStrength: 50
+    defaultBackStrength: 20
 
 - type: entity
   save: false
@@ -234,6 +233,7 @@
   id: BaseMobSpeciesOrganic
   abstract: true
   components:
+  - type: DiseaseCarrier # backmen
   - type: Barotrauma
     damage:
       types:
@@ -248,7 +248,6 @@
         Heat: -0.07
       groups:
         Brute: -0.07
-
   - type: Blindable
   # Other
   - type: Temperature
@@ -311,14 +310,6 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - shader: StencilClear
-      sprite: Mobs/Species/Human/parts.rsi
-      state: l_leg
-    - shader: StencilMask
-      map: ["enum.HumanoidVisualLayers.StencilMask"]
-      sprite: Mobs/Customization/masking_helpers.rsi
-      state: unisex_full
-      visible: false
     - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
@@ -331,7 +322,6 @@
       visible: false
     - map: [ "gloves" ]
     - map: [ "shoes" ]
-    - map: [ "socks" ]
     - map: [ "ears" ]
     - map: [ "outerClothing" ]
     - map: [ "eyes" ]

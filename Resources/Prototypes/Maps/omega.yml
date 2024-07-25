@@ -2,8 +2,8 @@
   id: Omega
   mapName: 'Omega'
   mapPath: /Maps/omega.yml
-  minPlayers: 0
-  maxPlayers: 200
+  minPlayers: 10
+  maxPlayers: 35
   stations:
     Omega:
       stationProto: StandardNanotrasenStation
@@ -51,6 +51,8 @@
             #Lawyer: [ 1, 1 ] # Corvax-IAA
             #supply
             Quartermaster: [ 1, 1 ]
+            Paramedic: [ 0, 1 ] # backmen-Paramedic
+            Brigmedic: [ 0, 1 ] # backmen-Brigmedic
             SalvageSpecialist: [ 2, 2 ]
             CargoTechnician: [ 2, 2 ]
             #civilian
@@ -58,4 +60,15 @@
             Clown: [ 1, 1 ]
             Mime: [ 1, 1 ]
             Musician: [ 1, 1 ]
+            #BKBPLATech: [0, 3] # backmen-BPLA-Silicons
+            #BKBPLAMED: [0, 3] # backmen-BPLAMED-Silicons
             Borg: [ 2, 2 ]
+            Deliveryman: [ 0, 1 ]
+            Prisoner: [ 2, 3]
+            SAI: [1, 1] # backmen-SAI
+        # backmen blob-config-start SMALL+
+        - type: StationBlobConfig
+          stageBegin: 25
+          stageCritical: 350
+          stageTheEnd: 700
+        # backmen blob-config-end

@@ -49,6 +49,7 @@
   parent: [BaseItem, BaseGunWieldable]
   id: WeaponShotgunBulldog
   description: It's a magazine-fed shotgun designed for close quarters combat. Uses .50 shotgun shells.
+  noSpawn: true
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
@@ -85,6 +86,7 @@
         whitelist:
           tags:
           - MagazineShotgun
+        whitelistFailPopup: gun-magazine-whitelist-fail
         insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
   - type: ContainerContainer
@@ -138,6 +140,7 @@
   parent: [BaseWeaponShotgun, BaseGunWieldable]
   id: WeaponShotgunEnforcer
   description: A premium combat shotgun based on the Kammerer design, featuring an upgraded clip capacity. .50 shotgun shells.
+  noSpawn: true
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
@@ -154,6 +157,7 @@
 - type: entity
   parent: WeaponShotgunEnforcer
   id: WeaponShotgunEnforcerRubber
+  noSpawn: true
   suffix: Non-Lethal
   components:
   - type: BallisticAmmoProvider
@@ -166,6 +170,7 @@
   name: Kammerer
   parent: [BaseWeaponShotgun, BaseGunWieldable]
   id: WeaponShotgunKammerer
+  noSpawn: true
   description: When an old Remington design meets modern materials, this is the result. A favourite weapon of militia forces throughout many worlds. Uses .50 shotgun shells.
   components:
   - type: Item
@@ -180,12 +185,12 @@
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: BallisticAmmoProvider
     capacity: 4
-  - type: Tag
-    tags:
-    - WeaponShotgunKammerer
   - type: Gun # Corvax-Guns
     soundGunshot:
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_alt.ogg
+  - type: Tag
+    tags:
+    - WeaponShotgunKammerer
 
 - type: entity
   name: sawn-off shotgun

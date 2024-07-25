@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 54000 #25 hrs
+      time: 108000 #50 hrs # Corvax-RoleTime
   startingGear: WardenGear
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
@@ -20,6 +20,12 @@
   - External
   - Detective
   - Cryogenics
+  #start-backmen: currency
+  minBankBalance: 150
+  maxBankBalance: 250
+  wageDepartment: Security
+  wage: 50
+  #end-backmen: currency
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -30,8 +36,6 @@
     eyes: ClothingEyesGlassesSecurity
     id: WardenPDA
     ears: ClothingHeadsetSecurity
-    pocket1: WeaponPistolMk58
   storage:
     back:
     - Flash
-    - MagazinePistol

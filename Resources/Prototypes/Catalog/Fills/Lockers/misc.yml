@@ -109,6 +109,10 @@
   components:
     - type: StorageFill
       contents:
+        - id: DrinkCondensedmilkCan # backmen
+          prob: 0.2
+        - id: Eftpos # backmen
+          prob: 0.2
         - id: Lantern
           prob: 0.50
         - id: Wirecutter
@@ -170,6 +174,8 @@
           prob: 0.20
         - id: BarberScissors
           prob: 0.05
+        - id: Wristwatch
+          prob: 0.05
         - id: BookRandomStory
           prob: 0.1
         # Syndicate loot
@@ -206,7 +212,7 @@
         - id: BalloonSyn
           prob: 0.005
           orGroup: syndiemaintloot
-        - id: WeaponSniperMosin
+        - id: WeaponSniperMosinNew
           prob: 0.0010
           orGroup: syndiemaintloot
 
@@ -217,6 +223,10 @@
   components:
   - type: StorageFill
     contents:
+        - id: DrinkCondensedmilkCan # backmen
+          prob: 0.2
+        - id: Eftpos # backmen
+          prob: 0.2
         - id: Lantern
           prob: 0.50
         - id: Wirecutter
@@ -310,6 +320,6 @@
         - id: BalloonSyn
           prob: 0.005
           orGroup: syndiemaintloot
-        - id: WeaponSniperMosin
+        - id: WeaponSniperMosinNew
           prob: 0.0010
           orGroup: syndiemaintloot

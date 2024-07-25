@@ -137,6 +137,7 @@
       - UtilityBelt
       - Fulton
       - FultonBeacon
+      - Paper
       - Pickaxe
       - ModularReceiver
       - AppraisalTool
@@ -194,6 +195,9 @@
       - CellRechargerCircuitboard
       - BorgChargerCircuitboard
       - WeaponCapacitorRechargerCircuitboard
+      - AntiPsychicKnifeRecipe
+      - Ring
+      - SapphireRing
       - HandheldStationMap
       - ClothingHeadHatWelding
       - WetFloorSign
@@ -204,6 +208,7 @@
       - BoxShotgunFlare
       - BoxShotgunSlug
       - CombatKnife
+      - CashMachineCircuitboard
       - MagazineBoxLightRifle
       - MagazineBoxMagnum
       - MagazineBoxPistol
@@ -322,16 +327,25 @@
       - WeaponTetherGun
       - WeaponGrapplingGun
       - ClothingBackpackHolding
-      - ClothingBeltBlueSpace
+      - ClothingBackpackSatchelHolding
       - ClothingBackpackDuffelHolding
       - WelderExperimental
       - JawsOfLife
+      - ClothingEyesGlassesChemical
+      - CoreSilver
+      #- QSI
+      - InsulativeHeadcage
+      - HandTeleporter1
+      - BluespacePillCanister # Backmen
       - FauxTileAstroGrass
       - FauxTileMowedAstroGrass
       - FauxTileJungleAstroGrass
       - FauxTileAstroIce
       - FauxTileAstroSnow
       - OreBagOfHolding
+      - Ring
+      - SapphireRing
+      - GoldenRing
       - DeviceQuantumSpinInverter
   - type: EmagLatheRecipes
     emagDynamicRecipes:
@@ -340,6 +354,8 @@
       - BoxShotgunUranium
       - BoxShellTranquilizer
       - ExplosivePayload
+      - WeaponLaserCarbine
+      - WeaponLaserPistol
       - GrenadeBlast
       - GrenadeEMP
       - GrenadeFlash
@@ -499,6 +515,7 @@
       - ArtifactCrusherMachineCircuitboard
       - TelecomServerCircuitboard
       - MassMediaCircuitboard
+      - ShipyardCircuitboard # backmen
       - ReagentGrinderIndustrialMachineCircuitboard
       - JukeboxCircuitBoard
   - type: EmagLatheRecipes
@@ -798,6 +815,11 @@
       - WeaponDisablerSMG
       - WeaponLaserCannon
       - WeaponLaserCarbine
+      - WeaponLaserPistol
+      - WeaponLaserCarbinePractice
+      - InsulativeHeadcage
+      - ClothingHeadHelmetInsulated
+      - ShellSoulbreaker
       - WeaponXrayCannon
   - type: MaterialStorage
     whitelist:
@@ -922,8 +944,10 @@
       - ChemicalPayload
       - CryostasisBeaker
       - BluespaceBeaker
+#      - BluespaceBeaker1
       - SyringeBluespace
       - SyringeCryostasis
+      - BluespacePillCanister # Backmen
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: StealTarget
@@ -1180,6 +1204,7 @@
       idleState: icon
       runningState: building
       staticRecipes:
+        #- BluespaceCrystal # backmen
         - SheetSteel30
         - SheetGlass30
         - SheetRGlass30
@@ -1190,6 +1215,7 @@
         - IngotGold30
         - IngotSilver30
         - MaterialBananium10
+        - MaterialDiamond
 
 - type: entity
   parent: OreProcessor
@@ -1249,3 +1275,39 @@
     staticRecipes:
     - MaterialSheetMeat
     - SheetPaper
+    
+- type: entity
+  id: ProtolatheCash
+  parent: BaseLathe
+  name: Принтер кредитов
+  description: Распечатывает "фальшивые", неофициальные кредиты, в обход систем и бюррократии, за счет бумаги и некоторых связных материалов
+  components:
+  - type: Sprite
+    sprite: Backmen/Structures/Machines/protoprint.rsi 
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: ProtolatheCashMachineCircuitboard
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Document
+        - RawMaterial
+  - type: Lathe
+    producingSound: /Audio/Machines/scanning.ogg
+    idleState: icon
+    runningState: building
+    staticRecipes:
+    - SpaceCash
+  - type: EmagLatheRecipes
+    emagStaticRecipes:
+    - SpaceCashemag

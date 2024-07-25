@@ -3,6 +3,8 @@
   name: Urist McHands
   parent: BaseMobHuman
   id: MobHuman
+  components:
+    - type: PotentialPsionic
 
 #Syndie
 - type: entity
@@ -36,11 +38,68 @@
       giveObjectives: false
 
 - type: entity
+  parent: MobHumanSyndicateAgent
+  id: MobHumanSyndicateAgentMedic
+  name: syndicate medic
+  components:
+  - type: Loadout
+    prototypes: [SyndicateReinforcementMedic]
+
+- type: entity
+  parent: MobHumanSyndicateAgent
+  id: MobHumanSyndicateAgentSpy
+  name: syndicate spy
+  components:
+  - type: Loadout
+    prototypes: [SyndicateReinforcementSpy]
+
+- type: entity
+  parent: MobHumanSyndicateAgent
+  id: MobHumanSyndicateAgentThief
+  name: syndicate thief
+  components:
+  - type: Loadout
+    prototypes: [SyndicateReinforcementThief]
+
+- type: entity
   parent: MobHumanSyndicateAgentBase
   id: MobHumanSyndicateAgentNukeops # Reinforcement exclusive to nukeops uplink
   suffix: Human, NukeOps
   components:
+    - type: Loadout
+      prototypes: [SyndicateOperativeGearReinforcementNukeOps]
     - type: NukeOperative
+
+#Flesh Cultist
+- type: entity
+  parent: MobHuman
+  id: MobHumanFleshCultist
+  name: Flesh Cultist
+  components:
+    - type: FleshCultist
+      startingEvolutionPoint: 300
+    - type: NpcFactionMember
+      factions:
+        - Flesh
+    - type: UserInterface
+      interfaces:
+        enum.StoreUiKey.Key:
+          type: StoreBoundUserInterface
+    - type: Store
+      categories:
+        - FleshCultistAbilities
+      currencyWhitelist:
+        - StolenMutationPoint
+    - type: IntrinsicRadioReceiver
+    - type: IntrinsicRadioTransmitter
+      channels:
+        - Flesh
+    - type: ActiveRadio
+      channels:
+        - Flesh
+    - type: Psionic
+      channel: Flesh
+      channelColor: "#cf1b48"
 
 # Nuclear Operative
 - type: entity
@@ -70,28 +129,3 @@
     - type: NpcFactionMember
       factions:
       - Syndicate
-
-# Space Ninja
-- type: entity
-  noSpawn: true
-  name: Space Ninja
-  parent: MobHuman
-  id: MobHumanSpaceNinja
-  components:
-  - type: RandomHumanoidAppearance
-    randomizeName: false
-  - type: Loadout
-    prototypes: [SpaceNinjaGear]
-  - type: NpcFactionMember
-    factions:
-    - Syndicate
-  - type: SpaceNinja
-  - type: GenericAntag
-    rule: Ninja
-  - type: AutoImplant
-    implants:
-    - DeathAcidifierImplant
-  - type: RandomMetadata
-    nameSegments:
-    - names_ninja_title
-    - names_ninja

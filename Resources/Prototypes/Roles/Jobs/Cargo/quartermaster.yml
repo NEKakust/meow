@@ -9,10 +9,10 @@
 #      time: 21600 #6 hrs
     - !type:RoleTimeRequirement
       role: JobSalvageSpecialist
-      time: 18000 #5 hrs
+      time: 36000 #10 hrs # Corvax-RoleTime
     - !type:DepartmentTimeRequirement
       department: Cargo
-      time: 36000 #10 hrs
+      time: 54000 #15 hrs # Corvax-RoleTime
 #    - !type:OverallPlaytimeRequirement
 #      time: 144000 #40 hrs
   weight: 10
@@ -28,12 +28,21 @@
   - Command
   - Brig
   - Cryogenics
+  #start-backmen: currency
+  minBankBalance: 150
+  maxBankBalance: 250
+  wageDepartment: Cargo
+  wage: 50
+  #end-backmen: currency
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+      - type: NpcFactionMember
+        factions:
+          - CentralCommand
 
 - type: startingGear
   id: QuartermasterGear

@@ -19,6 +19,7 @@
 - type: entity
   id: RandomHumanoidSpawnerDeathSquad
   name: Death Squad Agent
+  noSpawn: true
   suffix: ERTRole, Death Squad
   components:
     - type: Sprite
@@ -56,6 +57,7 @@
 - type: entity
   id: RandomHumanoidSpawnerERTLeader
   name: ERT leader
+  noSpawn: true
   suffix: ERTRole, Basic
   components:
     - type: Sprite
@@ -90,6 +92,7 @@
   id: RandomHumanoidSpawnerERTLeaderEVA
   parent: RandomHumanoidSpawnerERTLeader
   name: ERT leader
+  noSpawn: true
   suffix: ERTRole, Armored EVA
   components:
     - type: Sprite
@@ -114,6 +117,7 @@
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderEVALecter
   parent: RandomHumanoidSpawnerERTLeaderEVA
+  noSpawn: true
   suffix: ERTRole, Lecter, EVA
   components:
     - type: RandomHumanoidSpawner
@@ -198,6 +202,7 @@
   id: RandomHumanoidSpawnerERTJanitor
   parent: RandomHumanoidSpawnerERTLeader
   name: ERT janitor
+  noSpawn: true
   suffix: ERTRole, Basic
   components:
     - type: Sprite
@@ -231,6 +236,7 @@
   id: RandomHumanoidSpawnerERTJanitorEVA
   parent: RandomHumanoidSpawnerERTJanitor
   name: ERT janitor
+  noSpawn: true
   suffix: ERTRole, Enviro EVA
   components:
     - type: Sprite
@@ -258,6 +264,7 @@
   id: RandomHumanoidSpawnerERTEngineer
   parent: RandomHumanoidSpawnerERTLeader
   name: ERT engineer
+  noSpawn: true
   suffix: ERTRole, Basic
   components:
     - type: Sprite
@@ -291,6 +298,7 @@
   id: RandomHumanoidSpawnerERTEngineerEVA
   parent: RandomHumanoidSpawnerERTEngineer
   name: ERT engineer
+  noSpawn: true
   suffix: ERTRole, Enviro EVA
   components:
     - type: Sprite
@@ -318,6 +326,7 @@
   id: RandomHumanoidSpawnerERTSecurity
   parent: RandomHumanoidSpawnerERTLeader
   name: ERT security
+  noSpawn: true
   suffix: ERTRole, Basic
   components:
     - type: Sprite
@@ -353,6 +362,7 @@
   id: RandomHumanoidSpawnerERTSecurityEVA
   parent: RandomHumanoidSpawnerERTSecurity
   name: ERT security
+  noSpawn: true
   suffix: ERTRole, Armored EVA
   components:
     - type: Sprite
@@ -377,6 +387,7 @@
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityEVALecter
   parent: RandomHumanoidSpawnerERTSecurityEVA
+  noSpawn: true
   suffix: ERTRole, Lecter, EVA
   components:
     - type: RandomHumanoidSpawner
@@ -401,6 +412,7 @@
   id: RandomHumanoidSpawnerERTMedical
   parent: RandomHumanoidSpawnerERTLeader
   name: ERT medic
+  noSpawn: true
   suffix: ERTRole, Basic
   components:
     - type: Sprite
@@ -434,6 +446,7 @@
   id: RandomHumanoidSpawnerERTMedicalEVA
   parent: RandomHumanoidSpawnerERTMedical
   name: ERT medic
+  noSpawn: true
   suffix: ERTRole, Armored EVA
   components:
     - type: Sprite
@@ -460,6 +473,7 @@
 - type: entity
   id: RandomHumanoidSpawnerCBURNUnit
   name: CBURN Agent
+  noSpawn: true
   suffix: ERTRole
   components:
     - type: Sprite
@@ -528,6 +542,7 @@
 
 - type: randomHumanoidSettings
   id: SyndicateAgent
+  parent: BackmenSpecies
   components:
     - type: RandomHumanoidAppearance
       randomizeName: false
@@ -546,6 +561,7 @@
 
 - type: randomHumanoidSettings
   id: NukeOp
+  parent: BackmenSpecies
   components:
     - type: RandomHumanoidAppearance
       randomizeName: false
@@ -612,6 +628,8 @@
 - type: randomHumanoidSettings
   id: LostCargoTechnician
   parent: EventHumanoid
+  speciesBlacklist:
+  - Vox
   components:
     - type: GhostRole
       name: ghost-role-information-lost-cargo-technical-name
@@ -663,6 +681,8 @@
   id: ClownTroupe
   parent: EventHumanoid
   randomizeName: false
+  speciesBlacklist:
+  - Vox
   components:
     - type: GhostRole
       name: ghost-role-information-clown-troupe-name
@@ -713,6 +733,8 @@
 - type: randomHumanoidSettings
   id: TravelingChef
   parent: EventHumanoid
+  speciesBlacklist:
+  - Vox
   components:
     - type: GhostRole
       name: ghost-role-information-traveling-chef-name
@@ -773,6 +795,8 @@
 - type: randomHumanoidSettings
   id: DisasterVictimHead
   parent: EventHumanoidMindShielded
+  speciesBlacklist:
+  - Vox
   components:
     - type: GhostRole
       name: ghost-role-information-disaster-victim-name
@@ -831,6 +855,8 @@
 - type: randomHumanoidSettings
   id: SyndieDisasterVictim
   parent: EventHumanoid
+  speciesBlacklist:
+  - Vox
   components:
     - type: NpcFactionMember
       factions:

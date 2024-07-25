@@ -2,8 +2,8 @@
   id: Atlas
   mapName: Atlas
   mapPath: /Maps/atlas.yml
-  minPlayers: 0
-  maxPlayers: 200
+  minPlayers: 5
+  maxPlayers: 20
   stations:
     Atlas:
       stationProto: StandardNanotrasenStation
@@ -55,3 +55,16 @@
             Clown: [ 1, 1 ]
             Mime: [ 1, 1 ]
             Musician: [ 1, 1 ]
+            # backmen
+            Prisoner: [ 1, 1 ]
+            SAI: [ 1, 1 ] # backmen-SAI
+            Brigmedic: [ 0, 1 ] # backmen-Brigmedic
+            #BKBPLATech: [ 0, 1 ] # backmen-BPLA-Silicons
+            #BKBPLAMED: [ 0, 1 ] # backmen-BPLAMED-Silicons
+        # backmen blob-config-start SMALL
+        - type: StationBlobConfig
+          stageBegin: 20
+          stageCritical: 300
+          stageTheEnd: 600
+          specForceTeam: RXBZZBlobLow
+        # backmen blob-config-end

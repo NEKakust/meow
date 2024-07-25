@@ -10,6 +10,7 @@
     ClothingOuterWinterMime: 1
     ClothingOuterWinterMusician: 1
     ClothingMaskJoy: 2
+    ClothingUniformJumpsuitNull: 1
     ClothingHeadHatCardborg: 2
     ClothingOuterCardborg: 2
     ClothingHeadHatSombrero: 2
@@ -48,14 +49,15 @@
     FoodPoppy: 1
     ClothingHeadHatGladiator: 1
     ClothingUniformJumpsuitGladiator: 1
-    ClothingHeadHatCowboyBrown: 1
-    ClothingHeadHatCowboyBlack: 1
-    ClothingHeadHatCowboyWhite: 1
-    ClothingHeadHatCowboyGrey: 1
-    ClothingShoesBootsCowboyBrown: 1
-    ClothingShoesBootsCowboyBlack: 1
-    ClothingShoesBootsCowboyWhite: 1
-    ClothingMaskNeckGaiterRed: 2
+    ClothingHeadHatStetson: 2 # backmen
+    ClothingHeadHatCowboyBrown: 1 
+    ClothingHeadHatCowboyBlack: 1 
+    ClothingHeadHatCowboyWhite: 1 
+    ClothingHeadHatCowboyGrey: 1 
+    ClothingShoesBootsCowboyBrown: 1 
+    ClothingShoesBootsCowboyBlack: 1  
+    ClothingShoesBootsCowboyWhite: 1  
+    ClothingMaskNeckGaiterRed: 2  
   emaggedInventory:
     ClothingShoesBling: 1
     ClothingShoesBootsCowboyFancy: 1

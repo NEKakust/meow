@@ -33,6 +33,7 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledShotgun
+  noSpawn: true
   name: Bulldog bundle
   description: "Lean and mean: Contains the popular Bulldog Shotgun, a 12g beanbag drum and 3 12g buckshot drums." #, and a pair of Thermal Imaging Goggles.
   components:
@@ -47,6 +48,7 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledSMG
+  noSpawn: true
   name: C-20r bundle
   description: "Old faithful: The classic C-20r Submachine Gun, bundled with three magazines." #, and a Suppressor.
   components:
@@ -72,6 +74,7 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledLMG
+  noSpawn: true
   name: L6 Saw bundle
   description: "More dakka: The iconic L6 lightmachinegun, bundled with 2 box magazines."
   components:
@@ -83,6 +86,7 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
+  noSpawn: true
   name: China-Lake bundle
   description: "An old China-Lake grenade launcher bundled with 11 rounds of various destruction capability."
   components:
@@ -97,6 +101,7 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledCarbine
+  noSpawn: true
   name: M-90gl bundle
   description: "A versatile battle rifle with an attached grenade launcher, bundled with 3 magazines and 6 grenades of various capabilities."
   components:
@@ -249,6 +254,19 @@
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateRaidBundle
+  name: syndicate raid suit bundle
+  description: "Contains the Syndicate's durable raid armor suit."
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingOuterArmorRaid
+      - id: ClothingHeadHelmetRaid
+      - id: ClothingMaskGasSyndicate
+      - id: ClothingHandsGlovesCombat
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateHardsuitBundle
   name: syndicate hardsuit bundle
   description: "Contains the Syndicate's signature blood red hardsuit."
@@ -302,6 +320,38 @@
       - id: PillAmbuzolPlus
       - id: PillAmbuzol
         amount: 3
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateOperative
+  name: operative duffelbag
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalSyndicate
+      - id: WeaponPistolHIB88M4
+      - id: PinpointerNuclear
+      - id: DeathAcidifierImplanter
+
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateMedicalBundle
+  id: ClothingBackpackDuffelSyndicateOperativeMedic
+  name: operative medic duffelbag
+  description: A large duffel bag for holding extra medical supplies.
+  components:
+  - type: StorageFill
+    contents:
+      - id: SyndiHypo
+      - id: BoxSurvivalSyndicate
+      - id: SawAdvanced
+      - id: Cautery
+      - id: CombatKnife
+      - id: WeaponPistolHIB88M4
+      - id: PinpointerNuclear
+      - id: HandheldHealthAnalyzer
+      - id: CombatMedipen
+      - id: DeathAcidifierImplanter
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateMedicalBundle

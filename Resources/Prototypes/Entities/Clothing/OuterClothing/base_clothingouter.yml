@@ -132,10 +132,14 @@
   - type: GroupExamine
   - type: Tag
     tags:
+    - FullBodyOuter
     - Hardsuit
     - WhitelistChameleon
   - type: ClothingRequiredStepTriggerImmune
     slots: WITHOUT_POCKET
+  - type: ClothingGrant
+    component:
+    - type: BkmSupermatterImmune
 
 - type: entity
   abstract: true
@@ -154,6 +158,9 @@
   - type: HeldSpeedModifier
   - type: Item
     size: Huge
+  - type: Tag
+    tags:
+      - FullBodyOuter
   - type: ClothingRequiredStepTriggerImmune
     slots: WITHOUT_POCKET
 

@@ -2,7 +2,7 @@
   id: CorvaxSplit
   mapName: 'Split Stations'
   mapPath: /Maps/corvax_split.yml
-  minPlayers: 0
+  minPlayers: 55
   stations:
     Mayhen:
       stationProto: NanotrasenStationNoArrivals
@@ -14,10 +14,11 @@
             prefixCreator: 'MT'
         - type: GridSpawn
           groups:
-            trade:
+            trade: !type:GridSpawnGroup
               addComponents:
                 - type: ProtectedGrid
                 - type: TradeStation
+                - type: ArrivalsProtectGrid
               paths:
                 - /Maps/Shuttles/trading_mayhen.yml
         - type: StationCargoShuttle
@@ -61,6 +62,19 @@
             # cargo
             SalvageSpecialist: [ 1, 1 ]
             CargoTechnician: [ 3, 3 ]
+            # backmen
+            SAI: [1, 1] # backmen-SAI
+        # backmen blob-config-start SMALL
+        - type: StationBlobConfig
+          stageBegin: 20
+          stageCritical: 300
+          stageTheEnd: 600
+        # backmen blob-config-end
+        - type: StationGoal
+          goals:
+            - Artifacts
+            - XenobiologyRepair
+            - VirusologyAmbusol
     Payback:
       stationProto: NanotrasenStationNoArrivals
       components:
@@ -71,10 +85,11 @@
             prefixCreator: 'MT'
         - type: GridSpawn
           groups:
-            trade:
+            trade: !type:GridSpawnGroup
               addComponents:
                 - type: ProtectedGrid
                 - type: TradeStation
+                - type: ArrivalsProtectGrid
               paths:
                 - /Maps/Shuttles/trading_payback.yml
         - type: StationCargoShuttle
@@ -114,6 +129,19 @@
             # cargo
             SalvageSpecialist: [ 1, 1 ]
             CargoTechnician: [ 2, 3 ]
+            # backmen
+            Prisoner: [ 3, 6]
+            SAI: [1, 1] # backmen-SAI
+            Brigmedic: [ 0, 1 ] # backmen-Brigmedic
+        # backmen blob-config-start SMALL
+        - type: StationBlobConfig
+          stageBegin: 20
+          stageCritical: 300
+          stageTheEnd: 600
+        # backmen blob-config-end
+        - type: StationGoal
+          goals:
+            - SectorSecurity
     Lumber:
       stationProto: NanotrasenStationNoArrivals
       components:
@@ -124,17 +152,18 @@
             prefixCreator: 'MT'
         - type: GridSpawn
           groups:
-            trade:
+            trade: !type:GridSpawnGroup
               addComponents:
                 - type: ProtectedGrid
                 - type: TradeStation
+                - type: ArrivalsProtectGrid
               paths:
                 - /Maps/Shuttles/trading_outpost.yml
-            mining:
+            mining: !type:GridSpawnGroup
               paths:
               - /Maps/Shuttles/corvax_mining.yml
             # Spawn last
-            ruins:
+            ruins: !type:GridSpawnGroup
               hide: true
               nameGrid: true
               minCount: 3
@@ -185,3 +214,19 @@
             Quartermaster: [ 1, 1 ]
             SalvageSpecialist: [ 3, 3 ]
             CargoTechnician: [ 3, 4 ]
+            # backmen
+            SAI: [1, 1] # backmen-SAI
+        # backmen blob-config-start SMALL
+        - type: StationBlobConfig
+          stageBegin: 20
+          stageCritical: 300
+          stageTheEnd: 600
+        # backmen blob-config-end
+        - type: StationGoal
+          goals:
+            - Shuttle
+            - Singularity
+            - SolarPanels
+            - Zoo
+            - MiningOutpost
+            - Tesla

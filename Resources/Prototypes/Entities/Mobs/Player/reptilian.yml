@@ -4,5 +4,6 @@
   suffix: Urisst' Mzhand
   parent: BaseMobReptilian
   id: MobReptilian
-
+  components:
+    - type: PotentialPsionic
 #Weh

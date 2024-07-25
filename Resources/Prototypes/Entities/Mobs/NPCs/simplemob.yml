@@ -25,6 +25,7 @@
     - ForcedSleep
     - TemporaryBlindness
     - Pacified
+    - SeeAll
     - Flashed
   - type: Buckle
   - type: StandingState
@@ -73,6 +74,7 @@
   suffix: AI
   abstract: true
   components:
+  - type: DiseaseCarrier
   - type: Hunger
     thresholds: # only animals and rats are derived from this prototype so let's override it here and in rats' proto
       Overfed: 100
@@ -100,6 +102,9 @@
       - TemporaryBlindness
       - Pacified
       - StaminaModifier
+      - PsionicsDisabled
+      - PsionicallyInsulated
+      - SeeAll
       - Flashed
   - type: Bloodstream
     bloodMaxVolume: 150

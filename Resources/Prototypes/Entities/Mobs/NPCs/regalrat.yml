@@ -1,5 +1,5 @@
 - type: entity
-  name: Rat King
+  name: rat king
   id: MobRatKing
   parent: [ SimpleMobBase, MobCombat ]
   description: He's da rat. He make da roolz.
@@ -117,11 +117,12 @@
   - type: GuideHelp
     guides:
     - MinorAntagonists
+  - type: PotentialPsionic
   - type: Grammar
     attributes:
       gender: male
   - type: TTS # Corvax-TTS
-    voice: Rat
+    voice: Npc1
 
 - type: entity
   id: MobRatKingBuff
@@ -160,7 +161,7 @@
     - MinorAntagonists
 
 - type: entity
-  name: Rat Servant
+  name: rat servant
   id: MobRatServant
   parent: [ SimpleMobBase, MobCombat ]
   description: He's da mini rat. He don't make da roolz.
@@ -288,6 +289,7 @@
   - type: GuideHelp
     guides:
     - MinorAntagonists
+  - type: FelinidFood
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Mouse_burning

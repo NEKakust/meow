@@ -102,6 +102,8 @@
         - proto: WaterTankHighCapacity
         - proto: WeldingFuelTankHighCapacity
           cost: 3
+        - proto: BluespacePillCanister # Backmen
+          cost: 1
         - proto: WeaponTeslaGun
           prob: 0.1
           cost: 2
@@ -177,6 +179,13 @@
   loots:
     - !type:BiomeMarkerLoot
       proto: OreBananium
+
+- type: salvageLoot
+  id: OreDiamond
+  guaranteed: true
+  loots:
+    - !type:BiomeMarkerLoot
+      proto: OreDiamond
 
 - type: salvageLoot
   id: OreArtifactFragment

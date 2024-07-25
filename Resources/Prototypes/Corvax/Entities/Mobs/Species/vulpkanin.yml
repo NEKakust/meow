@@ -3,7 +3,7 @@
   name: Urist McVulp
   parent: BaseMobSpeciesOrganic
   id: BaseMobVulpkanin
-  abstract: false
+  abstract: true
   components:
   - type: HumanoidAppearance
     species: Vulpkanin

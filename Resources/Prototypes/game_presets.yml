@@ -7,6 +7,7 @@
   description: survival-description
   rules:
     - RampingStationEventScheduler
+    - WageScheduler #backmen: currency
     - GameRuleMeteorScheduler
     - BasicRoundstartVariation
 
@@ -14,14 +15,18 @@
   id: AllAtOnce
   name: all-at-once-title
   description: all-at-once-description
-  showInVote: true
+  showInVote: false
   rules:
     - Nukeops
     - Traitor
     - Revolutionary
     - Zombie
     - RampingStationEventScheduler
+    - WageScheduler #backmen: currency
     - GameRuleMeteorScheduler
+    - BlobGameMode # backmen: blob
+    - VampiresGameRule # backmen: vampire
+    - FleshCult # backmen: flesh cult
 
 - type: gamePreset
   id: Extended
@@ -29,10 +34,11 @@
   - extended
   - shittersafari
   name: extended-title
-  showInVote: true #2boring2vote
+  showInVote: false #2boring2vote
   description: extended-description
   rules:
   - BasicStationEventScheduler
+  - WageScheduler #backmen: currency
   - GameRuleMeteorScheduler
   - BasicRoundstartVariation
 
@@ -42,10 +48,11 @@
   - greenshift
   - shittersafarideluxeedition
   name: greenshift-title
-  showInVote: true #4boring4vote
+  showInVote: false #4boring4vote
   description: greenshift-description
   rules:
   - BasicRoundstartVariation
+  - WageScheduler #backmen: currency
   - GameRuleMeteorScheduler
 
 - type: gamePreset
@@ -68,6 +75,7 @@
   description: secret-description
   rules:
     - BasicStationEventScheduler
+    - WageScheduler #backmen: currency
     - GameRuleMeteorScheduler
 
 - type: gamePreset
@@ -100,6 +108,7 @@
     - Traitor
     - SubGamemodesRule
     - BasicStationEventScheduler
+    - WageScheduler #backmen: currency
     - GameRuleMeteorScheduler
     - BasicRoundstartVariation
 
@@ -112,6 +121,7 @@
   description: death-match-description
   maxPlayers: 15
   showInVote: true
+  isMiniGame: true
   supportedMaps: DeathMatchMapPool
   rules:
     - DeathMatch31
@@ -122,13 +132,14 @@
     - nukeops
   name: nukeops-title
   description: nukeops-description
-  showInVote: false
+  showInVote: true
+  minPlayers: 15
   rules:
     - Nukeops
     - SubGamemodesRule
     - BasicStationEventScheduler
+    - WageScheduler #backmen: currency
     - GameRuleMeteorScheduler
-    - BasicRoundstartVariation
 
 - type: gamePreset
   id: Revolutionary
@@ -145,6 +156,7 @@
     - BasicStationEventScheduler
     - GameRuleMeteorScheduler
     - BasicRoundstartVariation
+    - WageScheduler #backmen: currency
 
 - type: gamePreset
   id: Zombie
@@ -160,5 +172,6 @@
   rules:
   - Zombie
   - BasicStationEventScheduler
+  - WageScheduler #backmen: currency
   - GameRuleMeteorScheduler
   - BasicRoundstartVariation

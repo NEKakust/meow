@@ -19,6 +19,12 @@
       - id: DoorRemoteArmory
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
+      - id: ClothingEyesHudSecurity
+      - id: AntiPsychicKnife # backmen
+        amount: 3
+      - id: ClothingHeadCage # backmen
+        amount: 2
+      - id: BookSpaceLaw
 
 - type: entity
   id: LockerWardenFilled
@@ -29,6 +35,9 @@
     contents:
       - id: FlashlightSeclite
       - id: WeaponDisabler
+        prob: 0.3
+      - id: ClothingHeadHatWarden
+      - id: ClothingHeadHatBeretWarden
       - id: ClothingHeadHatCapWardenAlt # Corvax-SecFashion
       - id: ClothingBeltSecurityFilled
       - id: Flash
@@ -42,6 +51,12 @@
       - id: RubberStampWarden
       - id: DoorRemoteArmory
       - id: HoloprojectorSecurity
+      - id: ClothingEyesHudSecurity
+      - id: AntiPsychicKnife # backmen
+        amount: 3
+      - id: ClothingHeadCage # backmen
+        amount: 2
+      - id: BookSpaceLaw
 
 - type: entity
   id: LockerSecurityFilled
@@ -50,6 +65,7 @@
   components:
   - type: StorageFill
     contents:
+      - id: Eftpos # backmen
       - id: FlashlightSeclite
         prob: 0.8
       - id: WeaponDisabler
@@ -68,9 +84,17 @@
         prob: 0.1
       - id: ClothingOuterCoatSecurityOvercoat # Corvax-SecFashion
         prob: 0.2
+      - id: ClothingEyesHudSecurity
+      - id: AntiPsychicKnife # backmen
+        amount: 3
+      - id: ClothingHeadCage # backmen
+        amount: 2
       - id: HoloprojectorSecurity
         prob: 0.6
+      - id: BookSpaceLaw
+        prob: 0.5
 
+# backmen brigmedic's locker reworked
 - type: entity
   id: LockerBrigmedicFilled
   suffix: Brigmedic, Filled
@@ -92,24 +116,18 @@
         prob: 0.1
       - id: MedkitFilled
       - id: MedkitCombatFilled
-        prob: 0.6
       - id: MedkitAdvancedFilled
-        prob: 0.4
       - id: MedkitOxygenFilled
-        prob: 0.3
+        prob: 0.4
       - id: MedkitBruteFilled
-        prob: 0.3
+        prob: 0.4
       - id: MedkitToxinFilled
-        prob: 0.3
+        prob: 0.4
       - id: MedkitBurnFilled
-        prob: 0.7
-      - id: ClothingNeckCloakMoth #bzzz Moth-pocalypse
-        prob: 0.15
-      - id: ClothingHeadHelmetSecurityMedic # Corvax-Resprite
-      - id: ClothingOuterVestSecurityMedic # Corvax-Resprite
-        prob: 0.5
-      - id: ClothingOuterCoatLabSecurityMedic # Corvax-Resprite
-        prob: 0.5
+        prob: 0.4
+      - id: AntiPsychicKnife # backmen
+      - id: ClothingHeadCage # backmen
+      - id: ClothingHeadsetAltBrigmedic # backmen
 
 - type: entity
   id: LockerDetectiveFilled
@@ -130,8 +148,12 @@
       - id: BoxForensicPad
       - id: DrinkDetFlask
       - id: ClothingHandsGlovesForensic
-      - id: RubberStampDetective
       - id: BookBusido # Corvax-Books
+      - id: AntiPsychicKnife # backmen
+        amount: 3
+      - id: ClothingHeadCage # backmen
+        amount: 2
+      - id: RubberStampDetective
       - id: HoloprojectorSecurity
       - id: BoxEvidenceMarkers
 
@@ -161,6 +183,10 @@
     contents:
     - id: WeaponDisabler
       amount: 5
+    - id: AntiPsychicKnife # backmen
+      amount: 3
+    - id: ClothingHeadCage # backmen
+      amount: 2
 
 - type: entity
   parent: GunSafe
@@ -169,7 +195,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponPistolMk58
+    - id: WeaponPistolACP14
       amount: 4
     - id: MagazinePistol
       amount: 8
@@ -181,7 +207,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponRifleLecter
+    - id: WeaponRifleAR18
       amount: 2
     - id: MagazineRifle
       amount: 4
@@ -193,7 +219,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponSubMachineGunDrozd
+    - id: WeaponSubMachineGunVectorSpecial
       amount: 2
     - id: MagazinePistolSubMachineGun
       amount: 4
@@ -205,7 +231,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponShotgunEnforcer
+    - id: WeaponShotgun39
       amount: 2
     - id: MagazineShotgun
       amount: 4
@@ -217,7 +243,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponShotgunKammerer
+    - id: WeaponShotguntrenchgun4034
       amount: 2
     - id: MagazineShotgun
       amount: 4
@@ -230,7 +256,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponSubMachineGunWt550
+    - id: WeaponSubMachineGunMP5
       amount: 2
     - id: MagazinePistolSubMachineGunTopMounted
       amount: 4
@@ -242,5 +268,5 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponLaserCarbine
+    - id: WeaponEarthGovLaserRifle
       amount: 3

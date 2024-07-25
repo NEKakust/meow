@@ -5,7 +5,7 @@
   playTimeTracker: JobSecurityCadet
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 3600 #1 hrs
+      time: 36000 #10 hrs # Corvax-RoleTime
     - !type:DepartmentTimeRequirement
       department: Security
       time: 72000 #20 hrs # Corvax-RoleTime
@@ -21,6 +21,12 @@
   - Service
   - External
   - Cryogenics
+  #start-backmen: currency
+  minBankBalance: 150
+  maxBankBalance: 250
+  wageDepartment: Security
+  wage: 25
+  #end-backmen: currency
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -34,8 +40,7 @@
     ears: ClothingHeadsetSecurity
     belt: ClothingBeltSecurityFilled
     pocket1: WeaponPistolMk58
-    pocket2: HyperLinkBookCorporateLaw # Corvax-HyperLink
+    pocket2: BookSpaceLaw # Corvax-HyperLink
   storage:
     back:
     - Flash
-    - MagazinePistol
