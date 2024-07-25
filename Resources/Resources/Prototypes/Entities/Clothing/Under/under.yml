@@ -1,0 +1,50 @@
+# These are technically shoes for now, as we don't actually have underwear. But
+# I would cry if we didn't have them. -swept
+
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: ClothingSocksBase
+  components:
+  - type: Clothing
+    slots:
+    - SOCKS
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+  - type: Tag
+    tags:
+    - ClothMade
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingUnderSocksBee
+  name: bee socks
+  description: Make them loins buzz!
+  components:
+  - type: Sprite
+    sprite: Clothing/Under/Socks/bee.rsi
+  - type: Clothing
+    sprite: Clothing/Under/Socks/bee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingUnderSocksCoder
+  name: coder socks
+  description: It's time to code sisters!!11!
+  components:
+  - type: Sprite
+    sprite: Clothing/Under/Socks/coder.rsi
+  - type: Clothing
+    sprite: Clothing/Under/Socks/coder.rsi
