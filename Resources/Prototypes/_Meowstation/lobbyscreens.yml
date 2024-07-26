@@ -14,4 +14,12 @@
   id: taintedlostoamin
   background: /Textures/_Meowstation/LobbyScreens/taintedlostoamin.png
 
+- type: lobbyBackground
+  id: berserko
+  background: /Textures/_Meowstation/LobbyScreens/berserko.png
+
+- type: lobbyBackground
+  id: bezmamni
+  background: /Textures/_Meowstation/LobbyScreens/bezmamni.png
+
 
