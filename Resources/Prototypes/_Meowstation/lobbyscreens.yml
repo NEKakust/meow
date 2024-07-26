@@ -1,0 +1,17 @@
+- type: lobbyBackground
+  id: furryamin
+  background: /Textures/_Meowstation/LobbyScreens/furryamin.png
+
+- type: lobbyBackground
+  id: furrypupsik
+  background: /Textures/_Meowstation/LobbyScreens/furrypupsik.png
+
+- type: lobbyBackground
+  id: potroshitel
+  background: /Textures/_Meowstation/LobbyScreens/potroshitel.png
+
+- type: lobbyBackground
+  id: taintedlostoamin
+  background: /Textures/_Meowstation/LobbyScreens/taintedlostoamin.png
+
+
