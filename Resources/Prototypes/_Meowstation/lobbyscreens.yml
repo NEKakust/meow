@@ -1,0 +1,15 @@
+- type: lobbyBackground
+  id: furryamin
+  background: /Textures/Backmen/LobbyScreens/furryamin.png
+
+- type: lobbyBackground
+  id: furrypupsik
+  background: /Textures/Backmen/LobbyScreens/furrypupsik.png
+
+- type: lobbyBackground
+  id: potroshitel
+  background: /Textures/Backmen/LobbyScreens/potroshitel.jpg
+
+- type: lobbyBackground
+  id: taintedlostoamin
+  background: /Textures/Backmen/LobbyScreens/taintedlostoamin.jpg
