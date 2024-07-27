@@ -1,28 +1,17 @@
 - type: gameMapPool
   id: DefaultMapPool
   maps:
-  - BackmenAspid
-  - BackmenKettle
-  - BackmenTortuga
-  - BackmenHive
-  - BackmenShoukou
-  - BackmenRook
-  - Meta
-  - Fland
-  - Cluster
-  - Saltern
-  - Omega
-  - Bagel
-  - CorvaxSplit
-  - Oasis
-  - no_madDelta
   - Atlas
+  - Bagel
   - Box
+  - Cluster
   - Core
   - Fland
   - Marathon
   - Meta
   - Oasis
+  - Omega
   - Origin
+  - Saltern
   - Packed
   - Train
