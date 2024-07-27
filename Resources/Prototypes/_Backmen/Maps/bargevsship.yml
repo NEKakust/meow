@@ -17,7 +17,7 @@
   id: BargeVsShip
   mapName: 'Бой на баржах'
   mapPath: /Maps/Backmen/bargevsship.yml
-  minPlayers: 2
+  minPlayers: 0
   stations:
     TeamA:
       stationProto: StandardNanotrasenStationVsShip

@@ -2,7 +2,7 @@
   id: BackmenCogmap
   mapName: 'Cogmap'
   mapPath: /Maps/Backmen/backmen_cogmap.yml
-  minPlayers: 55
+  minPlayers: 0
   stations:
     Cogmap:
       stationProto: StandardNanotrasenStation

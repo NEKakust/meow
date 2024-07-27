@@ -2,7 +2,7 @@
   id: no_madDelta
   mapName: 'Delta Station'
   mapPath: /Maps/Backmen/no_madDelta.yml
-  minPlayers: 30
+  minPlayers: 0
   stations:
     Delta:
       stationProto: StandardNanotrasenStation
