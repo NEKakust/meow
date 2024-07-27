@@ -1,5 +1,5 @@
 - type: gameMapPool
-  id: BackmenDefaultMapPool
+  id: DefaultMapPool
   maps:
   - BackmenAspid
   - BackmenKettle
