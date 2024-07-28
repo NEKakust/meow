@@ -1,6 +1,8 @@
 - type: gameMapPool
   id: DefaultMapPool
   maps:
+  - BackmenShoukou
+  - BackmenRook
   - Atlas
   - Bagel
   - Box
