@@ -1,0 +1,15 @@
+- type: reaction
+  id: MushroomBeer
+  requiredMixerCategories:
+    - Shake
+  reactants:
+    Beer:
+      amount: 2
+    Enzyme:
+      amount: 1
+    Amatoxin:
+      amount: 1
+    Nutriment:
+      amount: 2
+  products:
+    MushroomBeerSolution: 5

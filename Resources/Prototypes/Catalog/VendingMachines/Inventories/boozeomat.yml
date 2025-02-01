@@ -48,5 +48,6 @@
     DrinkSakeBottleFull: 3
     DrinkBeerCan: 5
     DrinkWineCan: 5
+    MushroomBeerGlass: 6
   emaggedInventory:
     DrinkPoisonWinebottleFull: 2

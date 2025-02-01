@@ -1,0 +1,19 @@
+- type: entity
+  parent: DrinkGlassBase
+  id: MushroomBeerGlass
+  name: Грибное пиво
+  description: Пиво с добавлением грибов. Имеет странный вкус.
+  components:
+    - type: SolutionContainerManager
+      solutions:
+        drink:
+          maxVol: 30
+          reagents:
+            - ReagentId: MushroomBeerSolution
+              Quantity: 30
+    - type: Drink
+    - type: FlavorProfile
+      flavors:
+        - meowstation_update
+    - type: Sprite
+      sprite: _Meowstation/Objects/Consumable/Drinks/mushroom_beer.rsi
