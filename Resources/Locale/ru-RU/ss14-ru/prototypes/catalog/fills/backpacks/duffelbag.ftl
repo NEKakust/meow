@@ -27,9 +27,6 @@ ent-ClothingBackpackDuffelSyndicateAmmoFilled = { ent-ClothingBackpackDuffelSynd
 
 # Corvax-HiddenDesc-End
 
-ent-ClothingBackpackDuffelSyndicateCostumeCentcom = вещмешок с костюмом представителя Центкома
-    .desc = Содержит полный комплект униформы представителя Центкома, гарнитуру и планшет. Гарнитура поставляется без ключа шифрования.
-    .suffix = НЕ МАППИТЬ
 ent-ClothingBackpackDuffelSyndicateCostumeClown = { ent-ClothingBackpackDuffelClown }
     .desc = { ent-ClothingBackpackDuffelClown.desc }
     .suffix = Синдикат
@@ -49,7 +46,7 @@ ent-ClothingBackpackChameleonFill = { ent-ClothingBackpackDuffelSyndicate }
 ent-ClothingBackpackDuffelSyndicateRaidBundle = набор рейдерского костюма Синдиката
     .desc = Содержит прочный рейдерский бронекостюм Синдиката.
 ent-ClothingBackpackDuffelSyndicateEVABundle = { ent-ClothingBackpackDuffelSyndicate }
-    .suffix = набор EVA Синдиката
+    .suffix = набор ВКД Синдиката
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
 ent-ClothingBackpackDuffelSyndicateHardsuitBundle = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = набор скафандров Синдиката

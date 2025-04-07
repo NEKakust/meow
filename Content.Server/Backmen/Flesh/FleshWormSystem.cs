@@ -26,6 +26,7 @@ namespace Content.Server.Backmen.Flesh;
 
 public sealed partial class FleshWormSystem : EntitySystem
 {
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStunSystem _stunSystem = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -47,6 +48,12 @@ public sealed partial class FleshWormSystem : EntitySystem
         SubscribeLocalEvent<FleshWormComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<FleshWormComponent, BeingUnequippedAttemptEvent>(OnUnequipAttempt);
         SubscribeLocalEvent<FleshWormComponent, FleshWormJumpActionEvent>(OnJumpWorm);
+        SubscribeLocalEvent<FleshWormComponent, ComponentShutdown>(OnShutdown);
+    }
+
+    private void OnShutdown(Entity<FleshWormComponent> ent, ref ComponentShutdown args)
+    {
+        _action.RemoveAction(ent.Owner, ent.Comp.WormJumpAction);
     }
 
     private void OnStartup(EntityUid uid, FleshWormComponent component, ComponentStartup args)
@@ -203,8 +210,8 @@ public sealed partial class FleshWormSystem : EntitySystem
 
         args.Handled = true;
         var xform = Transform(uid);
-        var mapCoords = args.Target.ToMap(EntityManager);
-        var direction = mapCoords.Position - xform.MapPosition.Position;
+        var mapCoords = _transform.ToMapCoordinates(args.Target);
+        var direction = mapCoords.Position - _transform.GetMapCoordinates(xform).Position;
 
         _throwing.TryThrow(uid, direction, 7F, uid, 10F);
         if (component.SoundWormJump != null)

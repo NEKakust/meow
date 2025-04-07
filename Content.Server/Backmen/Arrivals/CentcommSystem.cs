@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Server.Backmen.Arrivals.CentComm;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
@@ -24,22 +25,20 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.GameObjects;
-using Robust.Server.Maps;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.EntitySerialization;
+using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Backmen.Arrivals;
-
-public sealed class FtlCentComAnnounce : EntityEventArgs
-{
-    public Entity<ShuttleComponent> Source { get; set; }
-}
 
 public sealed class CentcommSystem : EntitySystem
 {
@@ -57,12 +56,14 @@ public sealed class CentcommSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    private ISawmill _sawmill = default!;
-
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly MapLoaderSystem _loader = default!;
+    [Dependency] private readonly  SharedMapSystem _mapSystem = default!;
 
     public EntityUid CentComGrid { get; private set; } = EntityUid.Invalid;
     public MapId CentComMap { get; private set; } = MapId.Nullspace;
-    public EntityUid CentComMapUid { get; private set; } = EntityUid.Invalid;
+    public Entity<MapComponent>? CentComMapUid { get; private set; }
     public float ShuttleIndex { get; set; } = 0;
 
     private WeightedRandomPrototype _stationCentComMapPool = default!;
@@ -70,7 +71,6 @@ public sealed class CentcommSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        _sawmill = Logger.GetSawmill("centcom");
         SubscribeLocalEvent<ActorComponent, CentcomFtlAction>(OnFtlActionUsed);
         SubscribeLocalEvent<PreGameMapLoad>(OnPreGameMapLoad, after: new[] { typeof(StationSystem) });
         SubscribeLocalEvent<RoundStartingEvent>(OnCentComInit, before: new[] { typeof(EmergencyShuttleSystem) });
@@ -85,6 +85,40 @@ public sealed class CentcommSystem : EntitySystem
         _stationCentComMapPool = _prototypeManager.Index<WeightedRandomPrototype>(StationCentComMapPool);
     }
 
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var curTime = _gameTiming.CurTime;
+
+        var q = EntityQueryEnumerator<StationCentCommDirectorComponent, StationSpawningComponent>();
+        while (q.MoveNext(out var stationUid, out var centcomDirector, out var stationSpawning))
+        {
+            if (!(centcomDirector.EventSchedule.Count > 0 && curTime >= centcomDirector.NextEventTick))
+            {
+                continue;
+            }
+
+            // Pop the event.
+            var curEvent = centcomDirector.EventSchedule[0];
+            centcomDirector.EventSchedule.RemoveAt(0);
+
+            // Add the next event's offset to the ticker.
+            if (centcomDirector.EventSchedule.Count > 0)
+                centcomDirector.NextEventTick = curTime + centcomDirector.EventSchedule[0].timeOffset;
+
+            Log.Info($"Running event: {curEvent}");
+
+            var ev = new CentCommEvent(stationUid, curEvent.eventId);
+            RaiseLocalEvent(stationUid, ev, true);
+            if (!ev.Handled)
+            {
+                Log.Warning($"Running event: {curEvent} is not handled");
+            }
+        }
+    }
+
+
     private void OnLoadingMaps(LoadingMapsEvent ev)
     {
         if (_gameTicker.CurrentPreset?.IsMiniGame ?? false)
@@ -96,12 +130,13 @@ public sealed class CentcommSystem : EntitySystem
 
     private void OnCentComEndRound(RoundEndedEvent ev)
     {
-        if (CentComMapUid.IsValid() && _shuttleSystem.TryAddFTLDestination(CentComMap, true, out var ftl))
+        if (CentComMapUid != null && _shuttleSystem.TryAddFTLDestination(CentComMap, true, out var ftl))
         {
-            EnableFtl((CentComMapUid, ftl));
+            EnableFtl((CentComMapUid.Value, ftl));
         }
     }
 
+    private readonly HashSet<Entity<IFFConsoleComponent>> _iFfConsoleEntities = new();
     private void OnFtlAnnounce(FtlCentComAnnounce ev)
     {
         if (!CentComGrid.IsValid())
@@ -109,17 +144,13 @@ public sealed class CentcommSystem : EntitySystem
             return; // not loaded centcom
         }
 
-        var transformQuery = EntityQueryEnumerator<TransformComponent, IFFConsoleComponent>();
-
         var shuttleName = "Неизвестный";
 
-        while (transformQuery.MoveNext(out var owner, out var transformComponent, out var iff))
-        {
-            if (transformComponent.GridUid != ev.Source)
-            {
-                continue;
-            }
+        _iFfConsoleEntities.Clear();
+        _lookup.GetGridEntities(ev.Source, _iFfConsoleEntities);
 
+        foreach (var (owner,iff) in _iFfConsoleEntities)
+        {
             var f = iff.AllowedFlags;
             if (f.HasFlag(IFFFlags.Hide))
             {
@@ -207,7 +238,7 @@ public sealed class CentcommSystem : EntitySystem
 
     private void OnCleanup(RoundRestartCleanupEvent ev)
     {
-        _sawmill.Info("OnCleanup");
+        Log.Info("OnCleanup");
         QueueDel(CentComGrid);
         CentComGrid = EntityUid.Invalid;
 
@@ -215,7 +246,7 @@ public sealed class CentcommSystem : EntitySystem
             _mapManager.DeleteMap(CentComMap);
 
         CentComMap = MapId.Nullspace;
-        CentComMapUid = EntityUid.Invalid;
+        CentComMapUid = null;
         ShuttleIndex = 0;
     }
 
@@ -231,49 +262,63 @@ public sealed class CentcommSystem : EntitySystem
         if (!force && (_gameTicker.RunLevel != GameRunLevel.InRound || !_cfg.GetCVar(CCVars.GridFill)))
             return;
 
-        _sawmill.Info("EnsureCentcom");
+        Log.Info("EnsureCentcom");
         if (CentComGrid.IsValid())
         {
             return;
         }
 
-        _sawmill.Info("Start load centcom");
+        Log.Info("Start load centcom");
 
-        if (CentComMap == MapId.Nullspace)
+        var mapPickId = _stationCentComMapPool.Pick(_random);
+        if (!_prototypeManager.TryIndex<GameMapPrototype>(mapPickId, out var mapToLoad))
         {
-            CentComMap = _mapManager.CreateMap();
+            mapPickId = StationCentComMapDefault;
+            mapToLoad = _prototypeManager.Index<GameMapPrototype>(StationCentComMapDefault);
         }
 
-        CentComMapUid = _mapManager.GetMapEntityId(CentComMap);
+        var opts = DeserializationOptions.Default with {InitializeMaps = true, PauseMaps = false};
+        var grids = _gameTicker.LoadGameMap(mapToLoad, out var mapIdMap, opts);
 
-        var mapId = _stationCentComMapPool.Pick(_random);
-        if (!_prototypeManager.TryIndex<GameMapPrototype>(mapId, out var map))
+        Entity<MapComponent?> mapId = (_mapSystem.GetMapOrInvalid(mapIdMap),null);
+        mapId.Comp = CompOrNull<MapComponent>(mapId.Owner);
+
+        var grid = grids.FirstOrNull(HasComp<BecomesStationComponent>);
+
+        if (!Exists(mapId))
         {
-            mapId = StationCentComMapDefault;
-            map = _prototypeManager.Index<GameMapPrototype>(StationCentComMapDefault);
-        }
-
-
-        var ent = _gameTicker.LoadGameMap(
-            map, CentComMap, new MapLoadOptions()
-            {
-                LoadMap = false
-            }, "Central Command").FirstOrNull(HasComp<BecomesStationComponent>);
-
-        _metaDataSystem.SetEntityName(_mapManager.GetMapEntityId(CentComMap), "CentCom");
-
-        if (ent != null)
-        {
-            CentComGrid = ent.Value;
-            if (_shuttle.TryAddFTLDestination(CentComMap, true, out var ftl))
-            {
-                DisableFtl((CentComMapUid,ftl));
-            }
-        }
-        else
-        {
-            _sawmill.Warning("No CentComm map found, skipping setup.");
+            Log.Error($"Failed to set up centcomm map!");
+            QueueDel(grid);
             return;
+        }
+
+        if (!Exists(grid))
+        {
+            Log.Error($"Failed to set up centcomm grid!");
+            QueueDel(mapId);
+            return;
+        }
+
+        var xform = Transform(grid.Value);
+        if (xform.ParentUid != mapId.Owner || xform.MapUid != mapId.Owner)
+        {
+            Log.Error($"Centcomm grid is not parented to its own map?");
+            QueueDel(mapId);
+            QueueDel(grid);
+            return;
+        }
+
+
+        CentComMapUid = (mapId.Owner, mapId.Comp!);
+        CentComMap = mapIdMap;
+
+        _metaDataSystem.SetEntityName(CentComMapUid.Value, Loc.GetString("map-name-centcomm"));
+
+        CentComGrid = grid.Value;
+        if (_shuttle.TryAddFTLDestination(CentComMap, true, false, false, out var ftl))
+        {
+            ftl.RequireCoordinateDisk = false;
+            DisableFtl((CentComMapUid.Value.Owner, ftl));
         }
 
         var q = EntityQueryEnumerator<StationCentcommComponent>();
@@ -288,16 +333,28 @@ public sealed class CentcommSystem : EntitySystem
     // ReSharper disable once MemberCanBePrivate.Global
     public void DisableFtl(Entity<FTLDestinationComponent?> ent)
     {
+        if(!Resolve(ent, ref ent.Comp))
+            return;
+
         var d = new EntityWhitelist
         {
             RequireAll = false,
             Components = new[] { "AllowFtlToCentCom" }
         };
+
+        ent.Comp.RequireCoordinateDisk = false;
+        ent.Comp.BeaconsOnly = false;
+
         _shuttle.SetFTLWhitelist(ent, d);
     }
 
     public void EnableFtl(Entity<FTLDestinationComponent?> ent)
     {
+        if(!Resolve(ent, ref ent.Comp))
+            return;
+        ent.Comp.RequireCoordinateDisk = false;
+        ent.Comp.BeaconsOnly = false;
+
         _shuttle.SetFTLWhitelist(ent, null);
     }
 
@@ -319,7 +376,10 @@ public sealed class CentcommSystem : EntitySystem
                 return;
         }
 
-        ev.Options.Offset = new Vector2(0, 0);
+        ev.Options.PauseMaps = false;
+        ev.Options.InitializeMaps = true;
+        ev.Offset = Vector2.Zero;
+        ev.Rotation = Angle.Zero;
     }
 
     private void OnFtlActionUsed(EntityUid uid, ActorComponent component, CentcomFtlAction args)

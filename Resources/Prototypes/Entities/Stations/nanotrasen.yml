@@ -23,28 +23,52 @@
     - BaseStationAlertLevels
     - BaseStationMagnet
     - BaseStationExpeditions
-    - BaseStationSiliconLawCrewsimov
+    - BaseStationSiliconLawNTDefault # Corvax-NTDefault
     - BaseStationAllEventsEligible
     - BaseStationNanotrasen
-  noSpawn: true
+    - BaseStationDeliveries
+  categories: [ HideSpawnMenu ]
   components:
     - type: Transform
 
 - type: entity
   id: NanotrasenCentralCommand
+  save: false
   parent:
     - BaseStation
     - BaseStationAlertLevels
     - BaseStationNanotrasen
-    - BaseStationCargo #Backmen
+  #  - BaseStationCargo #Backmen
     - BaseStationJobsSpawning #Backmen
     - BaseStationRecords #Backmen
-    - BaseStationShuttles #Backmen
+  #  - BaseStationShuttles #Backmen
     - BaseStationExpeditions #Backmen
     - BaseStationMagnet #Backmen
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Transform
+    - type: StationCentCommDirector
+      eventSchedule: # 10min = 600sec
+      - 0: Noop # init event prevent from missfire
+      - 600: AddWorker #10min
+      - 600: AddWorker #20min
+      - 600: AddWorker #30min
+      - 600: AddOperator #40min
+      - 1: AddSecurity
+      - 1: AddSecurity
+      - 600: AddCargo
+      availableMedJobs:
+        BKCCOperator: [ 1, 1 ]
+        BKCCCargo: [ 0, 1 ]
+        BKCCSecOfficer: [ 1, 2 ]
+        BKCCAssistant: [ 2, 2 ]
+      availableHighJobs:
+        BKCCOperator: [ 1, 1 ]
+        BKCCCargo: [ 1, 2 ]
+        BKCCSecOfficer: [ 2, 4 ]
+        BKCCAssistant: [ 2, 5 ]
+
+
 
 - type: entity
   id: StandardStationArena
@@ -53,6 +77,6 @@
   - BaseStationJobsSpawning
   - BaseStationRecords
   - BaseStationNanotrasen
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Transform

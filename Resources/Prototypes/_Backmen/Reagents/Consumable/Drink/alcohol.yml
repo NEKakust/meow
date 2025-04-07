@@ -62,7 +62,7 @@
   flavor: soju
   color: "#DDDDDD"
   metamorphicSprite:
-    sprite: Backmen/Objects/Consumable/Drinks/sojuglass.rsi 
+    sprite: Backmen/Objects/Consumable/Drinks/sojuglass.rsi
     state: icon
   metabolisms:
     Drink:
@@ -72,3 +72,4 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.15
+

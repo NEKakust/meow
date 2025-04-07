@@ -85,10 +85,10 @@
         - HypopenBox
         - GatfruitSeeds
         - EnergyDagger
-        - SupermatterGrenade
+        #- SupermatterGrenade
         - WhiteholeGrenade
         - HotPotato
-        - WeaponSniperMosin
+        - WeaponSniperMosinNew
         - SpeedLoaderMagnumAP
       rareChance: 0.2
       prototypes:
@@ -142,7 +142,7 @@
         - WeaponRevolverPythonAP
         - ThrowingKnivesKit
         - ExGrenade
-        - NocturineChemistryBottle
+        - ChemistryBottleNocturine
         - ChameleonProjector
       rareChance: 0.2
       prototypes:

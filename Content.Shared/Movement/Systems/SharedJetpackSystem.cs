@@ -13,12 +13,12 @@ namespace Content.Shared.Movement.Systems;
 
 public abstract class SharedJetpackSystem : EntitySystem
 {
-    [Dependency] private   readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] protected  readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] private   readonly SharedMoverController _mover = default!;
-    [Dependency] private   readonly SharedPopupSystem _popup = default!;
-    [Dependency] private   readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedMoverController _mover = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
 
     public override void Initialize()
@@ -125,8 +125,14 @@ public abstract class SharedJetpackSystem : EntitySystem
 
     private bool CanEnableOnGrid(EntityUid? gridUid)
     {
-        return gridUid == null ||
-               (!HasComp<GravityComponent>(gridUid));
+        // No and no again! Do not attempt to activate the jetpack on a grid with gravity disabled. You will not be the first or the last to try this.
+        // https://discord.com/channels/310555209753690112/310555209753690112/1270067921682694234
+
+        // SHUT THE FUCK UP IM DOING THIS
+        if (gridUid == null)
+            return true;
+
+        return !CompOrNull<GravityComponent>(gridUid.Value)?.Enabled ?? true; // backmen: jetpack in no gravity
     }
 
     private void OnJetpackGetAction(EntityUid uid, JetpackComponent component, GetItemActionsEvent args)
@@ -158,7 +164,7 @@ public abstract class SharedJetpackSystem : EntitySystem
 
         if (user == null)
         {
-            Container.TryGetContainingContainer(uid, out var container);
+            Container.TryGetContainingContainer((uid, null, null), out var container);
             user = container?.Owner;
         }
 

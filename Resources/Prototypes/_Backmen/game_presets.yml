@@ -6,7 +6,7 @@
   description: shipwrecked-description
   minPlayers: 1
   maxPlayers: 40
-  showInVote: true
+  showInVote: false
   isMiniGame: true
   supportedMaps: ShipwreckedPool
   rules:
@@ -19,13 +19,16 @@
   - bloodsucker
   name: vampires-title
   description: vampires-description
-  showInVote: true
+  showInVote: false # secret
   rules:
   - VampiresGameRule
   - BasicStationEventScheduler
   - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
   - SubGamemodesRule
   - BasicRoundstartVariation
+  - MeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: Blob
@@ -36,10 +39,28 @@
   showInVote: true
   rules:
   - BlobGameMode
-  - BasicStationEventScheduler
   - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
   - BasicRoundstartVariation
   - SubGamemodesRule
+  - CalmMeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
+
+- type: gamePreset
+  id: XenoAgent
+  alias: []
+  name: xeno-agent-title
+  description: xeno-agent-description
+  showInVote: false
+  rules:
+  - XenoAgentGameMode
+  - CalmStationEventScheduler
+  - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
+  - BasicRoundstartVariation
+  - SubGamemodesRule
+  - CalmMeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: FleshCult
@@ -51,10 +72,13 @@
   showInVote: true
   rules:
   - FleshCult
-  - BasicStationEventScheduler
+  - CalmStationEventScheduler
   - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
   - BasicRoundstartVariation
   - SubGamemodesRule
+  - CalmMeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: FleshCultAndTraitor
@@ -69,7 +93,10 @@
   - Traitor
   - BasicStationEventScheduler
   - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
   - BasicRoundstartVariation
+  - MeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: NukeopsFleshCult
@@ -84,7 +111,10 @@
     - FleshCult
     - BasicStationEventScheduler
     - WageScheduler #backmen: currency
+    - PsiScheduler #backmen: psi
     - BasicRoundstartVariation
+    - MeteorSwarmScheduler
+    - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: RevolutionaryTraitor
@@ -101,7 +131,10 @@
     - BasicStationEventScheduler
     - Traitor
     - WageScheduler #backmen: currency
+    - PsiScheduler #backmen: psi
     - BasicRoundstartVariation
+    - MeteorSwarmScheduler
+    - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: RevolutionaryNukeops
@@ -118,7 +151,10 @@
     - BasicStationEventScheduler
     - Nukeops
     - WageScheduler #backmen: currency
+    - PsiScheduler #backmen: psi
     - BasicRoundstartVariation
+    - MeteorSwarmScheduler
+    - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: ZombieTraitor
@@ -136,8 +172,11 @@
   - Zombie
   - BasicStationEventScheduler
   - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
   - Traitor
   - BasicRoundstartVariation
+  - MeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: ZombieNukeops
@@ -155,8 +194,11 @@
   - Zombie
   - BasicStationEventScheduler
   - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
   - Nukeops
   - BasicRoundstartVariation
+  - MeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: NukeopsFleshCultTraitor
@@ -172,8 +214,11 @@
     - FleshCult
     - BasicStationEventScheduler
     - WageScheduler #backmen: currency
+    - PsiScheduler #backmen: psi
     - Traitor
     - BasicRoundstartVariation
+    - MeteorSwarmScheduler
+    - LavalandStormScheduler # Lavaland Change
 
 - type: gamePreset
   id: SurvivalNukeops
@@ -187,5 +232,139 @@
   rules:
     - RampingStationEventScheduler
     - WageScheduler #backmen: currency
+    - PsiScheduler #backmen: psi
     - Nukeops
     - BasicRoundstartVariation
+    - MeteorSwarmScheduler
+    - LavalandStormScheduler # Lavaland Change
+
+- type: gamePreset
+  id: Changeling
+  alias:
+  - ling
+  - lings
+  - changeling
+  name: changeling-gamemode-title
+  description: changeling-gamemode-description
+  showInVote: false
+  rules:
+  - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
+  - Changeling
+  - SubGamemodesRule
+  - BasicStationEventScheduler
+  - BasicRoundstartVariation
+  - MeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
+
+- type: gamePreset
+  id: Traitorling
+  alias:
+  - lingtraitor
+  - traitorling
+  name: secret-title
+  description: secret-description
+  showInVote: false
+  rules:
+  - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
+  - Changeling
+  - Traitor
+  - SubGamemodesRule
+  - BasicRoundstartVariation
+  - MeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
+
+- type: gamePreset
+  id: ExtendedThief
+  alias:
+  - vor
+  - thiefs
+  - thief
+  name: thief-extended-gamemode-title
+  description: thief-extended-gamemode-description
+  showInVote: false
+  rules:
+  - ExtendedThief
+  - BasicStationEventScheduler
+  - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
+  - BasicRoundstartVariation
+  - MeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
+
+- type: gamePreset
+  id: Criminal
+  alias:
+  - criminal
+  - opg
+  name: criminal-gamemode-title
+  description: thief-extended-gamemode-description
+  showInVote: false
+  rules:
+  - Revolutionary
+  - ExtendedThief
+  - Traitor
+  - BasicStationEventScheduler
+  - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
+  - BasicRoundstartVariation
+  - MeteorSwarmScheduler
+  - LavalandStormScheduler # Lavaland Change
+
+- type: gamePreset
+  id: SuperKessler
+  alias:
+  - supermeteor
+  - bombit
+  - superkessler
+  - superkesler
+  name: super-kessler-gamemode-title
+  description: super-kessler-gamemode-description
+  showInVote: false
+  rules:
+  - BasicStationEventScheduler
+  - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
+  - BasicRoundstartVariation
+  # Oh my god.
+  - KesslerSyndromeScheduler
+  - KesslerSyndromeScheduler
+  - KesslerSyndromeScheduler
+  - MeteorSwarmMildScheduler
+  - MeteorSwarmScheduler
+  - RampingStationEventScheduler
+#  - SpaceTrafficControlEventScheduler
+#  - SpaceTrafficControlFriendlyEventScheduler
+  - LavalandStormScheduler # Lavaland Change
+
+- type: gamePreset
+  id: Calm
+  name: calm-title
+  showInVote: true
+  description: calm-description
+  rules:
+  - CalmStationEventScheduler
+  - WageScheduler #backmen: currency
+  - PsiScheduler #backmen: psi
+  - CalmMeteorSwarmScheduler
+  - BasicRoundstartVariation
+  - LavalandStormScheduler # Lavaland Change
+
+- type: gamePreset
+  id: BabelTower
+  name: babelTower-title
+  description: babelTower-description
+  minPlayers: 5
+  showInVote: false # secret
+  rules:
+    - BabelTower
+    - CalmStationEventScheduler
+    - WageScheduler
+    - PsiScheduler #backmen: psi
+    - CalmMeteorSwarmScheduler
+    - BasicRoundstartVariation
+#    - SpaceTrafficControlEventScheduler
+#    - SpaceTrafficControlFriendlyEventScheduler
+    - ExtendedThief
+    - LavalandStormScheduler # Lavaland Change

@@ -2,7 +2,7 @@
 - type: entity
   id: BaseMagazineLightRifle
   name: "magazine (.30 rifle)"
-  parent: BaseItem
+  parent: [ BaseItem, BaseSecurityContraband ]
   abstract: true
   components:
   - type: Tag
@@ -38,6 +38,7 @@
   id: MagazineLightRifleBox
   name: "L6 SAW magazine box (.30 rifle)"
   parent: BaseMagazineLightRifle
+  categories: [ HideSpawnMenu ]
   components:
   - type: Tag
     tags:
@@ -58,6 +59,7 @@
   id: MagazineLightRifle
   name: "magazine (.30 rifle)"
   parent: BaseMagazineLightRifle
+  categories: [ HideSpawnMenu ]
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRifle
@@ -73,6 +75,7 @@
   name: "magazine (.30 rifle any)"
   suffix: empty
   parent: MagazineLightRifle
+  categories: [ HideSpawnMenu ]
   components:
   - type: BallisticAmmoProvider
     proto: null
@@ -80,11 +83,14 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   id: MagazineLightRiflePractice
   name: "magazine (.30 rifle practice)"
   parent: BaseMagazineLightRifle
+  categories: [ HideSpawnMenu ]
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRiflePractice
@@ -99,6 +105,7 @@
   id: MagazineLightRifleUranium
   name: "magazine (.30 rifle uranium)"
   parent: BaseMagazineLightRifle
+  categories: [ HideSpawnMenu ]
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRifleUranium
@@ -113,6 +120,7 @@
   id: MagazineLightRifleIncendiary
   name: "magazine (.30 rifle incendiary)"
   parent: MagazineLightRifle
+  categories: [ HideSpawnMenu ]
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRifleIncendiary
@@ -121,6 +129,7 @@
   id: MagazineLightRifleMaxim
   name: "pan magazine (.30 rifle)"
   parent: BaseMagazineLightRifle
+  categories: [ HideSpawnMenu ]
   components:
   - type: Tag
     tags:
@@ -135,6 +144,7 @@
   id: MagazineLightRiflePkBox
   name: "PK munitions box (.30 rifle)"
   parent: BaseMagazineLightRifle
+  categories: [ HideSpawnMenu ]
   components:
   - type: Tag
     tags:
@@ -146,6 +156,6 @@
     sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/pk_box.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 7
+    steps: 8
     zeroVisible: false
   - type: Appearance

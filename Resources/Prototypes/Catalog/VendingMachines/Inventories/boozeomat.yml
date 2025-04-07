@@ -49,5 +49,8 @@
     DrinkBeerCan: 5
     DrinkWineCan: 5
     MushroomBeerGlass: 6
+  contrabandInventory:
+    ChemistryBottleEthanol: 3
+    DrinkBottleOfNothingFull: 1
   emaggedInventory:
     DrinkPoisonWinebottleFull: 2

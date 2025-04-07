@@ -1,6 +1,17 @@
 meta:
-  format: 6
-  postmapinit: false
+  format: 7
+  category: Map
+  engineVersion: 247.0.0
+  forkId: ""
+  forkVersion: ""
+  time: 02/19/2025 11:09:28
+  entityCount: 823
+maps:
+- 1
+grids:
+- 1
+orphans: []
+nullspace: []
 tilemap:
   0: Space
   7: FloorAsteroidSand
@@ -22,8 +33,10 @@ entities:
     - type: MetaData
     - type: Transform
     - type: Map
+      mapPaused: True
     - type: PhysicsMap
-    - type: LoadedMap
+    - type: GridTree
+    - type: MovedGrids
     - type: MapGrid
       chunks:
         0,0:
@@ -1206,9 +1219,25 @@ entities:
           - 0
           - 0
           - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
         - volume: 2500
           temperature: 147.92499
           moles:
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
           - 0
           - 0
           - 0
@@ -1236,11 +1265,17 @@ entities:
           - 0
           - 0
           - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: GridTree
-    - type: MovedGrids
     - type: Fixtures
       fixtures: {}
 - proto: APCBasic
@@ -1303,6 +1338,18 @@ entities:
     components:
     - type: Transform
       pos: 19.5,9.5
+      parent: 1
+- proto: BookRandomStory
+  entities:
+  - uid: 138
+    components:
+    - type: Transform
+      pos: 17.5,3.5
+      parent: 1
+  - uid: 460
+    components:
+    - type: Transform
+      pos: 19.5,10.5
       parent: 1
 - proto: Bookshelf
   entities:
@@ -4103,6 +4150,14 @@ entities:
         - 0
         - 0
         - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -4125,6 +4180,14 @@ entities:
         immutable: False
         temperature: 93.465614
         moles:
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
         - 0
         - 0
         - 0
@@ -4290,22 +4353,24 @@ entities:
     - type: Transform
       pos: 17.5,4.5
       parent: 1
-- proto: GeneratorBasic
+- proto: GeneratorBasic15kW
   entities:
-  - uid: 651
-    components:
-    - type: Transform
-      pos: 32.5,2.5
-      parent: 1
   - uid: 822
     components:
     - type: Transform
-      pos: 32.5,3.5
+      pos: 32.5,4.5
       parent: 1
   - uid: 823
     components:
     - type: Transform
-      pos: 32.5,4.5
+      pos: 32.5,2.5
+      parent: 1
+- proto: GeneratorRTG
+  entities:
+  - uid: 651
+    components:
+    - type: Transform
+      pos: 32.5,3.5
       parent: 1
 - proto: HospitalCurtains
   entities:
@@ -4861,18 +4926,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 27.5,2.5
-      parent: 1
-- proto: BookRandomStory
-  entities:
-  - uid: 138
-    components:
-    - type: Transform
-      pos: 17.5,3.5
-      parent: 1
-  - uid: 460
-    components:
-    - type: Transform
-      pos: 19.5,10.5
       parent: 1
 - proto: RandomDrinkGlass
   entities:

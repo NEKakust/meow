@@ -12,30 +12,66 @@
   - ChiefEngineerBackpack
   - ChiefEngineerSatchel
   - ChiefEngineerDuffel
-
-# JumpsuitPsi
+#backmen start
 - type: loadoutGroup
-  id: PsychologistJumpsuit
-  name: loadout-group-psychologist-jumpsuit
-  loadouts: 
-  - PsychologistJumpsuit
-  - PsychologistJumpsuitCrimson
+  id: SecurityJumpsuitPilot
+  name: loadout-group-security-pilot-jumpsuit
+  loadouts:
+  - SecurityPilotJumpsuit
+  - SecurityJumpsuit
+  - SecurityJumpskirt
+  - SeniorOfficerJumpsuit
+  - SeniorOfficerJumpskirt
+  - TrooperUniform
   
-# Jumpsuitщитькодбубубу
-- type: loadout
-  id: PsychologistJumpsuit
-  equipment: PsychologistJumpsuit
+- type: loadoutGroup
+  id: SecurityShoesPilot
+  name: loadout-group-security-pilot-shoes
+  loadouts:
+  - JackSecBoots # Corvax
+  - JackBoots
+  - SecurityWinterBoots
+  - SecurityMagBoots
+  - Laceup
 
-- type: startingGear
-  id: PsychologistJumpsuit
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitPsychologist
-
-- type: loadout
-  id: PsychologistJumpsuitCrimson
-  equipment: PsychologistJumpsuitCrimson
-
-- type: startingGear
-  id: PsychologistJumpsuitCrimson
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitPsychologistCrimson
+- type: loadoutGroup
+  id: SecurityHeadPilot
+  name: loadout-group-security-pilot-head
+  loadouts:
+  - SecurityHelmet
+  - SecurityBeret
+  - SecurityHat
+  - ClothingHeadHatCapSec
+  - ClothingHeadHatPilotkaSec
+  - TrooperHat
+  - SecurityPilotHelmet
+  - SecurityPilotCap
+  - SecurityPilotEngineerBeret
+  
+- type: loadoutGroup
+  id: SecurityOuterClothingPilot
+  name: loadout-group-security-pilot-outerclothing
+  loadouts:
+  - ArmorVest
+  - ArmorVestSlim
+  - ClothingOuterCoatSecurityOvercoat
+  - ClothingOuterCoatSecurityOfficerOvercoat
+  - SecurityOfficerWintercoat
+  - CoatBomber
+  - Hi-Viz
+  
+- type: loadoutGroup
+  id: SecurityClothingBeltPilot
+  name: loadout-group-security-pilot-belt
+  loadouts:
+  - SecurityBelt
+  - SecurityWebbing
+  - EngiBelt
+  
+- type: loadoutGroup
+  id: SecurityEyesPilot
+  name: loadout-group-security-pilot-eyes
+  loadouts:
+  - SecurityPilotTechVisor
+  - SecurityGlasses
+#backmen end

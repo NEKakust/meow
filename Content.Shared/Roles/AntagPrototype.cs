@@ -7,7 +7,7 @@ namespace Content.Shared.Roles;
 /// <summary>
 ///     Describes information for a single antag.
 /// </summary>
-[Prototype("antag")]
+[Prototype]
 [Serializable, NetSerializable]
 public sealed partial class AntagPrototype : IPrototype
 {
@@ -53,4 +53,8 @@ public sealed partial class AntagPrototype : IPrototype
     /// </summary>
     [DataField]
     public List<ProtoId<GuideEntryPrototype>>? Guides;
+
+    [DataField]
+    public bool DiscordRequired { get; private set; } // backmen: antag
+
 }

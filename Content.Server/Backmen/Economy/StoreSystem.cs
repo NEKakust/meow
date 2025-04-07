@@ -21,21 +21,20 @@ public sealed partial class StoreSystem
     {
         if (TryComp<VendingMachineComponent>(uid, out var vendingMachineComponent))
         {
-            _vendingMachineSystem.Deny(uid,vendingMachineComponent);
+            _vendingMachineSystem.Deny((uid,vendingMachineComponent));
         }
     }
     private void _PlayEject(EntityUid uid)
     {
         if (TryComp<VendingMachineComponent>(uid, out var vendComponent))
         {
-            vendComponent.Ejecting = true;
             vendComponent.NextItemToEject = null;
             vendComponent.ThrowNextItem = false;
-            _vendingMachineSystem.TryUpdateVisualState(uid, vendComponent);
+            _vendingMachineSystem.TryUpdateVisualState((uid, vendComponent));
             _audio.PlayPvs(vendComponent.SoundVend, uid);
         }
     }
-    private bool HandleBankTransaction(EntityUid uid, StoreComponent component, StoreBuyListingMessage msg, ListingData listing)
+    private bool HandleBankTransaction(EntityUid uid, StoreComponent component, StoreBuyListingMessage msg, ListingDataWithCostModifiers listing)
     {
         if (!TryComp<BuyStoreBankComponent>(uid, out var storeBank))
         {

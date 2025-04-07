@@ -1,11 +1,12 @@
 # Numbers for armor here largely taken from /tg/.
 # NOTE: Half of the kind of armor you're probably thinking of is in vests.yml. These should probably be merged some day.
 
-#Basic armor vest
+#Basic armor vest for inheritance
 - type: entity
-  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing]
-  id: ClothingOuterArmorBasic
+  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseSecurityContraband]
+  id: ClothingOuterArmorBase
   name: armor vest
+  abstract: true
   description: A standard Type I armored vest that provides decent protection against most types of damage.
   components:
   - type: Sprite
@@ -17,10 +18,20 @@
       coefficients:
         Blunt: 0.70
         Slash: 0.70
-        Piercing: 0.70 #Can save you, but bullets will still hurt. Will take about 10 shots from a Viper before critting, as opposed to 7 while unarmored and 16~ with a bulletproof vest.
+        Piercing: 0.60 #Can save you, but bullets will still hurt. Will take about 10 shots from a Viper before critting, as opposed to 7 while unarmored and 16~ with a bulletproof vest.
         Heat: 0.80
+        ArmorPiercing: 0.90
   - type: ExplosionResistance
     damageCoefficient: 0.90
+  - type: Tag
+    tags:
+      - BroneArachne
+
+
+#Standard armor vest, allowed for security and bartenders
+- type: entity
+  parent: [ BaseSecurityBartenderContraband, ClothingOuterArmorBase]
+  id: ClothingOuterArmorBasic
 
 #Alternate / slim basic armor vest
 - type: entity
@@ -36,7 +47,7 @@
     sprite: Clothing/OuterClothing/Armor/security_slim.rsi
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSecurityContraband]
   id: ClothingOuterArmorRiot
   name: riot suit
   description: A suit of semi-flexible polycarbonate body armor with heavy padding to protect against melee attacks. Perfect for fighting delinquents around the station.
@@ -58,7 +69,7 @@
   - type: GroupExamine
 
 - type: entity
-  parent: ClothingOuterArmorBasic
+  parent: ClothingOuterArmorBase
   id: ClothingOuterArmorBulletproof
   name: bulletproof vest
   description: A Type III heavy bulletproof vest that excels in protecting the wearer against traditional projectile weaponry and explosives to a minor extent.
@@ -72,13 +83,14 @@
       coefficients:
         Blunt: 0.9
         Slash: 0.9
-        Piercing: 0.4
+        Piercing: 0.25
+        ArmorPiercing: 0.70
         Heat: 0.9
   - type: ExplosionResistance
     damageCoefficient: 0.80
 
 - type: entity
-  parent: ClothingOuterArmorBasic
+  parent: ClothingOuterArmorBase
   id: ClothingOuterArmorReflective
   name: reflective vest
   description: An armored vest with advanced shielding to protect against energy weapons.
@@ -92,7 +104,7 @@
       coefficients:
         Blunt: 0.9
         Slash: 0.9
-        Piercing: 0.9
+        Piercing: 0.8
         Heat: 0.4 # this technically means it protects against fires pretty well? -heat is just for lasers and stuff, not atmos temperature
   - type: Reflect
     reflectProb: 1
@@ -100,10 +112,10 @@
       - Energy
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSyndicateContraband ]
   id: ClothingOuterArmorRaid
   name: syndicate raid suit
-  description: A somewhat flexible and well-armored suit with a powerful shoulder mounted flashlight manufactured in the Gorlex Marauder's iconic blood-red color scheme, it does not protect it's wearer from space.
+  description: A somewhat flexible and well-armored suit with a powerful shoulder mounted flashlight manufactured in the Gorlex Marauder's iconic blood-red color scheme, it does not protect its wearer from space.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi
@@ -119,9 +131,11 @@
       coefficients:
         Blunt: 0.35
         Slash: 0.35
-        Piercing: 0.35
+        Piercing: 0.25
+        ArmorPiercing: 0.50
         Heat: 0.35
         Caustic: 0.5
+        Stun: 0.3
   - type: ExplosionResistance
     damageCoefficient: 0.35
   - type: ClothingSpeedModifier
@@ -133,6 +147,9 @@
     clothingVisuals:
       outerClothing:
       - state: equipped-OUTERCLOTHING-light
+        shader: unshaded
+      outerClothing-vox:
+      - state: equipped-OUTERCLOTHING-light-vox
         shader: unshaded
   - type: Appearance
   - type: HandheldLight
@@ -172,7 +189,7 @@
     autoRechargeRate: 2
 
 - type: entity
-  parent: ClothingOuterBaseLarge
+  parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
   id: ClothingOuterArmorCult
   name: acolyte armor
   description: An evil-looking piece of cult armor, made of bones.
@@ -187,6 +204,7 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.6
+        ArmorPiercing: 0.9
         Heat: 0.5
   - type: GroupExamine
 
@@ -206,6 +224,7 @@
         Blunt: 0.2
         Slash: 0.2
         Piercing: 0.2
+        ArmorPiercing: 0.6
         Heat: 0.5
         Radiation: 0
         Caustic: 0.75
@@ -213,7 +232,7 @@
     tags:
       - FullBodyOuter
   - type: GroupExamine
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
 
 - type: entity
@@ -261,7 +280,7 @@
     sprite: Clothing/OuterClothing/Armor/magusred.rsi
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseCommandContraband]
   id: ClothingOuterArmorCaptainCarapace
   name: "captain's carapace"
   description: "An armored chestpiece that provides protection whilst still offering maximum mobility and flexibility. Issued only to the station's finest."
@@ -276,6 +295,7 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.6
+        ArmorPiercing: 0.9
         Heat: 0.5
         Caustic: 0.9
   - type: ClothingSpeedModifier
@@ -287,7 +307,7 @@
   - type: GroupExamine
 
 - type: entity
-  parent: ClothingOuterBaseLarge
+  parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
   id: ClothingOuterArmorChangeling
   name: chitinous armor
   description: Inflates the changeling's body into an all-consuming chitinous mass of armor.
@@ -302,6 +322,7 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
+        ArmorPiercing: 0.6
         Heat: 0.9
         Radiation: 0.8
   - type: ClothingSpeedModifier
@@ -314,7 +335,7 @@
     tags:
       - FullBodyOuter
   - type: GroupExamine
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
 
 - type: entity
@@ -335,6 +356,7 @@
           Blunt: 0.5
           Slash: 0.5
           Piercing: 0.4
+          ArmorPiercing: 0.8
           Heat: 0.5
     - type: ClothingSpeedModifier
       walkModifier: 0.9
@@ -347,7 +369,7 @@
     - type: GroupExamine
 
 - type: entity
-  parent: ClothingOuterBaseLarge
+  parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
   id: ClothingOuterArmorBone
   name: bone armor
   description: Sits on you like a second skin.
@@ -371,11 +393,11 @@
   - type: Construction
     graph: BoneArmor
     node: armor
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
 
 - type: entity
-  parent: ClothingOuterBaseLarge
+  parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
   id: ClothingOuterArmorPodWars
   name: ironclad II armor
   description: A repurposed suit of ironclad II armor, a relic of the pod wars.
@@ -392,6 +414,6 @@
         Piercing: 0.6
         Heat: 0.5
   - type: GroupExamine
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
 

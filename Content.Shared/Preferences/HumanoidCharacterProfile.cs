@@ -30,6 +30,7 @@ namespace Content.Shared.Preferences
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
         public const int MaxNameLength = 32;
+        public const int MaxLoadoutNameLength = 32;
         public const int MaxDescLength = 512;
 
         /// <summary>
@@ -572,11 +573,11 @@ namespace Content.Shared.Preferences
             string flavortext;
             if (FlavorText.Length > MaxDescLength)
             {
-                flavortext = FormattedMessage.RemoveMarkup(FlavorText)[..MaxDescLength];
+                flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText)[..MaxDescLength];
             }
             else
             {
-                flavortext = FormattedMessage.RemoveMarkup(FlavorText);
+                flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText);
             }
 
             var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex, sponsorPrototypes);
@@ -622,8 +623,9 @@ namespace Content.Shared.Preferences
                 .ToList();
 
             var traits = TraitPreferences
-                         .Where(prototypeManager.HasIndex)
-                         .ToList();
+                .Where(x => prototypeManager.TryIndex(x, out var trait)
+                            && (!trait.SponsorOnly || sponsorPrototypes.Contains(x.Id))) //backmen: sponsor traits
+                .ToList();
 
             Name = name;
             FlavorText = flavortext;

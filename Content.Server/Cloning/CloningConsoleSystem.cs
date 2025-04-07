@@ -3,7 +3,6 @@ using Content.Server.Administration.Logs;
 using Content.Server.Cloning.Components;
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Medical.Components;
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.UserInterface;
 using Content.Shared.Cloning;
@@ -15,19 +14,18 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using JetBrains.Annotations;
+using Content.Shared.Power;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 
 namespace Content.Server.Cloning
 {
-    [UsedImplicitly]
     public sealed class CloningConsoleSystem : EntitySystem
     {
         [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly CloningSystem _cloningSystem = default!;
+        [Dependency] private readonly CloningPodSystem _cloningPodSystem = default!;
         [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
         [Dependency] private readonly PowerReceiverSystem _powerReceiverSystem = default!;
@@ -178,7 +176,7 @@ namespace Content.Server.Cloning
             }
             // end-backmen: MetempsychoticMachine
 
-            if (_cloningSystem.TryCloning(cloningPodUid, body.Value, (mindId, mind), cloningPod, fail))
+            if (_cloningPodSystem.TryCloning(cloningPodUid, body.Value, (mindId, mind), cloningPod, scannerComp.CloningFailChanceMultiplier))
                 _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(uid)} successfully cloned {ToPrettyString(body.Value)}.");
         }
 
@@ -220,7 +218,7 @@ namespace Content.Server.Cloning
                 {
                     scanBodyInfo = MetaData(scanBody.Value).EntityName;
 
-                    if (!_mobStateSystem.IsDead(scanBody.Value))
+                    if (false) // GoobStation: Lets you clone living people
                     {
                         clonerStatus = ClonerStatus.ScannerOccupantAlive;
                     }

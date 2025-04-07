@@ -69,6 +69,9 @@ public sealed partial class StationEventComponent : Component
     [DataField]
     public int MinimumPlayers;
 
+    [DataField]
+    public int? MaxPlayers;
+
     /// <summary>
     ///     How many times this even can occur in a single round
     /// </summary>
@@ -81,4 +84,10 @@ public sealed partial class StationEventComponent : Component
     [DataField("endTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
     public TimeSpan? EndTime;
+
+    /// <summary>
+    /// If false, the event won't trigger during ongoing evacuation.
+    /// </summary>
+    [DataField]
+    public bool OccursDuringRoundEnd = true;
 }

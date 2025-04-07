@@ -3,7 +3,6 @@
   mapName: 'Saltern'
   mapPath: /Maps/saltern.yml
   minPlayers: 0
-  maxPlayers: 100
   fallback: true
   stations:
     Saltern:
@@ -15,7 +14,7 @@
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/corvax_emergency.yml # Corvax-EmergencyShuttle
+          emergencyShuttlePath: /Maps/Shuttles/emergency.yml
         - type: StationJobs
           availableJobs:
             #service
@@ -61,11 +60,10 @@
             Musician: [ 1, 1 ]
             # backmen
             Brigmedic: [ 0, 1 ] # backmen-Brigmedic
-            #BKBPLATech: [0, 3] # backmen-BPLA-Silicons
-            #BKBPLAMED: [0, 3] # backmen-BPLAMED-Silicons
+            BKBPLATech: [0, 1] # backmen-BPLA-Silicons
+            BKBPLAMED: [0, 1] # backmen-BPLAMED-Silicons
             Deliveryman: [ 0, 1 ]
             Prisoner: [ 2, 2]
-            SAI: [1, 1] # backmen-SAI
         # backmen blob-config-start SMALL+
         - type: StationBlobConfig
           stageBegin: 25

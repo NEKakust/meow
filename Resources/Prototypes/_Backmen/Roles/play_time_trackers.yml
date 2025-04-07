@@ -51,3 +51,15 @@
 
 - type: playTimeTracker
   id: JobRoboticist
+
+- type: playTimeTracker
+  id: JobBlueShield
+
+- type: playTimeTracker
+  id: JobSpecialOperationsOfficer
+
+- type: playTimeTracker
+  id: JobBkmSurgeon
+
+- type: playTimeTracker
+  id: JobBkmVirologist

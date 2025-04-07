@@ -3,7 +3,9 @@
   startingInventory:
     SecurityWhistle: 5
     Handcuffs: 8
+    Purplecuffs: 1 # Backmen
     GrenadeFlashBang: 4
+    GrenadeBarrier: 4 # WWDP
     TearGasGrenade: 4
     ClusterBangFull: 2
     GrenadeStinger: 4
@@ -22,6 +24,7 @@
     RadioHandheldSecurity: 5
   # security officers need to follow a diet regimen!
   contrabandInventory:
+    WeaponMeleeNeedle: 2
     FoodDonutHomer: 12
     FoodBoxDonut: 2
     #box evidence

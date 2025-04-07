@@ -22,7 +22,7 @@
           tags:
           - SwordSquadRO
   - type: Appearance
-  
+
 - type: entity
   parent: ClothingBeltStorageBase
   id: ClothingBeltKatanaSheath
@@ -288,12 +288,12 @@
     sprite: Backmen/Clothing/Belt/Gear/shotgunbelt.rsi
   - type: Storage
     grid:
-    - 0,0,5,4
+    - 0,0,7,6
     maxItemSize: Small
     whitelist:
       tags:
         - ShellShotgun
-        
+
 - type: entity
   parent: ClothingBeltMilitaryWebbing
   id: ClothingBeltTGMCwhite
@@ -305,5 +305,59 @@
   - type: Clothing
     sprite: Backmen/Clothing/Belt/webbingtgmcwhite.rsi
 
-        
+- type: entity
+  parent: [ClothingBeltStorageBase, BaseMinorContraband]
+  id: ClothingBeltInteQWebbing
+  name: combat webbing
+  description: Unique and versatile chest mount in which you can store weapons and ammunition.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Belt/inteq_webbing.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Belt/inteq_webbing.rsi
 
+- type: entity
+  parent: [ClothingBeltStorageBase, BaseMinorContraband]
+  id: ClothingBeltInteQDropPouch
+  name: combat drop pouch
+  description: Improved unloading for storing various items
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Belt/inteq_droppouch.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Belt/inteq_droppouch.rsi
+
+- type: entity
+  parent: [ ClothingBeltBase, BaseMajorContraband ]
+  id: ClothingBeltInteQShieldBelt
+  name: InteQ shield belt
+  description: Brilliant ideas came before the bullet, and the mercenaries came up with the idea of using shields not only in hardsuits.
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: Backmen/Clothing/Belt/inteq_shieldbelt.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Belt/inteq_shieldbelt.rsi
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellSmall
+        whitelist:
+          tags:
+            - PowerCell
+            - PowerCellSmall
+  - type: EnergyDomeGenerator
+    damageEnergyDraw: 5
+    domePrototype: EnergyDomeSmallOrange
+  - type: PowerCellDraw
+    drawRate: 8
+    useRate: 0
+  - type: UseDelay
+    delay: 10.0

@@ -188,6 +188,7 @@
     Blunt: 0.6
     Slash: 0.6
     Piercing: 0.5
+    ArmorPiercing: 0.9
     Shock: 0.8
     Heat: 0.8
 
@@ -279,7 +280,7 @@
     rootTask:
       task: NPCGuardRangedCompound
 
-- type: statusIcon
+- type: securityIcon
   id: DSOSecurity
   priority: 2
   locationPreference: Left
@@ -288,7 +289,7 @@
     sprite: /Textures/Backmen/Icons/jobicon.rsi
     state: NanotrasenSec
 
-- type: statusIcon
+- type: securityIcon
   id: NTSecurity
   priority: 2
   locationPreference: Left

@@ -153,7 +153,6 @@ public abstract partial class SharedFultonSystem : EntitySystem
         _doAfter.TryStartDoAfter(
             new DoAfterArgs(EntityManager, args.User, component.ApplyFultonDuration, ev, args.Target, args.Target, args.Used)
             {
-                CancelDuplicate = true,
                 MovementThreshold = 0.5f,
                 BreakOnMove = true,
                 Broadcast = true,
@@ -184,7 +183,7 @@ public abstract partial class SharedFultonSystem : EntitySystem
         return true;
     }
 
-    protected bool CanFulton(EntityUid uid)
+    protected virtual bool CanFulton(EntityUid uid)
     {
         var xform = Transform(uid);
 

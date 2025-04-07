@@ -13,7 +13,7 @@
     lowPressureMultiplier: 1000
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitOrden
   name: Helmet of the space suit of the elite special squad of the Red Order.
   description: An indispensable part of the suit, it has small scratches.
@@ -39,7 +39,7 @@
         Radiation: 0.2
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitOrdinaryOrden
   name: Helmet of the space suit of the Red Order.
   description: An indispensable part of the suit, it has small scratches.
@@ -62,11 +62,12 @@
         Heat: 0.2
         Radiation: 0.5
   - type: TemperatureProtection
-    coefficient: 0.005
+    heatingCoefficient: 0.005
+    coolingCoefficient: 0.005
 
 # carporate hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitCentcomCarporate
   name: Шлем скафандра ЦК (Корпорат)
   description: Специальный космический шлем Корпорат сделаный для различных ситуация с хорошим фанариком лоялиста НаноТрайзен.
@@ -108,7 +109,7 @@
         - Psionics
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitUEG
   name: Шлем скафандра охраны ОПЗ
   description: Этот шлем был нагло скопирован с шлема лидера ОБР NanoTrasen
@@ -214,7 +215,7 @@
     sprite: Backmen/Clothing/Head/Hardsuits/RescueTroopsUnits/dungeonmasterhardsuit.rsi
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSecurityEgov
   name: marine hardsuit helmet
   description: A marine helmet designed specifically for combat in space and the harsh far-off worlds.
@@ -233,9 +234,20 @@
         Slash: 0.8
         Piercing: 0.8
 
+- type: entity
+  parent: ClothingHeadHelmetHardsuitERTOperativeAlpha1
+  id: ClothingHeadHelmetHardsuitBlueShield
+  name: шлем скафандра Синего Щита
+  description: Модифицированный шлем скафандра разведчиков ОПЗ, специализирован для ведения разведки на дальних расстояниях, оснащен устройством ночного видиния.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hardsuits/bluehardhelmet.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hardsuits/bluehardhelmet.rsi
+
 #Chrono
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitChronoLegionnaire
   name: chrono legionnaire hardsuit helmet
   description: An advanced and stylish helmet right from the future. Or from the past?
@@ -249,3 +261,96 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+
+# Changeling
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: ChangelingClothingHeadHelmetHardsuit
+  name: organic space helmet
+  description: A spaceworthy biomass of pressure and temperature resistant tissue.
+  suffix: Unremoveable
+  components:
+  - type: Item
+  - type: Sprite
+    sprite: Backmen/Changeling/ling_spacesuit_helmet.rsi
+  - type: Clothing
+    sprite: Backmen/Changeling/ling_spacesuit_helmet.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.225
+    lowPressureMultiplier: 1000
+  - type: Unremoveable
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitSecurity
+  id: ClothingHeadHelmetHardsuitSecurityPilot
+  name: security pilot hardsuit helmet
+  description: Armored hardsuit helmet for security needs.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hardsuits/sec-pilot-hardsuit.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hardsuits/sec-pilot-hardsuit.rsi
+  - type: PointLight
+    color: blue
+    radius: 7
+    energy: 3
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseMajorContraband]
+  id: ClothingHeadHelmetHardsuitInteQElite
+  name: elite InteQ hardsuit helmet
+  description: A variant of the syndicate helmet designed by the InteQ to be exceptionally fireproof and pressure proof.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hardsuits/elite_inteq_hardsuit.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hardsuits/elite_inteq_hardsuit.rsi
+  - type: PointLight
+    radius: 6
+    energy: 3
+    color: "#FF8C00"
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: FlashImmunity
+  - type: EyeProtection
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseMajorContraband]
+  id: ClothingHeadHelmetHardsuitInteQ
+  name: InteQ hardsuit helmet
+  description: A variant of the syndicate helmet designed by the InteQ to be exceptionally fireproof and pressure proof.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hardsuits/inteq_hardsuit.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hardsuits/inteq_hardsuit.rsi
+  - type: PointLight
+    radius: 6
+    energy: 3
+    color: "#FF8C00"
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: FlashImmunity
+  - type: EyeProtection
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseMajorContraband]
+  id: ClothingHeadHelmetHardsuitSyndicateInteQ
+  name: InteQ hardsuit helmet
+  description: A variant of the syndicate helmet designed by the InteQ to be exceptionally fireproof and pressure proof.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hardsuits/inteq_syn_hardsuit.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hardsuits/inteq_syn_hardsuit.rsi
+  - type: PointLight
+    radius: 5
+    energy: 3
+    color: "#FF8C00"
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: FlashImmunity
+  - type: EyeProtection

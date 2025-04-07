@@ -1,0 +1,125 @@
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleXenoAgent
+  name: Xeno Agent Role
+  #  description: mind-role-blob-description
+  components:
+  - type: MindRole
+    antagPrototype: XenoAgent
+    exclusiveAntag: true
+    roleType: TeamAntagonist
+  - type: XenoAgentRole
+
+# Blob
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleBlob
+  name: Blob Role
+#  description: mind-role-blob-description
+  components:
+  - type: MindRole
+    antagPrototype: Blob
+    exclusiveAntag: true
+    roleType: TeamAntagonist
+  - type: BlobRole
+
+# Flesh Cultists
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleFlesh
+  name: Flesh Cultist Role
+#  description: mind-role-flesh-description
+  components:
+  - type: MindRole
+    antagPrototype: FleshCultist
+    exclusiveAntag: true
+    roleType: TeamAntagonist
+  - type: FleshCultistRole
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleFleshLeader
+  name: Flesh Cultist Leader Role
+#  description: mind-role-flesh-description
+  components:
+  - type: MindRole
+    antagPrototype: FleshCultistLeader
+    exclusiveAntag: true
+    roleType: TeamAntagonist
+  - type: FleshCultistRole
+    isLeader: true
+
+# Bloodsucker
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleBloodsucker
+  name: Bloodsucker Role
+#  description: mind-role-bloodsucker-description
+  components:
+  - type: MindRole
+    antagPrototype: Bloodsucker
+    exclusiveAntag: true
+    roleType: SoloAntagonist
+  - type: VampireRole
+
+# Changeling
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleChangeling
+  name: Changeling Role
+#  description: mind-role-changeling-description
+  components:
+  - type: MindRole
+    antagPrototype: Changeling
+    exclusiveAntag: true
+    roleType: FreeAgent
+  - type: ChangelingRole
+
+# EvilTwin
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleEvilTwin
+  name: Evil Twin Role
+#  description: mind-role-evil-twin-description
+  components:
+  - type: MindRole
+    antagPrototype: EvilTwin
+    exclusiveAntag: true
+    roleType: Neutral
+  - type: EvilTwinRole
+
+# SuperPsi
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleSuperPsi
+  name: Super Psi Role
+#  description: mind-role-super-psi-description
+  components:
+  - type: MindRole
+    antagPrototype: SuperPsi
+    exclusiveAntag: true
+    roleType: SoloAntagonist
+  - type: SuperPsiRole
+
+# Fugitive
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleFugitive
+  name: Fugitive Role
+#  description: mind-role-fugitive-description
+  components:
+  - type: MindRole
+    antagPrototype: Fugitive
+    exclusiveAntag: true
+    roleType: Neutral
+  - type: FugitiveRole
+
+# Bank
+- type: entity
+  parent: BaseMindRole
+  id: MindRoleBankMemory
+  name: Bank Memory
+  #  description: mind-role-fugitive-description
+  components:
+  - type: MindRole
+  - type: BankMemory

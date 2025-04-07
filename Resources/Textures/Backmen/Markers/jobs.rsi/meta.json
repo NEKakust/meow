@@ -32,10 +32,19 @@
       "name": "prisoner"
     },
     {
+      "name": "virologist"
+    },
+    {
       "name": "brigmedic"
     },
     {
       "name": "roboticist"
+    },
+    {
+      "name": "blueshield"
+    },
+    {
+      "name": "surgeon"
     }
   ]
 }
