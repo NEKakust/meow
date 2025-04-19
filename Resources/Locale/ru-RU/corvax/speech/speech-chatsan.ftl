@@ -252,3 +252,5 @@ corvax-chatsan-word-126 = абуз
 corvax-chatsan-replacement-126 = кара
 corvax-chatsan-word-127 = абузят
 corvax-chatsan-replacement-127 = карают
+corvax-chatsan-word-126 = наабузят
+corvax-chatsan-replacement-126 = покарают
