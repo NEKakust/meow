@@ -1,0 +1,20 @@
+research-technology-machine-parts = Machine parts
+research-technology-powercells = Basic powercells
+research-technology-powercells-upgraded = Upgraded powercells
+research-technology-powercells-prototypes = Powercell prototypes
+research-technology-powercells-bluespace = Bluespace powercell
+research-technology-powercells-bluespace-reactor = Bluespace reactor powercell
+research-technology-powercells-vortex = Vortex powercell
+research-technology-engineering-devices = Engineering devices
+research-technology-atmospheric-devices = Atmosphetic devices
+research-engineering-tools = Basic tools
+research-engineering-advanced-tools = Advanced tools
+research-technology-atmospheric-tools = Atmospheric tools
+
+research-technology-power-generation-machines = Power generation machines
+research-technology-power-generation-advanced-machines = Advanced power generation machines
+research-technology-mechanical-compression-machines = Mechanical compression machines
+research-technology-engineering-machines = Basic machines
+research-technology-engineering-advanced-machines = Advanced machines
+research-technology-atmospheric-machines = Atmospheric machines
+research-technology-atmospheric-advanced-machines = Advanced atmospheric machines

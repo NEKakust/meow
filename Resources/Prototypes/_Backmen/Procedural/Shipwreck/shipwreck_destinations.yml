@@ -1,0 +1,197 @@
+﻿- type: shipwreckDestination
+  id: FrozenWastes
+  biome: Snow
+  components:
+  - type: MapLight
+    ambientLightColor: "#2b3143"
+  - type: LightCycle
+    duration: 720      # полный день+ночь = 12мин
+    offset:   0      # старт цикла — утро
+    minLightLevel: 0.4       # ночь
+    maxLightLevel: 3.0       # день
+    clipLight: 1.0
+    clipLevel: "#FFFFFF"
+    minLevel: "#1E2A3B"
+    maxLevel: "#E0F8FF"
+    initialOffset: false
+  - type: SunShadow
+  structures:
+    RuinedDwellings: 2
+    RuinedHospital: 2
+    RuinedShop: 4
+  factions:
+    - ZombieOutbreak
+    - FleshMonsterInvasion
+    - MalfunctioningRobots
+  atmosphere:
+    volume: 2450
+    temperature: 251
+    moles:
+      - 20.61979
+      - 77.56971
+
+- type: shipwreckDestination
+  id: DesertWastes
+  biome: LowDesert
+  components:
+  - type: MapLight
+    # Цвет солнечного света: тёплый рассветный (очень тёмный оранжево‑красный)
+    ambientLightColor: "#FFFFE0"
+  - type: LightCycle
+    duration: 720            # секундами
+    offset:   0
+    minLightLevel: 0.4
+    maxLightLevel: 3.0
+    clipLight: 1.0
+    clipLevel: "#FFFFFF"
+    minLevel: "#1E1A17"
+    maxLevel: "#FFF8E0"
+    initialOffset: false
+  - type: SunShadow
+  structures:
+    RuinedDwellings: 3
+    RuinedHospital: 1
+    RuinedShop: 4
+  factions:
+  - ZombieOutbreak
+  - FleshMonsterInvasion
+  - MalfunctioningRobots
+  atmosphere:
+    volume: 2300
+    temperature: 307
+    moles:
+    - 21.94724
+    - 77.05276
+
+- type: shipwreckDestination
+  id: Jungle
+  biome: Grasslands
+  components:
+  - type: MapLight
+    # Цвет солнечного света: густой полуденный зелёно‑желтый отблеск сквозь листву
+    ambientLightColor: "#DFFF00"
+  - type: LightCycle
+    duration: 720
+    offset:   0
+    minLightLevel: 0.8
+    maxLightLevel: 2.8
+    clipLight: 1.0
+    clipLevel: "#CCFFCC"
+    minLevel: "#0A1A0A"
+    maxLevel: "#D0FFD0"
+    initialOffset: false
+  - type: SunShadow
+  structures:
+    RuinedDwellings: 2
+    RuinedHospital: 2
+    RuinedShop: 4
+  factions:
+  - ZombieOutbreak
+  - FleshMonsterInvasion
+  - MalfunctioningRobots
+  atmosphere:
+    volume: 2400
+    temperature: 296
+    moles:
+    - 21.94724
+    - 77.05276
+
+- type: shipwreckDestination
+  id: Continental
+  biome: Continental
+  components:
+  - type: MapLight
+    # Цвет солнечного света: яркий полдень (тёплый жёлто‑белый)
+    ambientLightColor: "#D8B059"
+  - type: LightCycle
+    duration: 720
+    offset:   0
+    minLightLevel: 0.3
+    maxLightLevel: 3.0
+    clipLight: 1.0
+    clipLevel: "#FFF0C0"
+    minLevel: "#2A2315"
+    maxLevel: "#FFF8E0"
+    initialOffset: false
+  - type: SunShadow
+  structures:
+    RuinedDwellings: 1
+    RuinedHospital: 1
+    RuinedShop: 6
+  factions:
+  - ZombieOutbreak
+  - FleshMonsterInvasion
+  - MalfunctioningRobots
+  atmosphere:
+    volume: 2400
+    temperature: 280
+    moles:
+    - 21.94724
+    - 77.05276
+
+- type: shipwreckDestination
+  id: Lava
+  biome: Lava
+  components:
+  - type: MapLight
+    # Цвет солнечного света: раскалённый закат (насыщенный оранжево‑красный)
+    ambientLightColor: "#A34931"
+  - type: LightCycle
+    duration: 720
+    offset:   0
+    minLightLevel: 0.6
+    maxLightLevel: 3.5
+    clipLight: 1.2
+    clipLevel: "#FFAA88"
+    minLevel: "#331100"
+    maxLevel: "#FFDDCC"
+    initialOffset: false
+  - type: SunShadow
+  structures:
+    RuinedDwellings: 2
+    RuinedHospital: 6
+    RuinedShop: 2
+  factions:
+  - ZombieOutbreak
+  - FleshMonsterInvasion
+  - MalfunctioningRobots
+  atmosphere:
+    volume: 2300
+    temperature: 320
+    moles:
+    - 21.94724
+    - 77.05276
+
+- type: shipwreckDestination
+  id: RuinedMegacity
+  biome: RuinedMegacity
+  components:
+  - type: MapLight
+    # Цвет солнечного света: приглушённый городской свет (жёлто‑белый)
+    ambientLightColor: "#D8B059"
+  - type: LightCycle
+    duration: 720
+    offset:   0
+    minLightLevel: 0.4
+    maxLightLevel: 3.2
+    clipLight: 1.0
+    clipLevel: "#FFFFE0"
+    minLevel: "#2D2A25"
+    maxLevel: "#FFF8E0"
+    initialOffset: false
+  - type: SunShadow
+  structures:
+    RuinedDwellings: 1
+    RuinedHospital: 2
+    RuinedShop: 5
+  factions:
+  - ZombieOutbreak
+  - FleshMonsterInvasion
+  - MalfunctioningRobots
+  atmosphere:
+    volume: 2400
+    temperature: 280
+    moles:
+    - 21.94724
+    - 77.05276
+

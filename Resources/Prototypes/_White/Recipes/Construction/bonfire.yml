@@ -1,0 +1,17 @@
+- type: construction
+  id: Bonfire
+  graph: Bonfires
+  startNode: start
+  targetNode: Bonfire
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: LegionnaireBonfire
+  graph: Bonfires
+  startNode: start
+  targetNode: LegionnaireBonfire
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false

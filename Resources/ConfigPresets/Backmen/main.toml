@@ -1,0 +1,153 @@
+﻿[game]
+hostname = "👽 МЁРТВЫЙ КОСМОС 🌆 Конфедерация [TTS][MRP]"
+maxplayers = 70
+soft_max_players = 60
+desc="""📣 Наш личный модовый не коммерческий проект, который мы ведем и разрабатываем уже более года
+
+✔️ - RP, размеренный геймплей, нацеленный на общение и взаимопонимание!
+✔️ - Личная разработка с полностью открытым исходным кодом (включая TTS)!
+✔️ - Новые антагонисты: Вампиры, Блоб, Злой Близнец, Беглец, Культ Плоти!
+✔️ - Новая роль: Заключенный!
+✔️ - Новые отряды быстрого реагирования!... а самое главное - СОБР!
+✔️ - Множество видов огнестрельного(и не только) оружия!
+✔️ - DS-авторизация с просмотром своей статистики прямо в чате!
+✔️ - Новая боёвка!
+✔️ - Система языков!
+✔️ - Хирургия и кукла!
+🕖 Именно мы одни из тех первых проектов, кто решился встать на открытый путь разработки по личной инициативе!
+
+☎️ Присоединяйся и стань частью нашей большой семьи!
+
+"""
+map_pool="BackmenDefaultMapPool"
+defaultpreset="secret"
+lobbyenabled = true
+cryo_sleep_rejoining = true
+lobbyduration=300
+contraband_examine = true
+
+# IPIntel stuff
+ipintel_enabled = true
+ipintel_contact_email = "backmen@bk.ru"
+
+[infolinks]
+website="https://backmen.ru"
+discord="https://discord.gg/B7gWj7hB8b"
+wiki="http://wiki.backmen.ru"
+github="https://github.com/Rxup/space-station-14"
+appeal="https://backmen.ru/tag/ticket"
+patreon="https://boosty.to/ds14confederation"
+
+[shuttle]
+arrivals = true
+arrivals_map = "/Maps/Misc/kosmoport.yml"
+#arrivals_map = "/Maps/Backmen/Etc/terminal.yml"
+#arrivals_map = "/Maps/Misc/terminal.yml"
+arrivals_returns = true
+auto_call_time = 150
+auto_call_extension_time = 70
+emergency_dock_time = 280
+emergency_authorize_time = 30
+emergency_early_launch_allowed = true
+arrivals_planet = false
+
+[salvage]
+expedition_cooldown = 300
+
+[ic]
+restricted_names = true
+flavor_text = true
+
+[ooc]
+show_ooc_patron_color = false
+
+[looc]
+enabled_crit = true
+
+[biomass]
+easy_mode = false
+
+[atmos]
+space_wind = true
+space_wind_max_velocity = 22.0
+max_explosion_range = 5
+
+[physics]
+target_minimum_tickrate = 30
+timetosleep = 0.1
+angsleeptol = 0.01
+linsleeptol = 0.001
+
+[update]
+restart_delay = 120
+
+[worldgen]
+enabled = true
+
+[ahelp]
+admin_prefix = true
+admin_prefix_webhook = true
+
+[viewport]
+maximum_width = 26
+
+[rules]
+time = 30
+
+[afk]
+time = 9999999.0
+#time=1200.0
+
+[admin]
+announce_login = false
+announce_logout = false
+see_own_notes = true
+new_player_threshold = 600
+alert.min_players_sharing_connection = 2
+
+[adminlogs]
+server_name="main"
+
+[events]
+enabled=true
+
+[server]
+rules_file="RulesBackmen"
+
+[net]
+max_connections = 1024
+log_late_msg=false
+# Automatic port forwarding!
+# Disabled by default because you may not want to do this.
+# upnp = true
+sendbuffersize=2471071
+#receivebuffersize=1471071
+lidgren_log_warning = false
+lidgren_log_error = false
+
+[netres]
+limit = 2.0
+
+[game.panic_bunker]
+disable_with_admins = false
+enable_without_admins = false
+show_reason = true
+#Minimum age of the account (from server's PoV, so from first-seen date) in minutes.
+min_account_age = 1440
+#Minimal overall played time.
+#min_overall_hours = 10
+
+[queue]
+enabled=true
+
+[laying]
+crawlundertables=true
+
+[vote]
+map_enabled = true
+restart_required_ratio = 0.6
+timermap = 60
+
+[hub]
+advertise = true
+tags = "lang:ru,rp:med,region:eu_e,tts"

@@ -1,0 +1,13 @@
+names-revenant-theme-dataset-1 = агонии
+names-revenant-theme-dataset-2 = злости
+names-revenant-theme-dataset-3 = смерти
+names-revenant-theme-dataset-4 = отчаяния
+names-revenant-theme-dataset-5 = безысходности
+names-revenant-theme-dataset-6 = разрушения
+names-revenant-theme-dataset-7 = болезни
+names-revenant-theme-dataset-8 = горя
+names-revenant-theme-dataset-9 = ненависти
+names-revenant-theme-dataset-10 = адской агонии
+names-revenant-theme-dataset-11 = смеха
+names-revenant-theme-dataset-12 = нищеты
+names-revenant-theme-dataset-13 = погибели

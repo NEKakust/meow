@@ -1,0 +1,214 @@
+# Languages spoken by various critters.
+- type: language
+  id: Cat
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 2
+    replacement:
+    - мур
+    - мяу
+    - мурр
+    - мяв
+
+- type: language
+  id: Dog
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 2
+    replacement:
+    - гав
+    - тяв
+    - рр
+    - ррр
+    - гаф
+    - гарр
+
+- type: language
+  id: Fox
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 2
+    replacement:
+    - рр
+    - гаф
+    - гарр
+    - кья
+    - тяв
+    - мя
+
+- type: language
+  id: SpaceMob
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 8
+    replacement:
+    - с
+    - С
+
+- type: language
+  id: Monkey
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 8
+    replacement:
+    - о
+    - к
+
+- type: language
+  id: Mouse
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 2
+    maxSyllables: 3
+    replacement:
+    - пии
+    - пик
+    - писк
+    - чуу
+    - еп
+    - чии
+    - хи
+
+- type: language
+  id: Chicken
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 3
+    replacement:
+    - ко
+    - ку
+    - от
+
+- type: language
+  id: Duck
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 3
+    replacement:
+    - кр
+    - ква
+    - ква-ква
+
+- type: language
+  id: Cow
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 3
+    replacement:
+    - муу
+    - мууу
+
+- type: language
+  id: Sheep
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 3
+    replacement:
+    - бе
+    - бе-бе
+    - аа
+
+- type: language
+  id: Kangaroo
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 3
+    replacement:
+    - шре
+    - ак
+    - чуу
+    - чоо
+
+- type: language
+  id: Pig
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 3
+    replacement:
+    - хрю
+
+- type: language
+  id: Crab
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 3
+    replacement:
+    - кл
+    - тик
+    - так
+    - пи
+    - кли
+    - ык
+
+- type: language
+  id: Kobold
+  speech:
+    fontId: Tolkiencyr
+    color: "#FFA07A"
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 2
+    maxSyllables: 4
+    replacement:
+    - тяф
+    - кья
+    - гар
+    - грр
+    - ар
+    - скр
+    - рр
+    - грр
+    - сс
+    - и
+

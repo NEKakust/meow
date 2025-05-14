@@ -1,0 +1,82 @@
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafeRifleAR18
+  name: ar rifle safe
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleAR18
+      amount: 2
+    - id: MagazineRifle556UEG
+      amount: 4
+
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafeSubMachineGunVector
+  name: Vector safe
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSubMachineGunVectorSpecial
+      amount: 2
+    - id: MagazinePistolSubMachineGunVector45ACP
+      amount: 4
+
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafeShotgunShotgun39
+  name: XM1014 safe
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgun39
+      amount: 2
+    - id: MagazineShotgun
+      amount: 4
+
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafeShotgunTrenchgun
+  name: trenchgun safe
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponShotguntrenchgun4034
+      amount: 2
+    - id: MagazineShotgun
+      amount: 4
+
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafeSubMachineGunMP5
+  name: mp5 safe
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSubMachineGunMP5
+      amount: 2
+    - id: MagazinePistolSubMachineGun9x17
+      amount: 4
+
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafeLaserCarbineUEG
+  name: laser safe
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponEarthGovLaserRifle
+      amount: 3
+
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafePistolGlock
+  name: G22 safe
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponPistolG22
+      amount: 4
+    - id: MagazinePistol9x17
+      amount: 8
