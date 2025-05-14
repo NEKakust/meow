@@ -1,7 +1,7 @@
 # Stack
 - type: stack
   id: Fulton
-  name: fulton
+  name: stack-fulton
   icon:
     sprite: /Textures/Objects/Tools/fulton.rsi
     state: extraction_pack
@@ -15,6 +15,7 @@
   name: fulton beacon
   description: Beacon to receive fulton extractions.
   components:
+    - type: NoLavalandUsage
     - type: Physics
       bodyType: Dynamic
     - type: Fixtures
@@ -87,7 +88,7 @@
 
 - type: entity
   id: FultonEffect
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   name: fulton effect
   components:
   - type: TimedDespawn

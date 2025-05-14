@@ -1,18 +1,18 @@
-using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
+﻿using Robust.Shared.GameStates;
 
-namespace Content.Shared.Backmen.StationAI;
+namespace Content.Shared.Backmen.StationAI.Components;
 
-[RegisterComponent, NetworkedComponent]
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState()]
 public sealed partial class AICameraComponent : Component
 {
-    [DataField("enabled"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField("enabled"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public bool Enabled = false;
 
-    [DataField("cameraName"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField("cameraName"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public string CameraName = "Unnamed";
 
-    [DataField("cameraCategory"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField("cameraCategory"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public List<string> CameraCategories = new List<string>()
     {
         "Uncategorized"
@@ -20,15 +20,4 @@ public sealed partial class AICameraComponent : Component
 
     [ViewVariables]
     public HashSet<EntityUid> ActiveViewers { get; } = new();
-}
-
-[Serializable, NetSerializable]
-public sealed class AICameraComponentState : ComponentState
-{
-    public bool Enabled { get; init; }
-    public string CameraName { get; init; } = "Unnamed";
-    public List<string> CameraCategories { get; init; } = new List<string>()
-    {
-        "Uncategorized"
-    };
 }

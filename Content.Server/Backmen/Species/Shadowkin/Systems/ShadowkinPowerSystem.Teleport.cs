@@ -9,8 +9,11 @@ using Content.Shared.Backmen.Species.Shadowkin.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Backmen.Species.Shadowkin.Components;
+using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Physics;
+using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -23,10 +26,12 @@ public sealed class ShadowkinTeleportSystem : EntitySystem
     [Dependency] private readonly ShadowkinPowerSystem _power = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StaminaSystem _stamina = default!;
+    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly MagicSystem _magic = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly TagSystem _tagSystem = default!;
 
     public override void Initialize()
     {
@@ -61,6 +66,11 @@ public sealed class ShadowkinTeleportSystem : EntitySystem
         if (HasComp<HandcuffComponent>(args.Performer) || HasComp<PsionicInsulationComponent>(args.Performer))
             return;
 
+        if(!_interaction.InRangeUnobstructed(args.Performer, args.Target, 0,
+               CollisionGroup.Opaque,
+               predicate: (ent) => _tagSystem.HasTag(ent, "Structure"),
+               popup:true))
+            return;
 
         var transform = Transform(args.Performer);
         if (transform.MapID != args.Target.GetMapId(EntityManager) || transform.GridUid == null)
@@ -102,9 +112,6 @@ public sealed class ShadowkinTeleportSystem : EntitySystem
         // Take power and deal stamina damage
         _power.TryAddPowerLevel(args.Performer, -args.PowerCost);
         _stamina.TakeStaminaDamage(args.Performer, args.StaminaCost);
-
-        // Speak
-        _magic.Speak(args);
 
         args.Handled = true;
     }

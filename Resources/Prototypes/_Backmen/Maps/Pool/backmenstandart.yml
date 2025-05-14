@@ -3,17 +3,28 @@
   maps:
   - BackmenAspid
   - BackmenKettle
-  - BackmenTortuga
+  - BackmenBox
+  #- BackmenTortuga
   - BackmenHive
   - BackmenShoukou
-  - BackmenRook
-  - Meta
-  - Fland
-  - Cluster
-  - Saltern
-  - Omega
-  - Reach
-  - Bagel
+  #- BackmenRook
+  - BackmenDelta
   - CorvaxSplit
+  - Saltern
+  - Bagel
+  - Core
+  - Fland
+  - Marathon
+  - Meta
   - Oasis
+<<<<<<< HEAD
   - no_madDelta
+=======
+  - Omega
+  - Packed
+  - Reach
+  - Amber
+  - CorvaxTushkan
+  - Elkridge
+  #- Train
+>>>>>>> upstream

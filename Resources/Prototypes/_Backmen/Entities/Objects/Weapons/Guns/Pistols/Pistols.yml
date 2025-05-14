@@ -37,9 +37,9 @@
   - type: Item
     sprite: Backmen/Objects/Weapons/Gunsx64/Pistols/acp14/tiny.rsi
   - type: Gun
-    angleIncrease: 2
+    angleIncrease: 8
     angleDecay: 10
-    cameraRecoilScalar: 0.5
+    cameraRecoilScalar: 1
     maxAngle: 15
     minAngle: 1
     selectedMode: SemiAuto
@@ -52,21 +52,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistol
+        startingItem: MagazinePistol45ACP
         insertSound: /Audio/Weapons/Guns64/Pistols/acp14_reload.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazinePistol
-            - MagazinePistolHighCapacity
+            - MagazinePistol45ACP
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: CartridgePistolACP
         priority: 1
         whitelist:
           tags:
-            - CartridgePistol
+            - CartridgePistol45ACP
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -104,21 +103,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolHighCapacity
+        startingItem: MagazinePistol57x28Extd
         insertSound: /Audio/Weapons/Guns64/Pistols/vp70_reload.ogg
         ejectSound: /Audio/Weapons/Guns64/Pistols/vp70_unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazinePistol
-            - MagazinePistolHighCapacity
+            - MagazinePistol57x28
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: CartridgePistol57x28
         priority: 1
         whitelist:
           tags:
-            - CartridgePistol
+            - CartridgePistol57x28
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -140,6 +138,7 @@
   - type: Item
     sprite: Backmen/Objects/Weapons/Gunsx64/Pistols/deagle/tiny.rsi
   - type: Gun
+    fireRate: 3
     angleDecay: 15
     angleIncrease: 10
     cameraRecoilScalar: 2
@@ -156,20 +155,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineMagnumPistol
+        startingItem: MagazinePistol50AE
         insertSound: /Audio/Weapons/Guns64/Pistols/deagle_reload.ogg
         ejectSound: /Audio/Weapons/Guns64/Pistols/deagle_unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazineMagnumPistol
+            - MagazinePistol50AE
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnum
+        startingItem: CartridgePistol50AE
         priority: 1
         whitelist:
           tags:
-            - CartridgeMagnum
+            - CartridgePistol50AE
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -204,21 +203,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistol
+        startingItem: MagazinePistol9x17
         insertSound: /Audio/Weapons/Guns64/Pistols/beretta_reload.ogg
         ejectSound: /Audio/Weapons/Guns64/Pistols/beretta_unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazinePistol
-            - MagazinePistolHighCapacity
+            - MagazinePistol9x17
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: CartridgePistol9x17
         priority: 1
         whitelist:
           tags:
-            - CartridgePistol
+            - CartridgePistol9x17
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -232,19 +230,6 @@
   parent: WeaponPistolG22
   id: WeaponPistolG22NonLethal
   suffix: Пистолет [Non-lethal]
-  components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazinePistol
-        insertSound: /Audio/Weapons/Guns64/Pistols/beretta_reload.ogg
-        ejectSound: /Audio/Weapons/Guns64/Pistols/beretta_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazinePistol
-            - MagazinePistolHighCapacity
 
 - type: entity
   name: HI Browning-88 M4
@@ -271,21 +256,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistol
+        startingItem: MagazinePistol57x28
         insertSound: /Audio/Weapons/Guns64/Pistols/vp70_reload.ogg
         ejectSound: /Audio/Weapons/Guns64/Pistols/vp70_unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazinePistol
-            - MagazinePistolHighCapacity
+            - MagazinePistol57x28
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: CartridgePistol57x28
         priority: 1
         whitelist:
           tags:
-            - CartridgePistol
+            - CartridgePistol57x28
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -320,21 +304,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistol
+        startingItem: MagazinePistol9x17
         insertSound: /Audio/Weapons/Guns64/Pistols/colt_reload.ogg
         ejectSound: /Audio/Weapons/Guns64/Pistols/colt_unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazinePistol
-            - MagazinePistolHighCapacity
+            - MagazinePistol9x17
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: CartridgePistol9x17
         priority: 1
         whitelist:
           tags:
-            - CartridgePistol
+            - CartridgePistol9x17
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -376,21 +359,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistol
+        startingItem: MagazinePistol57x28
         insertSound: /Audio/Weapons/Guns64/Pistols/colt_reload.ogg
         ejectSound: /Audio/Weapons/Guns64/Pistols/colt_unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazinePistol
-            - MagazinePistolHighCapacity
+            - MagazinePistol57x28
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: CartridgePistol57x28
         priority: 1
         whitelist:
           tags:
-            - CartridgePistol
+            - CartridgePistol57x28
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -459,3 +441,62 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Backmen/Objects/Weapons/Gunsx64/Pistols/prentor.rsi
+
+- type: entity
+  name: UCS
+  parent: BaseWeaponPistol
+  id: WeaponPistolUCS
+  description: UCS полу-автоматический пистолет компании "Interdyne", зарекомендовал себя как вторичное оружия наёмников, превосходит свои аналоги с Земли.
+  components:
+  - type: Sprite
+    sprite: Backmen/Objects/Weapons/Gunsx64/Pistols/ucs/big.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Backmen/Objects/Weapons/Gunsx64/Pistols/ucs/tiny.rsi
+  - type: Item
+    sprite: Backmen/Objects/Weapons/Gunsx64/Pistols/ucs/tiny.rsi
+  - type: ChamberMagazineAmmoProvider
+    autoEject: true
+    soundAutoEject: /Audio/Backmen/Misc/empty_alarm.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistol57x28Extd
+        insertSound: /Audio/Weapons/Guns64/SMGs/uzi_reload.ogg
+        ejectSound: /Audio/Weapons/Guns64/SMGs/uzi_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistol57x28
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgePistol57x28
+  - type: Gun
+    fireRate: 6
+    cameraRecoilScalar: 0.5
+    soundEmpty: /Audio/Backmen/Misc/error.ogg
+    soundGunshot:
+      path: /Audio/Weapons/Guns64/SMGs/uzi.ogg
+
+- type: entity
+  parent: [WeaponPistolHIB88M4, BaseMajorContraband]
+  id: WeaponPistolInteQCommissar
+  name: Commissar
+  suffix: Pistol
+  description: Small, easily concealable, but somewhat underpowered gun. Retrofitted with a fully automatic receiver. Uses 5.7x28 ammo. It is painted in the InteQ brand color.
+  components:
+  - type: Sprite
+    sprite: Backmen/Objects/Weapons/Guns/Pistols/inteq_commissar.rsi
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+      - SemiAuto
+      - FullAuto

@@ -1,5 +1,8 @@
-﻿using Content.Shared.Database;
+using Content.Shared.Backmen.Surgery.Body;
+using Content.Shared.Database;
+using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Components;
+using Robust.Shared.Player;
 
 namespace Content.Shared.Mobs.Systems;
 
@@ -103,6 +106,9 @@ public partial class MobStateSystem
         if (oldState == newState || !component.AllowedStates.Contains(newState))
             return;
 
+        if (oldState == MobState.Dead && HasComp<DebrainedComponent>(target))
+            return;
+
         OnExitState(target, component, oldState);
         component.CurrentState = newState;
         OnEnterState(target, component, newState);
@@ -110,8 +116,22 @@ public partial class MobStateSystem
         var ev = new MobStateChangedEvent(target, component, oldState, newState, origin);
         OnStateChanged(target, component, oldState, newState);
         RaiseLocalEvent(target, ev, true);
-        _adminLogger.Add(LogType.Damaged, oldState == MobState.Alive ? LogImpact.Low : LogImpact.Medium,
-            $"{ToPrettyString(target):user} state changed from {oldState} to {newState}");
+
+        // backmen edit start
+        if (_consciousness.TryGetNerveSystem(target, out var nerveSys))
+        {
+            var ev1 = new MobStateChangedEvent(target, component, oldState, newState, origin);
+            RaiseLocalEvent(nerveSys.Value, ev1, true);
+
+            // to handle consciousness related stuff. sorry
+        }
+        // backmen edit end
+
+        if (origin != null && HasComp<ActorComponent>(origin) && HasComp<ActorComponent>(target) && oldState < newState)
+            _adminLogger.Add(LogType.Damaged, LogImpact.High, $"{ToPrettyString(origin):player} caused {ToPrettyString(target):player} state to change from {oldState} to {newState}");
+        else
+            _adminLogger.Add(LogType.Damaged, oldState == MobState.Alive ? LogImpact.Low : LogImpact.Medium, $"{ToPrettyString(target):user} state changed from {oldState} to {newState}");
+
         Dirty(target, component);
     }
 

@@ -8,3 +8,13 @@ public sealed partial class AIEnemyNTComponent : Component
     [AutoNetworkedField]
     public EntityUid? Source;
 }
+[RegisterComponent, NetworkedComponent]
+public sealed partial class BorgAINTComponent : Component
+{
+
+}
+[RegisterComponent,NetworkedComponent]
+public sealed partial class CanBeBorgNTEnemyComponent : Component
+{
+
+}

@@ -66,7 +66,7 @@
 
 - type: material
   id: FakeCredit
-  name: speso
+  name: stack-credit
   unit: materials-unit-bill
   stackEntity: FakeSpaceCash
   icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
@@ -74,7 +74,7 @@
 
 - type: stack
   id: FakeCredit
-  name: speso
+  name: stack-credit
   icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
   spawn: FakeSpaceCash
 
@@ -194,7 +194,7 @@
   result: FakeSpaceCash100
   completetime: 3
   materials:
-    SheetPrinter: 100
+    Paper: 100
     Cloth: 200
     Durathread: 50
 
@@ -203,7 +203,7 @@
   result: FakeSpaceCash1000
   completetime: 5
   materials:
-    SheetPrinter: 200
+    Paper: 200
     Cloth: 500
     Durathread: 200
 
@@ -217,7 +217,8 @@
 - type: latheRecipe
   id: CashMachineCircuitboard
   result: ProtolatheCashMachineCircuitboard
-  category: Circuitry
+  categories:
+  -  Circuitry
   completetime: 4
   materials:
      Steel: 500

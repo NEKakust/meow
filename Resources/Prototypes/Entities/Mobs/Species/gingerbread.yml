@@ -16,11 +16,13 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Gingerbread
-  - type: DamageVisuals
-    damageOverlayGroups:
-      Brute:
-        sprite: Mobs/Effects/brute_damage.rsi
-        color: "#896e55"
+  #- type: DamageVisuals
+  #  damageOverlayGroups:
+  #    Brute:
+  #      sprite: Mobs/Effects/brute_damage.rsi
+  #      color: "#896e55"
+  #    Burn:
+  #      sprite: Mobs/Effects/burn_damage.rsi
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -40,6 +42,8 @@
           - MobMask
         layer:
           - MobLayer
+  - type: TypingIndicator
+    proto: gingerbread
   - type: Inventory
     femaleDisplacements:
       jumpsuit:
@@ -47,12 +51,21 @@
           32:
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
+  - type: LanguageSpeaker
+    currentLanguage: TauCetiBasic
+  - type: LanguageKnowledge #backmen: languages
+    speaks:
+    - TauCetiBasic
+    - SolCommon
+    understands:
+    - TauCetiBasic
+    - SolCommon
 
 
 - type: entity
   parent: BaseSpeciesDummy
   id: MobGingerbreadDummy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: HumanoidAppearance
     species: Gingerbread

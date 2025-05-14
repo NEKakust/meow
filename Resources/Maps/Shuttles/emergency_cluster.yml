@@ -1,6 +1,17 @@
 meta:
-  format: 6
-  postmapinit: false
+  format: 7
+  category: Grid
+  engineVersion: 247.0.0
+  forkId: ""
+  forkVersion: ""
+  time: 02/19/2025 11:09:40
+  entityCount: 541
+maps: []
+grids:
+- 2
+orphans:
+- 2
+nullspace: []
 tilemap:
   0: Space
   29: FloorDark
@@ -64,6 +75,7 @@ entities:
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
     - type: DeviceNetwork
+      deviceNetId: Wireless
       configurators: []
       deviceLists: []
       transmitFrequencyId: ShuttleTimer
@@ -442,9 +454,25 @@ entities:
           - 0
           - 0
           - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
         - volume: 2500
           temperature: 293.15
           moles:
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
           - 0
           - 0
           - 0
@@ -553,38 +581,43 @@ entities:
       rot: 3.141592653589793 rad
       pos: 8.5,-18.5
       parent: 2
-- proto: AtmosDeviceFanTiny
+- proto: AtmosDeviceFanDirectional
   entities:
   - uid: 472
     components:
     - type: Transform
-      pos: 2.5,-7.5
+      rot: 1.5707963267948966 rad
+      pos: 16.5,-7.5
       parent: 2
   - uid: 473
     components:
     - type: Transform
-      pos: 2.5,-9.5
+      rot: 1.5707963267948966 rad
+      pos: 16.5,-9.5
       parent: 2
   - uid: 475
     components:
     - type: Transform
-      pos: 16.5,-9.5
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-7.5
       parent: 2
   - uid: 476
     components:
     - type: Transform
+      rot: 1.5707963267948966 rad
       pos: 16.5,-15.5
       parent: 2
   - uid: 477
     components:
     - type: Transform
-      pos: 16.5,-17.5
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-9.5
       parent: 2
-  - uid: 586
+  - uid: 503
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 16.5,-7.5
+      rot: 1.5707963267948966 rad
+      pos: 16.5,-17.5
       parent: 2
 - proto: Bed
   entities:
@@ -1699,7 +1732,7 @@ entities:
     - type: Transform
       pos: 9.5,-1.5
       parent: 2
-- proto: EpinephrineChemistryBottle
+- proto: ChemistryBottleEpinephrine
   entities:
   - uid: 247
     components:

@@ -1,6 +1,6 @@
 - type: entity
   name: Saber of the Leader of the Red Orden
-  parent: BaseItem
+  parent: BaseSword
   id: OrdenSabre
   description: Unusual saber. Instead of a blade, this weapon uses the teeth of a space dragon, which cut and cling to the victim's flesh, tearing open wounds. Nightmare weapon.
   components:
@@ -40,7 +40,6 @@
     - state: icon
     - state: base_on
       visible: false
-      shader: unshaded
       map: ["enum.ToggleVisuals.Layer"]
   - type: GenericVisualizer
     visuals:
@@ -88,6 +87,9 @@
     - Belt
   - type: ToggleableLightVisuals
     spriteLayer: on
+    clothingVisuals:
+      belt:
+      - state: equipped-BELT-on
     inhandVisuals:
       left:
       - state: inhand-left-on
@@ -115,13 +117,13 @@
 
 - type: entity
   name: wakizashi
-  parent: BaseItem
+  parent: BaseSword
   id: Wakizashi
   description: A short, multi-purpose sword of plasteel construction.
   components:
   - type: Tag
     tags:
-    - Katana
+    - Wakizashi
   - type: Sharp
   - type: Utensil
     types:
@@ -178,7 +180,7 @@
 
 - type: entity # Backmen
   name: Ямато
-  parent: BaseItem
+  parent: BaseSword
   id: YamatoSabre
   description: Личное оружие Вергилия, выкованное из тёмного сплава. Найдено в секторе "Бекман"
   components:

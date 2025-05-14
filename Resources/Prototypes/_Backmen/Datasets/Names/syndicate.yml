@@ -1,38 +1,36 @@
-- type: dataset
+- type: localizedDataset
   id: SyndicateNamesSuperNormal
   values:
-  - Альфа
-  - Браво
-  - Чарли
-  - Дельта
-  - Эхо
-  - Фокстрот
-  - Гольф
-  - Хоутел
-  - Индиа
-  - Джулиет
-  - Кило
-  - Лима
-  - Майк
-  - Новэмбэр
-  - Оскар
-  - Папа
-  - Квебек
-  - Ромео
-  - Сьера
-  - Танго
-  - Юниформ
-  - Виктор
-  - Виски
-  - Иксрей
-  - Зулу
+    prefix: SyndicateNamesSuperNormal-
+    count: 25
 
-- type: dataset
+- type: localizedDataset
   id: SyndicateZvanieSuperNormal
   values:
-  - Оператор
+    prefix: SyndicateZvanieSuperNormal-
+    count: 1
 
-- type: dataset
+
+- type: localizedDataset
   id: SyndicateZvanieSuperNormalAgent
   values:
-  - Агент
+    prefix: SyndicateZvanieSuperNormalAgent-
+    count: 1
+
+- type: localizedDataset
+  id: SyndicateNamesPrefix
+  values:
+    prefix: names-Syndicate-Prefix-dataset-
+    count: 4
+
+- type: localizedDataset
+  id: NamesMilitaryLast
+  values:
+    prefix: names-military-last-dataset-
+    count: 42
+
+- type: localizedDataset
+  id: NamesMilitaryFirstLeader
+  values:
+    prefix: names-military-leader-first-dataset-
+    count: 5

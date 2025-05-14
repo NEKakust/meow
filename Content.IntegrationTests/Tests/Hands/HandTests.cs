@@ -1,12 +1,13 @@
 using System.Linq;
+using Content.Server.Damage.Systems;
 using Content.Server.Storage.EntitySystems;
+using Content.Shared.Backmen.CCVar;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Map;
 
 namespace Content.IntegrationTests.Tests.Hands;
 
@@ -38,7 +39,7 @@ public sealed class HandTests
 
         var entMan = server.ResolveDependency<IEntityManager>();
         var playerMan = server.ResolveDependency<IPlayerManager>();
-        var mapMan = server.ResolveDependency<IMapManager>();
+        var mapSystem = server.System<SharedMapSystem>();
         var sys = entMan.System<SharedHandsSystem>();
         var tSys = entMan.System<TransformSystem>();
 
@@ -53,6 +54,10 @@ public sealed class HandTests
             player = playerMan.Sessions.First().AttachedEntity!.Value;
             var xform = entMan.GetComponent<TransformComponent>(player);
             item = entMan.SpawnEntity("Crowbar", tSys.GetMapCoordinates(player, xform: xform));
+            Assert.That(
+                entMan.HasComponent<HandsComponent>(player),
+                Is.True,
+                $"player {entMan.ToPrettyString(player)} does not have hands component");
             hands = entMan.GetComponent<HandsComponent>(player);
             sys.TryPickup(player, item, hands.ActiveHand!);
         });
@@ -69,7 +74,7 @@ public sealed class HandTests
         await pair.RunTicksSync(5);
         Assert.That(hands.ActiveHandEntity, Is.Null);
 
-        await server.WaitPost(() => mapMan.DeleteMap(data.MapId));
+        await server.WaitPost(() => mapSystem.DeleteMap(data.MapId));
         await pair.CleanReturnAsync();
     }
 
@@ -79,15 +84,17 @@ public sealed class HandTests
         await using var pair = await PoolManager.GetServerClient(new PoolSettings
         {
             Connected = true,
-            DummyTicker = false
+            DummyTicker = false,
+            Fresh = true, // backmen edit
         });
         var server = pair.Server;
+
         var map = await pair.CreateTestMap();
         await pair.RunTicksSync(5);
 
         var entMan = server.ResolveDependency<IEntityManager>();
         var playerMan = server.ResolveDependency<IPlayerManager>();
-        var mapMan = server.ResolveDependency<IMapManager>();
+        var mapSystem = server.System<SharedMapSystem>();
         var sys = entMan.System<SharedHandsSystem>();
         var tSys = entMan.System<TransformSystem>();
         var containerSystem = server.System<SharedContainerSystem>();
@@ -134,7 +141,7 @@ public sealed class HandTests
         Assert.That(hands.ActiveHandEntity, Is.Not.EqualTo(item));
         Assert.That(containerSystem.IsInSameOrNoContainer((player, xform), (item, itemXform)));
 
-        await server.WaitPost(() => mapMan.DeleteMap(map.MapId));
+        await server.WaitPost(() => mapSystem.DeleteMap(map.MapId));
         await pair.CleanReturnAsync();
     }
 }

@@ -1,4 +1,7 @@
 using System.Linq;
+using Content.Server.Body.Systems;
+using Content.Server.Hands.Systems;
+using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
 using Content.Shared.Destructible;
 using Content.Shared.Hands;
@@ -8,7 +11,9 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Storage;
 using Content.Shared.Tag;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Tools.Innate;
 
@@ -22,6 +27,8 @@ public sealed class InnateToolSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
 
+    private static readonly ProtoId<TagPrototype> InnateDontDeleteTag = "InnateDontDelete";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -31,12 +38,35 @@ public sealed class InnateToolSystem : EntitySystem
         SubscribeLocalEvent<InnateToolComponent, DestructionEventArgs>(OnDestroyed);
     }
 
+    //start-backmen: fix
+
+    [ValidatePrototypeId<EntityPrototype>]
+    public const string DefaultHandPrototype = "LeftHandHuman";
+
+
+    private void AddHand(EntityUid entity, int handCounter, HandsComponent handsComponent)
+    {
+        var handId = $"it-{entity}-item{handCounter}";
+        _sharedHandsSystem.AddHand(entity, handId, HandLocation.Middle, handsComponent);
+    }
+
+    //end-backmen: fix
+
+
     private void OnMapInit(EntityUid uid, InnateToolComponent component, MapInitEvent args)
     {
         if (component.Tools.Count == 0)
             return;
 
         component.ToSpawn = EntitySpawnCollection.GetSpawns(component.Tools, _robustRandom);
+
+        //start-backmen: fix
+        var hands = EnsureComp<HandsComponent>(uid);
+        for (var i = 0; i < component.Tools.Count; i++)
+        {
+            AddHand(uid,i,hands);
+        }
+        //end-backmen: fix
     }
 
     private void OnHandCountChanged(EntityUid uid, InnateToolComponent component, HandCountChangedEvent args)
@@ -51,7 +81,7 @@ public sealed class InnateToolSystem : EntitySystem
         var item = Spawn(toSpawn, spawnCoord);
         if (!_sharedHandsSystem.TryPickupAnyHand(uid, item, checkActionBlocker: false))
         {
-            QueueDel(item);
+            Del(item);
             component.ToSpawn.Remove(toSpawn);
             return;
         }
@@ -77,7 +107,7 @@ public sealed class InnateToolSystem : EntitySystem
     {
         foreach (var tool in component.ToolUids)
         {
-            if (_tagSystem.HasTag(tool, "InnateDontDelete"))
+            if (_tagSystem.HasTag(tool, InnateDontDeleteTag))
             {
                 RemComp<UnremoveableComponent>(tool);
             }

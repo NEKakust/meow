@@ -6,6 +6,8 @@ using Content.Client.Inventory;
 using Content.Client.Lobby.UI;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Station;
+using Content.Corvax.Interfaces.Client;
+using Content.Corvax.Interfaces.Shared;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.GameTicking;
@@ -40,6 +42,7 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
     [Dependency] private readonly IStateManager _stateManager = default!;
     [Dependency] private readonly JobRequirementsManager _requirements = default!;
     [Dependency] private readonly MarkingManager _markings = default!;
+    [Dependency] private readonly ISharedSponsorsManager _clientSponsorsManager = default!;
     [UISystemDependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [UISystemDependency] private readonly ClientInventorySystem _inventory = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
@@ -80,10 +83,7 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
     private LobbyCharacterPreviewPanel? GetLobbyPreview()
     {
-        if (_stateManager.CurrentState is LobbyState lobby)
-        {
-            return lobby.Lobby?.CharacterPreview;
-        }
+
 
         return null;
     }
@@ -273,12 +273,14 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
             _logManager,
             _playerManager,
             _prototypeManager,
+            _resourceCache,
             _requirements,
-            _markings);
+            _markings,
+            _clientSponsorsManager);
 
         _profileEditor.OnOpenGuidebook += _guide.OpenHelp;
 
-        _characterSetup = new CharacterSetupGui(EntityManager, _prototypeManager, _resourceCache, _preferencesManager, _profileEditor);
+        _characterSetup = new CharacterSetupGui(_profileEditor);
 
         _characterSetup.CloseButton.OnPressed += _ =>
         {
@@ -365,7 +367,7 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
                 if (!_prototypeManager.TryIndex(loadout.Prototype, out var loadoutProto))
                     continue;
 
-                _spawn.EquipStartingGear(uid, _prototypeManager.Index(loadoutProto.Equipment));
+                _spawn.EquipStartingGear(uid, loadoutProto);
             }
         }
     }
@@ -388,36 +390,51 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
                     if (!_prototypeManager.TryIndex(loadout.Prototype, out var loadoutProto))
                         continue;
 
-                    // TODO: Need some way to apply starting gear to an entity coz holy fucking shit dude.
-                    var loadoutGear = _prototypeManager.Index(loadoutProto.Equipment);
-
+                    // TODO: Need some way to apply starting gear to an entity and replace existing stuff coz holy fucking shit dude.
                     foreach (var slot in slots)
                     {
-                        var itemType = loadoutGear.GetGear(slot.Name);
-
-                        if (_inventory.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
+                        // Try startinggear first
+                        if (_prototypeManager.TryIndex(loadoutProto.StartingGear, out var loadoutGear))
                         {
-                            EntityManager.DeleteEntity(unequippedItem.Value);
+                            var itemType = ((IEquipmentLoadout) loadoutGear).GetGear(slot.Name);
+
+                            if (_inventory.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
+                            {
+                                EntityManager.DeleteEntity(unequippedItem.Value);
+                            }
+
+                            if (itemType != string.Empty)
+                            {
+                                var item = EntityManager.SpawnEntity(itemType, MapCoordinates.Nullspace);
+                                _inventory.TryEquip(dummy, item, slot.Name, true, true);
+                            }
                         }
-
-                        if (itemType != string.Empty)
+                        else
                         {
-                            var item = EntityManager.SpawnEntity(itemType, MapCoordinates.Nullspace);
-                            _inventory.TryEquip(dummy, item, slot.Name, true, true);
+                            var itemType = ((IEquipmentLoadout) loadoutProto).GetGear(slot.Name);
+
+                            if (_inventory.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
+                            {
+                                EntityManager.DeleteEntity(unequippedItem.Value);
+                            }
+
+                            if (itemType != string.Empty)
+                            {
+                                var item = EntityManager.SpawnEntity(itemType, MapCoordinates.Nullspace);
+                                _inventory.TryEquip(dummy, item, slot.Name, true, true);
+                            }
                         }
                     }
                 }
             }
         }
 
-        if (job.StartingGear == null)
+        if (!_prototypeManager.TryIndex(job.StartingGear, out var gear))
             return;
-
-        var gear = _prototypeManager.Index<StartingGearPrototype>(job.StartingGear);
 
         foreach (var slot in slots)
         {
-            var itemType = gear.GetGear(slot.Name);
+            var itemType = ((IEquipmentLoadout) gear).GetGear(slot.Name);
 
             if (_inventory.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
             {
@@ -439,7 +456,21 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
     {
         EntityUid dummyEnt;
 
-        if (humanoid is not null)
+        EntProtoId? previewEntity = null;
+        if (humanoid != null && jobClothes)
+        {
+            job ??= GetPreferredJob(humanoid);
+
+            previewEntity = job.JobPreviewEntity ?? (EntProtoId?)job?.JobEntity;
+        }
+
+        if (previewEntity != null)
+        {
+            // Special type like borg or AI, do not spawn a human just spawn the entity.
+            dummyEnt = EntityManager.SpawnEntity(previewEntity, MapCoordinates.Nullspace);
+            return dummyEnt;
+        }
+        else if (humanoid is not null)
         {
             var dummy = _prototypeManager.Index<SpeciesPrototype>(humanoid.Species).DollPrototype;
             dummyEnt = EntityManager.SpawnEntity(dummy, MapCoordinates.Nullspace);
@@ -453,7 +484,8 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
         if (humanoid != null && jobClothes)
         {
-            job ??= GetPreferredJob(humanoid);
+            DebugTools.Assert(job != null);
+
             GiveDummyJobClothes(dummyEnt, humanoid, job);
 
             if (_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID)))

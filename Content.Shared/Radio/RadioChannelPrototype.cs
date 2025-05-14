@@ -1,8 +1,9 @@
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Radio;
 
-[Prototype("radioChannel")]
+[Prototype]
 public sealed partial class RadioChannelPrototype : IPrototype
 {
     /// <summary>
@@ -27,7 +28,7 @@ public sealed partial class RadioChannelPrototype : IPrototype
     public Color Color { get; private set; } = Color.Lime;
 
     [IdDataField, ViewVariables]
-    public string ID { get; } = default!;
+    public string ID { get; private set; } = default!;
 
     /// <summary>
     /// If channel is long range it doesn't require telecommunication server
@@ -35,4 +36,12 @@ public sealed partial class RadioChannelPrototype : IPrototype
     /// </summary>
     [DataField("longRange"), ViewVariables]
     public bool LongRange = false;
+
+    // start-backmen: radio sound
+    /// <summary>
+    /// Звук передачи сообщений в рации
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? OnSendSound = null;
+    // end-backmen: radio sound
 }

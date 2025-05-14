@@ -1,6 +1,17 @@
 meta:
-  format: 6
-  postmapinit: false
+  format: 7
+  category: Grid
+  engineVersion: 247.0.0
+  forkId: ""
+  forkVersion: ""
+  time: 02/19/2025 11:10:03
+  entityCount: 34
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
 tilemap:
   0: Space
   82: FloorShuttleOrange
@@ -83,9 +94,25 @@ entities:
           - 0
           - 0
           - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
         - volume: 2500
           immutable: True
           moles:
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
           - 0
           - 0
           - 0
@@ -122,6 +149,7 @@ entities:
   - uid: 4
     components:
     - type: Transform
+      rot: 1.5707963267948966 rad
       pos: 0.5,-2.5
       parent: 1
 - proto: BoxMRE
@@ -201,8 +229,16 @@ entities:
         immutable: False
         temperature: 293.14673
         moles:
-        - 1.7459903
-        - 6.568249
+        - 1.8856695
+        - 7.0937095
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
         - 0
         - 0
         - 0
@@ -219,10 +255,10 @@ entities:
           showEnts: False
           occludes: True
           ents:
+          - 7
+          - 6
           - 8
           - 9
-          - 6
-          - 7
 - proto: ClothingOuterSuitEmergency
   entities:
   - uid: 7
@@ -239,19 +275,19 @@ entities:
     - type: Transform
       pos: 0.5,-0.5
       parent: 1
-- proto: DisasterVictimSpawner
-  entities:
-  - uid: 20
-    components:
-    - type: Transform
-      pos: 0.5,-1.5
-      parent: 1
 - proto: GeneratorWallmountAPU
   entities:
   - uid: 21
     components:
     - type: Transform
       pos: -0.5,-1.5
+      parent: 1
+- proto: Grille
+  entities:
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 0.5,0.5
       parent: 1
 - proto: Gyroscope
   entities:
@@ -269,6 +305,18 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: NTVisitorSpawner
+  entities:
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 0.5,-1.5
+      parent: 1
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 0.5,-1.5
+      parent: 1
 - proto: Poweredlight
   entities:
   - uid: 22

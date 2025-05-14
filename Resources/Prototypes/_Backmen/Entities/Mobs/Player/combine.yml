@@ -10,6 +10,8 @@
   - type: Speech
     speechSounds: Combine
     soundCooldownTime: 0.1
+  - type: Damageable
+    damageModifierSet: CombineHuman
   - type: Stamina
     critThreshold: 250
   - type: MobState
@@ -18,10 +20,6 @@
       0: Alive
       200: Critical
       250: Dead
-  - type: SlowOnDamage
-    speedModifierThresholds:
-      100: 0.7
-      150: 0.5
   - type: TriggerOnMobstateChange
     mobState:
     - Critical

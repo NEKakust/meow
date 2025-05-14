@@ -4,7 +4,6 @@ barsign-ui-set-label = Выбрать вывеску:
 
 # Bar signs prototypes
 
-
 ## The Harmbaton
 
 barsign-prototype-name-harmbaton = Хармбатон
@@ -73,7 +72,7 @@ barsign-prototype-description-maltese-falcon = Сыграй ещё раз, Сэ�
 ## The Sun
 
 barsign-prototype-name-the-sun = Солнце
-barsign-prototype-description-the-sun = Иронично яркий для такого тёмного бара.
+barsign-prototype-description-the-sun = Иронично яркая, для такого тёмного бара.
 
 ## The Birdcage
 
@@ -92,13 +91,13 @@ barsign-prototype-description-lv426 = Выпить с модной маской 
 
 ## The Wiggle Roomm
 
-barsign-prototype-name-wiggle-room = Пространство для манёвра
+barsign-prototype-name-wiggle-room = Комната Виггль
 barsign-prototype-description-wiggle-room = MoMMI маневрируют в танце.
 
 ## The Lightbulb
 
 barsign-prototype-name-the-lightbulb = Лампочка
-barsign-prototype-description-the-lightbulb = Кафе, популярное среди ниан и моффов. Однажды его закрыли на неделю после того, как барменша использовала нафталин для обработки своей запасной униформы.
+barsign-prototype-description-the-lightbulb = Кафе, популярное среди молей. Однажды его закрыли на неделю после того, как барменша использовала нафталин для обработки своей запасной униформы.
 
 ## The Loose Goose
 
@@ -115,12 +114,25 @@ barsign-prototype-description-enginechange = Всё ещё ожидаем.
 barsign-prototype-name-emprah = За Империю
 barsign-prototype-description-emprah = Нравится и фанатикам, и еретикам, и завсегдатаям с дефектами мозга.
 
+## Spacebucks
+
+barsign-prototype-name-spacebucks = Спейсбакс
+barsign-prototype-description-spacebucks = От них нельзя скрыться, даже в космосе.
+
+## Maltroach
+
+barsign-prototype-name-maltroach = Пивная Моль
+barsign-prototype-description-maltroach = Сквик!
+
+## Whiskey Echoes
+
+barsign-prototype-name-whiskeyechoes = Виски Эхо
+barsign-prototype-description-whiskeyechoes = Элитный бар для элитных опер... Подождите, это же станция Nanotrasen. Почему эта вывеска в базе данных?
+
 ## EmpBarSign
 
-barsign-prototype-name-spacebucks = Кредиты
-barsign-prototype-description-spacebucks = От них нельзя скрыться, даже в космосе.
 barsign-prototype-description-empbarsign = Что-то пошло совсем не так.
 
 ## SignOff
 
-barsign-prototype-description-sign-off = Этот знак, похоже, не включён.
+barsign-prototype-description-sign-off = Эта вывеска, похоже, не включёна.

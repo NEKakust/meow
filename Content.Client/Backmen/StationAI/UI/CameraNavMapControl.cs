@@ -1,7 +1,4 @@
 ﻿using Content.Client.Pinpointer.UI;
-using Content.Shared.Backmen.StationAI;
-using Robust.Client.Graphics;
-using Robust.Shared.Map.Components;
 
 namespace Content.Client.Backmen.StationAI.UI;
 

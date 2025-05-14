@@ -129,7 +129,7 @@ public sealed class ShadowkinSystem : EntitySystem
 
             // Don't update things for ssd shadowkin
             if (!_mindSystem.TryGetMind(uid, out var mindId, out var mind, mindContainerComponent) ||
-                mind.Session == null)
+                !_mindSystem.TryGetSession(mind, out var session))
                 continue;
 
 
@@ -248,9 +248,13 @@ public sealed class ShadowkinSystem : EntitySystem
 
             target = coords.Offset(offset);
 
-            if (_interaction.InRangeUnobstructed(uid, target.Value, 0,
-                    CollisionGroup.MobMask | CollisionGroup.MobLayer))
+            if (!_interaction.InRangeUnobstructed(uid,
+                    target.Value,
+                    0,
+                    CollisionGroup.WallLayer))
+            {
                 break;
+            }
 
             target = null;
         }

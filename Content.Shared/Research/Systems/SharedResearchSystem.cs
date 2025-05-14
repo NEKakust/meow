@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using System.Linq;
+using Content.Shared.Lathe;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;
 using JetBrains.Annotations;
@@ -8,10 +9,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Research.Systems;
 
-public abstract class SharedResearchSystem : EntitySystem
+public abstract partial class SharedResearchSystem : EntitySystem   // Goobstation - made class partial
 {
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedLatheSystem _lathe = default!;
 
     public override void Initialize()
     {
@@ -71,8 +73,8 @@ public abstract class SharedResearchSystem : EntitySystem
         if (!component.SupportedDisciplines.Contains(tech.Discipline))
             return false;
 
-        if (tech.Tier > disciplineTiers[tech.Discipline])
-            return false;
+        // if (tech.Tier > disciplineTiers[tech.Discipline])    // Goobstation R&D Console rework - removed main discipline checks
+        //     return false;
 
         if (component.UnlockedTechnologies.Contains(tech.ID))
             return false;
@@ -155,42 +157,42 @@ public abstract class SharedResearchSystem : EntitySystem
         if (includeTier)
         {
             disciplinePrototype ??= PrototypeManager.Index(technology.Discipline);
-            description.AddMarkup(Loc.GetString("research-console-tier-discipline-info",
+            description.AddMarkupOrThrow(Loc.GetString("research-console-tier-discipline-info",
                 ("tier", technology.Tier), ("color", disciplinePrototype.Color), ("discipline", Loc.GetString(disciplinePrototype.Name))));
             description.PushNewline();
         }
 
         if (includeCost)
         {
-            description.AddMarkup(Loc.GetString("research-console-cost", ("amount", technology.Cost)));
+            description.AddMarkupOrThrow(Loc.GetString("research-console-cost", ("amount", technology.Cost)));
             description.PushNewline();
         }
 
         if (includePrereqs && technology.TechnologyPrerequisites.Any())
         {
-            description.AddMarkup(Loc.GetString("research-console-prereqs-list-start"));
+            description.AddMarkupOrThrow(Loc.GetString("research-console-prereqs-list-start"));
             foreach (var recipe in technology.TechnologyPrerequisites)
             {
                 var techProto = PrototypeManager.Index(recipe);
                 description.PushNewline();
-                description.AddMarkup(Loc.GetString("research-console-prereqs-list-entry",
+                description.AddMarkupOrThrow(Loc.GetString("research-console-prereqs-list-entry",
                     ("text", Loc.GetString(techProto.Name))));
             }
             description.PushNewline();
         }
 
-        description.AddMarkup(Loc.GetString("research-console-unlocks-list-start"));
+        description.AddMarkupOrThrow(Loc.GetString("research-console-unlocks-list-start"));
         foreach (var recipe in technology.RecipeUnlocks)
         {
             var recipeProto = PrototypeManager.Index(recipe);
             description.PushNewline();
-            description.AddMarkup(Loc.GetString("research-console-unlocks-list-entry",
-                ("name",recipeProto.Name)));
+            description.AddMarkupOrThrow(Loc.GetString("research-console-unlocks-list-entry",
+                ("name", _lathe.GetRecipeName(recipeProto))));
         }
         foreach (var generic in technology.GenericUnlocks)
         {
             description.PushNewline();
-            description.AddMarkup(Loc.GetString("research-console-unlocks-list-entry-generic",
+            description.AddMarkupOrThrow(Loc.GetString("research-console-unlocks-list-entry-generic",
                 ("text", Loc.GetString(generic.UnlockDescription))));
         }
 
@@ -225,6 +227,9 @@ public abstract class SharedResearchSystem : EntitySystem
             return;
         component.MainDiscipline = prototype.Discipline;
         Dirty(uid, component);
+
+        var ev = new TechnologyDatabaseModifiedEvent();
+        RaiseLocalEvent(uid, ref ev);
     }
 
     /// <summary>
@@ -296,7 +301,7 @@ public abstract class SharedResearchSystem : EntitySystem
         component.UnlockedRecipes.Add(recipe);
         Dirty(uid, component);
 
-        var ev = new TechnologyDatabaseModifiedEvent();
+        var ev = new TechnologyDatabaseModifiedEvent(new List<string> { recipe });
         RaiseLocalEvent(uid, ref ev);
     }
 }

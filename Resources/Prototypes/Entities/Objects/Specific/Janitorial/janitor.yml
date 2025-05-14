@@ -50,6 +50,7 @@
   - type: GuideHelp
     guides:
     - Janitorial
+  - type: DnaSubstanceTrace
 
 - type: entity
   parent: BaseItem
@@ -109,6 +110,7 @@
       tags:
         - Mop
         - MopAdv
+    - type: DnaSubstanceTrace
 
 - type: entity
   name: wet floor sign
@@ -122,6 +124,8 @@
     sprite: Objects/Specific/Janitorial/wet_floor_sign.rsi
     size: Normal
   - type: Armor
+    coverage:
+    - Head
     modifiers:
       coefficients:
         Blunt: 0.95
@@ -192,9 +196,9 @@
     entries:
     - label: corvax-hidden-desc-WetFloorSignMineExplosive-syndicate
       whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+        mindRoles:
+        - TraitorRole
+        - NukeopsRole
     - label: corvax-hidden-desc-WetFloorSignMineExplosive-research
       jobRequired:
         - ResearchAssistant
@@ -202,7 +206,7 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
-        
+
 - type: entity
   name: plunger
   id: Plunger
@@ -263,6 +267,9 @@
       types:
         Blunt: 3
   - type: Plunger
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 100
 
 - type: entity
   name: golden plunger
@@ -347,3 +354,4 @@
     - type: CleansForensics
     - type: Fiber
       fiberColor: fibers-white
+    - type: DnaSubstanceTrace

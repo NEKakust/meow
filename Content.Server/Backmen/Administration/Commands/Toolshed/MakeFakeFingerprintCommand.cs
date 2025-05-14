@@ -2,6 +2,7 @@
 using Content.Server.Administration;
 using Content.Server.Forensics;
 using Content.Shared.Administration;
+using Content.Shared.Forensics.Components;
 using Content.Shared.Inventory;
 using Robust.Shared.Player;
 using Robust.Shared.Toolshed;
@@ -33,7 +34,7 @@ public sealed class MakeFakeFingerprintCommand : ToolshedCommand
 
 
         var f = EntityManager.EnsureComponent<ForensicsComponent>(target);
-        if (EntityManager.TryGetComponent<DnaComponent>(playerUid, out var dna))
+        if (EntityManager.TryGetComponent<DnaComponent>(playerUid, out var dna) && !string.IsNullOrEmpty(dna.DNA))
         {
             f.DNAs.Add(dna.DNA);
         }

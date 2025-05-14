@@ -7,15 +7,6 @@
     Glass: 900
 
 - type: latheRecipe
-  id: AntiPsychicKnifeRecipe
-  result: AntiPsychicKnife
-  completetime: 4
-  materials:
-    Steel: 300
-    Glass: 300
-    Plastic: 200
-
-- type: latheRecipe
   id: MetempsychoticMachineCircuitboard
   result: MetempsychoticMachineCircuitboard
   completetime: 4
@@ -23,3 +14,8 @@
     Steel: 100
     Glass: 900
     Gold: 100
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: GunsmithTechFabCircuitboard
+  result: GunsmithTechFabCircuitboard

@@ -7,6 +7,12 @@
     state: icon
   - type: Clothing
     slots: [gloves]
+  # backmen edit start
+    equipSound:
+      path: /Audio/Backmen/Items/handling/generic_equip2.ogg
+      params:
+        volume: -4
+  # backmen edit end
   - type: Food
     requiresSpecialDigestion: true
   - type: Item
@@ -23,6 +29,21 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 5 # the average lightbulb only does around four damage!
+  - type: Armor # the same as SEC
+    coverage: # backmen: armour coverage
+    - Hand
+    modifiers:
+      coefficients:
+        Heat: 0.9
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.1
 
 - type: entity
   abstract: true
@@ -44,3 +65,35 @@
   - type: Fiber
     fiberMaterial: fibers-synthetic
   - type: FingerprintMask
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RingBase
+  components:
+  - type: Clothing
+    slots: [ gloves, neck ]
+  - type: Sprite
+    sprite: Clothing/Hands/Rings/basic.rsi
+  - type: Appearance
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - Ring
+
+- type: entity
+  abstract: true
+  id: GoldRingBase
+  components:
+  - type: StaticPrice
+    price: 300
+
+- type: entity
+  abstract: true
+  id: SilverRingBase
+  name: silver ring
+  description: Looks slightly less valuable than a gold one.
+  components:
+  - type: StaticPrice
+    price: 275

@@ -1,19 +1,30 @@
 - type: gameMapPool
   id: DefaultMapPool
   maps:
+<<<<<<< HEAD
   - BackmenShoukou
   - BackmenRook
   - Atlas
+=======
+  - Amber
+>>>>>>> upstream
   - Bagel
   - Box
-  - Cluster
-  - Core
+  - Convex
+  #- Core
+  - Elkridge
   - Fland
+  #- Gate
+  - Loop
   - Marathon
   - Meta
   - Oasis
   - Omega
-  - Origin
-  - Saltern
   - Packed
+<<<<<<< HEAD
   - Train
+=======
+  - Plasma
+  - Reach
+  #- Train
+>>>>>>> upstream

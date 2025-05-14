@@ -1,6 +1,6 @@
 ﻿- type: entity
   id: PowerSink
-  parent: BaseMachine
+  parent: [BaseMachine, BaseSyndicateContraband]
   name: power sink
   description: Drains immense amounts of electricity from the grid.
   components:
@@ -45,16 +45,22 @@
     - type: Sprite
       sprite: Objects/Power/powersink.rsi
       state: powersink
+    - type: Tag
+      tags:
+      - GhostOnlyWarp
     - type: WarpPoint
       location: powersink
+      blacklist:
+        tags:
+        - GhostOnlyWarp
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
       - label: corvax-hidden-desc-PowerSink-syndicate
         whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+          mindRoles:
+          - TraitorRole
+          - NukeopsRole
       - label: corvax-hidden-desc-PowerSink-engineering
         jobRequired:
           - ChiefEngineer

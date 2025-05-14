@@ -2,7 +2,7 @@
   id: CrateSecurityArmor
   parent: CrateSecgear
   name: armor crate
-  description: Three vests of well-rounded, decently-protective armor. Requires Security access to open.
+  description: Contains three bulletproof vests. Requires Security access to open.
   components:
   - type: StorageFill
     contents:
@@ -24,7 +24,7 @@
   id: CrateSecurityNonlethal
   parent: CrateSecgear
   name: nonlethals crate
-  description: Disabler weapons. Requires Security access to open.
+  description: Contains a mix of disablers, stun batons, and flashes. Requires Security access to open.
   components:
   - type: StorageFill
     contents:
@@ -41,28 +41,6 @@
         amount: 2 #Backmen Rebalance End
 #      - Pepperspray
 #      - GrenadeTeargas
-
-- type: entity
-  id: CrateSecurityRiot
-  parent: CrateSecgear
-  name: swat crate
-  description: Contains two sets of riot armor, helmets, shields, and enforcers loaded with beanbags. Extra ammo is included. Requires Armory access to open.
-  components:
-  - type: StorageFill
-    contents:
-      - id: ClothingOuterArmorRiot
-        amount: 2
-      - id: ClothingHeadHelmetRiot
-        amount: 2
-      - id: WeaponLauncherM81 #Backmen Rebalance Start
-        amount: 2
-      - id: BoxGrenadeTearGas
-        amount: 2
-      - id: BoxGrenadeNonLetal
-        amount: 2 #Backmen Rebalance End
-      - id: RiotShield
-        amount: 2
-#      - SecGasmask
 
 - type: entity
   id: CrateSecuritySupplies
@@ -119,4 +97,19 @@
       - id: TrackingImplanter
         amount: 4
 
-# Cosmetic Crates
+- type: entity
+  parent: CrateSecgear
+  id: CrateSecNonlethalThrowables
+  name: nonlethal throwables crate
+  description: Contains one box each of flashbangs, stingers, tear gas grenades, and four bolas. Requires Security access to open.
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxFlashbang
+      amount: 1
+    - id: BoxStinger
+      amount: 1
+    - id: BoxTearGas
+      amount: 1
+    - id: Bola # replace with 4 e-bolas when added
+      amount: 4

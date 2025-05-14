@@ -30,6 +30,7 @@ public sealed partial class HandsComponent : Component
     /// <summary>
     ///     List of hand-names. These are keys for <see cref="Hands"/>. The order of this list determines the order in which hands are iterated over.
     /// </summary>
+    [ViewVariables]
     public List<string> SortedHands = new();
 
     /// <summary>
@@ -78,8 +79,29 @@ public sealed partial class HandsComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan ThrowCooldown = TimeSpan.FromSeconds(0.5f);
 
+    /// <summary>
+    ///     Fallback displacement map applied to all sprites in the hand, unless otherwise specified
+    /// </summary>
     [DataField]
     public DisplacementData? HandDisplacement;
+
+    /// <summary>
+    ///     If defined, applies to all sprites in the left hand, ignoring <see cref="HandDisplacement"/>
+    /// </summary>
+    [DataField]
+    public DisplacementData? LeftHandDisplacement;
+
+    /// <summary>
+    ///     If defined, applies to all sprites in the right hand, ignoring <see cref="HandDisplacement"/>
+    /// </summary>
+    [DataField]
+    public DisplacementData? RightHandDisplacement;
+
+    /// <summary>
+    /// If false, hands cannot be stripped, and they do not show up in the stripping menu.
+    /// </summary>
+    [DataField]
+    public bool CanBeStripped = true;
 }
 
 [Serializable, NetSerializable]

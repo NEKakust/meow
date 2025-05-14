@@ -24,6 +24,46 @@
   - BKCCCargoBackpack
   - BKCCCargoSatchel
   - BKCCCargoDuffel
+  - CommonMessenger
+
+# Security
+
+# BlueShield
+- type: loadoutGroup
+  id: ClothingUniformJumpsuitBlueShield
+  name: loadout-group-blueshield-jumpsuit
+  loadouts:
+  - ClothingJumpsuitBlueShield
+  - ClothingUniformBlueShield
+  - ClothingSkirtBlueShield
+
+- type: loadoutGroup
+  id: ClothingHeadHatBlueShield
+  name: loadout-group-BlueShield-hat
+  minLimit: 0
+  loadouts:
+  - ClothingHeadHatBeretBlueShield
+  - ClothingHeadHatBlueShieldCap
+  - ClothingHeadHatUshankaBlueShield
+  - ClothingHeadHelmetEGov
+  - ClothingHeadHelmetXenonauten
+
+- type: loadoutGroup
+  id: ClothingOuterBlueShield
+  name: loadout-group-BlueShield-outer
+  loadouts:
+  - ClothingOuterNavyVest
+  - ClothingOuterXenonautenLight
+  - ClothingOuterCoatArmorBlueShield
+  - ClothingOuterCoatArmorBlueShieldAlt
+
+- type: loadoutGroup
+  id: EyeBlueShield
+  name: loadout-group-BlueShield-eyes
+  minLimit: 0
+  loadouts:
+  - ClothingEyesGlassesBlueShield
+  - ClothingEyeslensesBlueShield
 
 # Operator
 #- type: loadoutGroup
@@ -67,6 +107,7 @@
   - ClothingBackpackBrigmedic
   - ClothingBackpackDuffelBrigmedic
   - ClothingBackpackSatchelBrigmedic
+  - SecurityMessenger
 
 - type: loadoutGroup
   id: ClothingHeadHatBrigmedic
@@ -118,3 +159,52 @@
   - ClothingMedalBronzesol
   - ClothingMedalGoldenStar
   - ClothingMedalIronStar
+
+# Surgeon
+- type: loadoutGroup
+  id: SurgeonHead
+  name: loadout-group-surgeon-head
+  loadouts:
+  - SurgeonHat
+  - BlueSurgeryCap
+  - GreenSurgeryCap
+  - PurpleSurgeryCap
+
+- type: loadoutGroup
+  id: SurgeonJumpsuit
+  name: loadout-group-surgeon-jumpsuit
+  loadouts:
+  - SurgeonJumpsuit
+  - SurgeonJumpskirt
+  - MedicalBlueScrubs
+  - MedicalGreenScrubs
+  - MedicalPurpleScrubs
+
+- type: loadoutGroup
+  id: SurgeonOuterClothing
+  name: loadout-group-surgeon-outerclothing
+  loadouts:
+  - SurgeonLabCoat
+
+# Virologist
+- type: loadoutGroup
+  id: BkmVirologistJumpsuit
+  name: loadout-group-virologist-jumpsuit
+  loadouts:
+  - VirologistJumpsuit
+  - VirologistJumpskirt
+
+- type: loadoutGroup
+  id: VirologistOuterClothing
+  name: loadout-group-virologist-outerclothing
+  loadouts:
+  - VirologistLabCoat
+
+- type: loadoutGroup
+  id: VirologistBackpack
+  name: loadout-group-virologist-backpack
+  loadouts:
+  - VirologistBackpack
+  - VirologistSatchel
+  - VirologistDuffel
+  - VirologistMessenger

@@ -4,6 +4,14 @@
   id: Welder
   description: "Melts anything as long as it's fueled, don't forget your eye protection!"
   components:
+  # backmen edit start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Backmen/Items/handling/weldingtool_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/welder_drop.ogg
+  # backmen edit end
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/welder_drop.ogg
@@ -95,6 +103,7 @@
     radius: 1.5
     color: orange
     netsync: false
+  - type: ItemTogglePointLight
   - type: Appearance
   - type: RequiresEyeProtection
   - type: PhysicalComposition
@@ -104,6 +113,13 @@
     price: 40
   - type: IgnitionSource
     temperature: 700
+  - type: Cautery # Shitmed
+    speed: 0.7
+  - type: SurgeryTool # Shitmed
+    startSound:
+      collection: Welder
+    endSound:
+      collection: WelderOff
 
 - type: entity
   name: industrial welding tool
@@ -170,6 +186,8 @@
       reagents:
       - ReagentId: WeldingFuel
         Quantity: 1
+  - type: RequiresEyeProtection
+    statusEffectTime: 5 # less harmful; sunglasses can block it
 
 - type: entity
   name: emergency welding tool
@@ -197,3 +215,21 @@
     enabled: false
     radius: 1.0
     color: orange
+
+- type: entity
+  parent: [ Welder, BaseXenoborgContraband ]
+  id: RefuelingWelder
+  name: refuling welding tool
+  description: "An slow welder that can refuel itself over time."
+  components:
+  - type: Tool
+    speedModifier: 0.5
+  - type: Welder
+    fuelConsumption: 2
+    fuelLitCost: 1
+  - type: SolutionRegeneration
+    solution: Welder
+    generated:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 0.1

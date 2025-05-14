@@ -12,57 +12,58 @@ uplink-box-heavy-rifle-name = коробка патронов (.62 винтов�
 uplink-box-heavy-rifle-desc = 30 патронов калибра .62 винтовочный, совместимо с BR-64.
 uplink-box-light-rifle-name = пакет патронов (7,62 винтовка)
 uplink-box-light-rifle-desc = 30 патронов калибра 7,62 винтовка, совместимо с SVD.
-
 uplink-psi-grenade-bundle-name = набор пси гранат
-uplink-psi-grenade-bundle-desc = Набор содержит вещь мешок с 20-тью пси гранатами которые мешают жертвам говорить.
-
+uplink-psi-grenade-bundle-desc = Набор содержит вещмешок с 20-тью пси гранатами которые мешают жертвам говорить.
 uplink-anti-psi-grenade-bundle-name = набор анти-психических гранат
-uplink-anti-psi-grenade-bundle-desc = Полный вещьмешок ани-психических гранат.
-
+uplink-anti-psi-grenade-bundle-desc = Полный вещмешок ани-психических гранат.
+uplink-ClothingHandsGlovesColorYellowUnsulated-name = изолированные перчатки
+uplink-ClothingHandsGlovesColorYellowUnsulated-desc = Позволяет взаимодействать с психическими зарядами в ноосфере
+uplink-BedsheetInvisibilityCloak-name = рваная простыня
+uplink-BedsheetInvisibilityCloak-desc = Позволяет искажать восприятие существ, чувствительных к ноосфере
+uplink-ClothingHandsDispelGloves-name = лоскутные перчатки
+uplink-ClothingHandsDispelGloves-desc = Позволяет нарушать связанность в ноосфере
+uplink-ClothingEyesTelegnosisSpectacles-name = странные очки
+uplink-ClothingEyesTelegnosisSpectacles-desc = Позволяет сменить точку зрения, блягодаря взаимодействию с ноосферой
+uplink-AntiPsychicKnife-name = Анти-психический нож
+uplink-AntiPsychicKnife-desc = Холодное оружие, позволяющее кратковременно нарушать связь с ноосферой связанных с ней существ. В противном случае будет отдача!!!
 store-category-bundles = Наборы
+store-category-psionic = Псионика
 
 # wizard
 
 uplink-book-spawn-name = Книга заклинания "Призыв существа"
 uplink-book-spawn-desc = Призывает несколько карпов, которые нападают на все, что находится к ним ближе всего.
-
 uplink-book-forcewall-name = Книга заклинания "Силовая стена"
 uplink-book-forcewall-desc = Вызывает стену размером 3х1, которая не позволяет пройти через нее никому, кроме вас.
-
 uplink-book-blink-name = Книга заклинания "телепортация"
 uplink-book-blink-desc = Позволяет вам телепортироваться в любое место на вашем экране, даже сквозь стены!
-
 uplink-book-smite-name = Книга заклинания "Кара"
 uplink-book-smite-desc = Позволяет вам мгновенно и очень яростно превратить кого-либо в месиво.
-
 uplink-book-knok-name = Тук-тук
 uplink-book-knok-desc = Открывает все двери в большой области на некоторое время, короткая перезарядка.
-
 uplink-book-fireball-name = Фаерболл
-uplink-book-fireball-desc = Throw a massive explosive at people, don't get caught in it yourself.
-
-uplink-book-heal-name = Healing book
-uplink-book-heal-desc = Target a being and heal them of all their wounds instantly! (WARNING - May be considered necromany if used on the dead)
+uplink-book-fireball-desc = Пускает огненный шар в цель, на которую вы навелись.
+uplink-book-heal-name = Книга Исцеления
+uplink-book-heal-desc = Нацелитесь на существо и мгновенно исцелите его от всех ран! (ВНИМАНИЕ - Использование на мертвецах может быть расценено как некромантия)
 
 # Wands
 
 # Armor
-uplink-armor-hardsuit-name = Hardsuit
-uplink-armor-hardsuit-desc = A somewhat damage resistant, but heavy hardsuit that allows eva and protection in fights. Also acts as wizard robes, allowing you to use spells.
-
+uplink-armor-hardsuit-name = скафандр мага
+uplink-armor-hardsuit-desc = Несколько устойчивый к повреждениям, но тяжелый бронекостюм, который обеспечивает защиту в бою. Также действует как мантия волшебника, позволяя использовать заклинания.
 # Utility
-uplink-utility-spellbelt-name = Spell Belt
-uplink-utility-spellbelt-desc = A belt to hold your spells in.
-
+uplink-utility-spellbelt-name = Пояс заклинаний
+uplink-utility-spellbelt-desc = Пояс чтобы содержать в нем свои заклинания.
 # Bundles
-uplink-bundles-wizardsurpluscrate30bs-name = 30 to 50 BS surplus crate
-uplink-bundles-wizardsurpluscrate30bs-desc = A crate filled with random wizard items, overall worth 50BS.
-
-uplink-bundles-wizardoutfitbag-name = Wizard outfit bag
-uplink-bundles-wizardoutfitbag-desc = A nice set few sets of magical wizard clothing to use spells.
+uplink-bundles-wizardsurpluscrate30bs-name = ящик разных магических штук за 50БС
+uplink-bundles-wizardsurpluscrate30bs-desc = Ящик заполненный вещами мага, ценой от 30 до 50 БС.
+uplink-bundles-wizardoutfitbag-name = рюкзак с одеждой мага
+uplink-bundles-wizardoutfitbag-desc = Хороший набор содержащий одежду мага, одежда мага дает возможность использовать магию.
 
 # Miscellanious
 
 # Pointless
-uplink-pointless-spellburger-name = Spell Burger
-uplink-pointless-spellburger-desc = A delicious burger made of magic and bluespace.
+uplink-pointless-spellburger-name = магический бургер
+uplink-pointless-spellburger-desc = Вкуснейший бургер созданный магией и блюспейсом.
+uplink-book-codespeak-language-name = словарь кодового языка
+uplink-book-codespeak-language-desc = Словарь, что научит вас кодовому языку. Можно прочитать всего 2 раза.

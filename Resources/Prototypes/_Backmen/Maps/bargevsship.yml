@@ -9,7 +9,7 @@
   - BaseStationSiliconLawCrewsimov
   - BaseStationAllEventsEligible
   - BaseStationNanotrasen
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Transform
 
@@ -28,12 +28,11 @@
           !type:NanotrasenNameGenerator
           prefixCreator: 'G'
       - type: StationBankAccount
-        balance: 20000
         increasePerSecond: 100
       - type: StationTeamMarker
         team: TeamA
         goal:
-        - AICoreShip
+        - PlayerStationAiSAI
         - ComputerShipyardTeamA
         requireJobs:
         - Captain
@@ -53,12 +52,12 @@
           !type:NanotrasenNameGenerator
           prefixCreator: 'G'
       - type: StationBankAccount
-        balance: 20000
+#        balance: 20000
         increasePerSecond: 100
       - type: StationTeamMarker
         team: TeamB
         goal:
-        - AICoreShip
+        - PlayerStationAiSAI
         - ComputerShipyardTeamB
         requireJobs:
         - Captain

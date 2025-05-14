@@ -148,6 +148,8 @@
   - type: Clothing
     sprite: Backmen/Clothing/Head/Helmets/men.rsi
   - type: Armor
+    coverage:
+    - Head
     modifiers:
       coefficients:
         Blunt: 0.80
@@ -179,7 +181,7 @@
       sprite: Backmen/Clothing/Head/Hats/seccap.rsi
     - type: Clothing
       sprite: Backmen/Clothing/Head/Hats/seccap.rsi
-      
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretVet
@@ -190,7 +192,7 @@
       sprite: Backmen/Clothing/Head/Hats/beretvet.rsi
     - type: Clothing
       sprite: Backmen/Clothing/Head/Hats/beretvet.rsi
-      
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatChapa
@@ -298,7 +300,7 @@
   - type: Unremoveable
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: ClothingHeadHatBeretHoS
   id: ClothingHeadHatBeretMobileTaskForce
   name: берет отдела специальных операций
@@ -315,71 +317,6 @@
   - type: Clothing
     sprite: Backmen/Clothing/Head/Hats/anon.rsi
 
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatAlex
-  name: Алекс
-  description: Кто пригласил всех этих идиотов?
-  components:
-   - type: Sprite
-     sprite: Backmen/Clothing/Head/Hats/alex.rsi
-   - type: Clothing
-     sprite: Backmen/Clothing/Head/Hats/alex.rsi
-   - type: IngestionBlocker
-   - type: IdentityBlocker
-
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatJake
-  name: Джейк
-  description: Алло?! Кто это? Дай мне поговорить с твоим начальником!
-  components:
-   - type: Sprite
-     sprite: Backmen/Clothing/Head/Hats/jake.rsi
-   - type: Clothing
-     sprite: Backmen/Clothing/Head/Hats/jake.rsi
-   - type: IngestionBlocker
-   - type: IdentityBlocker
-
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatRasmus
-  name: Расмус
-  description: Я не знаю тебя! Зачем ты здесь? Я тебя не приглашал.
-  components:
-   - type: Sprite
-     sprite: Backmen/Clothing/Head/Hats/rasmus.rsi
-   - type: Clothing
-     sprite: Backmen/Clothing/Head/Hats/rasmus.rsi
-   - type: IngestionBlocker
-   - type: IdentityBlocker
-
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatRichter
-  name: Рихтер
-  description: Ааа, вот ты где! А я всё думал, когда ты вернёшься?
-  components:
-   - type: Sprite
-     sprite: Backmen/Clothing/Head/Hats/richter.rsi
-   - type: Clothing
-     sprite: Backmen/Clothing/Head/Hats/richter.rsi
-   - type: IngestionBlocker
-   - type: IdentityBlocker
-
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatTony
-  name: Тони
-  description: Чувак, эта вечеринка отстой. Я ненавижу этих людей.
-  components:
-   - type: Sprite
-     sprite: Backmen/Clothing/Head/Hats/tony.rsi
-   - type: Clothing
-     sprite: Backmen/Clothing/Head/Hats/tony.rsi
-   - type: IngestionBlocker
-   - type: IdentityBlocker
-
 - type: entity # backmen
   parent: ClothingMaskBase
   id: ClothingMaskBal
@@ -390,7 +327,7 @@
     sprite: Backmen/Clothing/Head/Masks/balaclawa.rsi
   - type: Clothing
     sprite: Backmen/Clothing/Head/Masks/balaclawa.rsi
-    
+
 - type: entity # backmen
   parent: ClothingHeadBase
   id: ClothingHeadJeester
@@ -401,7 +338,7 @@
     sprite: Backmen/Clothing/Head/Hats/jeester.rsi
   - type: Clothing
     sprite: Backmen/Clothing/Head/Hats/jeester.rsi
-    
+
 - type: entity # backmen
   parent: ClothingHeadBase
   id: ClothingHeadPlet
@@ -412,3 +349,126 @@
     sprite: Backmen/Clothing/Head/Hats/hatfriz.rsi
   - type: Clothing
     sprite: Backmen/Clothing/Head/Hats/hatfriz.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretBlueShield
+  name: берет Синего Щита
+  description: Берет офицеров Синего Щита, внушает чувство лживой безопасности.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hats/blueberet.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hats/blueberet.rsi
+  - type: Armor
+    coverage: # backmen: armour coverage
+    - Head
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBlueShieldCap
+  name: фуражка Синего Щита
+  description: Фуражка офицера Синего Щита, имеет эмблему Blue Shield Security.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hats/bluecap.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hats/bluecap.rsi
+  - type: Armor
+    coverage: # backmen: armour coverage
+    - Head
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatUshankaBlueShield
+  name: ушанка Синего Щита
+  description: Довольно старая ушанка флота СССП, переделанная под нужды офицеров Синего Щита (Добавлена их эмблема).
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hats/blueushanka.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hats/blueushanka.rsi
+  - type: Armor
+    coverage: # backmen: armour coverage
+    - Head
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+
+- type: entity
+  parent: [ClothingHeadBase, BaseSecurityContraband]
+  id: ClothingHeadCapSecurityPilot
+  name: security pilot cap
+  description: The cap of the security service pilot... Contains signs of communism...
+  components:
+    - type: Sprite
+      sprite: Backmen/Clothing/Head/Hats/secpilotcap.rsi
+    - type: Clothing
+      sprite: Backmen/Clothing/Head/Hats/secpilotcap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadDarkSurgeonHat
+  name: dark surgeon hat
+  description: The surgeon's black headdress also has a small mirror.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hats/surgeon_hat.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hats/surgeon_hat.rsi
+
+- type: entity
+  parent: [ClothingHeadBase, BaseMinorContraband]
+  id: ClothingHeadInteQBeret
+  name: InteQ beret
+  description: Brown beret with a gold emblem on it.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hats/inteq_beret.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hats/inteq_beret.rsi
+
+- type: entity
+  parent: [ClothingHeadBase, BaseMinorContraband]
+  id: ClothingHeadInteQHonorableBeret
+  name: InteQ honorable beret
+  description: White beret with a emblem on it.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hats/inteq_honorable_beret.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hats/inteq_honorable_beret.rsi
+
+- type: entity
+  parent: [ClothingHeadBase, BaseMinorContraband]
+  id: ClothingHeadHatInteQMAA
+  name: InteQ master at arms hat
+  description: Master at arms hat, looks intimidating, I doubt that you will like to communicate with its owner...
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hats/inteq_peaked.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hats/inteq_peaked.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatInteQTacticalMaidHeadband
+  name: tactical maid headband
+  description: White headband - dont imagine yourself a Buster.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Head/Hats/inteq_headband.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Head/Hats/inteq_headband.rsi

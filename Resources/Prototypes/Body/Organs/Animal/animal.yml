@@ -1,9 +1,16 @@
-﻿- type: entity
+- type: entity
   id: BaseAnimalOrganUnGibbable
   parent: BaseItem
   abstract: true
   components:
   - type: Organ
+    # backmen edit
+    intCap: 13
+    integrity: 13
+    integrityThresholds:
+      Normal: 13
+      Damaged: 6
+      Destroyed: 0
   - type: Food
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
@@ -30,17 +37,26 @@
   components:
   - type: Gibbable
 
+
 - type: entity
   id: OrganAnimalLungs
   parent: BaseAnimalOrgan
   name: lungs
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
     - state: lung-l
     - state: lung-r
   - type: Organ
+    slotId: lungs
+    intCap: 17 # animal lungs are less tuff than human's one
+    # backmen edit
+    integrity: 17
+    integrityThresholds:
+      Normal: 17
+      Damaged: 8
+      Destroyed: 0
   - type: Lung
   - type: Metabolizer
     removeEmpty: true
@@ -60,16 +76,27 @@
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
+  - type: Item
+    size: Small
+    heldPrefix: lungs
 
 - type: entity
   id: OrganAnimalStomach
   parent: BaseAnimalOrgan
   name: stomach
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: stomach
   - type: Organ
+    slotId: stomach
+    # backmen edit
+    intCap: 28
+    integrity: 28
+    integrityThresholds:
+      Normal: 28
+      Damaged: 16
+      Destroyed: 0
   - type: SolutionContainerManager
     solutions:
       stomach:
@@ -86,43 +113,74 @@
     groups:
     - id: Food
     - id: Drink
+  - type: Item
+    size: Small
+    heldPrefix: stomach
 
 - type: entity
   id: OrganMouseStomach
   parent: OrganAnimalStomach
   name: stomach
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: SolutionContainerManager
     solutions:
       stomach:
         maxVol: 30
+  - type: Item
+    size: Small
+    heldPrefix: stomach
 
 - type: entity
   id: OrganAnimalLiver
   parent: BaseAnimalOrgan
   name: liver
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: liver
   - type: Organ
+    slotId: liver
+    # backmen edit
+    intCap: 17
+    integrity: 17
+    integrityThresholds:
+      Normal: 17
+      Damaged: 8
+      Destroyed: 0
+  - type: Liver
   - type: Metabolizer
     maxReagents: 1
     metabolizerTypes: [ Animal ]
     groups:
     - id: Alcohol
       rateModifier: 0.1
+  - type: Tag # goob edit
+    tags:
+    - Meat
+    - Organ
+    - Liver
+  - type: Item
+    size: Small
+    heldPrefix: liver
 
 - type: entity
   id: OrganAnimalHeart
   parent: BaseAnimalOrgan
   name: heart
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: heart-on
   - type: Organ
+    slotId: heart # Shitmed
+    # backmen edit
+    intCap: 14
+    integrity: 14
+    integrityThresholds:
+      Normal: 14
+      Damaged: 6
+      Destroyed: 0
   - type: Metabolizer
     maxReagents: 2
     metabolizerTypes: [ Animal ]
@@ -130,19 +188,116 @@
     - id: Medicine
     - id: Poison
     - id: Narcotic
+  - type: Heart # Shitmed
+  - type: Tag # goob edit
+    tags:
+    - Meat
+    - Organ
+    - Heart
+  - type: Item
+    size: Small
+    heldPrefix: heart
 
 - type: entity
   id: OrganAnimalKidneys
   parent: BaseAnimalOrgan
   name: kidneys
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
     - state: kidney-l
     - state: kidney-r
   - type: Organ
+    # backmen edit
+    intCap: 17
+    integrity: 17
+    integrityThresholds:
+      Normal: 17
+      Damaged: 8
+      Destroyed: 0
+    slotId: kidneys # Shitmed
   - type: Metabolizer
     maxReagents: 5
     metabolizerTypes: [ Animal ]
     removeEmpty: true
+  - type: Item
+    size: Small
+    heldPrefix: kidneys
+
+- type: entity
+  id: OrganAnimalBrain
+  parent: BaseAnimalOrganUnGibbable
+  name: animal brain
+  description: "Not so intelligence, not so honk."
+  components:
+  - type: Sprite
+    state: brain
+  - type: Organ
+    # backmen edit
+    slotId: brain # backmen: surgery
+    intCap: 28
+    integrity: 28
+    integrityThresholds:
+      Normal: 28
+      Damaged: 16
+      Destroyed: 0
+  - type: NerveSystem # backmen: wounding
+  - type: ConsciousnessRequired
+    identifier: "nerveSystem"
+    causesDeath: true
+  - type: Input
+    context: "ghost"
+  - type: Brain
+  - type: InputMover
+  - type: Examiner
+  - type: BlockMovement
+  - type: Tag
+    tags:
+      - Meat
+  - type: SolutionContainerManager
+    solutions:
+      organ:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: GreyMatter
+          Quantity: 5
+  - type: FlavorProfile
+    flavors:
+      - people
+  - type: FoodSequenceElement
+    entries:
+      Burger: Brain
+      Taco: Brain
+  - type: Item
+    size: Small
+    heldPrefix: brain
+
+- type: entity
+  id: OrganAnimalEyes
+  parent: BaseAnimalOrgan
+  name: animal eyes
+  description: "I see you!"
+  components:
+  # start-backmen: surgery
+  - type: Organ
+    slotId: eyes
+    intCap: 12
+    integrity: 12
+    integrityThresholds:
+      Normal: 12
+      Damaged: 6
+      Destroyed: 0
+  - type: Eyes
+  # end-backmen: surgery
+  - type: Sprite
+    layers:
+      - state: eyeball-l
+      - state: eyeball-r
+  - type: Item
+    size: Small
+    heldPrefix: eyeballs

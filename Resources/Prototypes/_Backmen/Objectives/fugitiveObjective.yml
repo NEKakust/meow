@@ -12,11 +12,10 @@
         state: shuttle
     - type: RoleRequirement
       roles:
-        components:
-          - FugitiveRole
+      - FugitiveRole
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseFugitiveObjective
   id: EscapeShuttleObjectiveFugitive
   name: Сбегите в Центком живым и свободным.

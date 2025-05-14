@@ -5,6 +5,15 @@
   id: MobArachneClassicBase
   abstract: true
   components:
+  - type: LanguageSpeaker
+    currentLanguage: TauCetiBasic
+  - type: LanguageKnowledge #backmen: languages
+    speaks:
+    - TauCetiBasic
+    - Spider
+    understands:
+    - TauCetiBasic
+    - Spider
   - type: Sprite
     netsync: false
     noRot: true
@@ -16,7 +25,11 @@
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
         color: "#e8b59b"
         sprite: Mobs/Species/Human/parts.rsi
-        state: torso_m
+        state: chest_m
+      - map: [ "enum.HumanoidVisualLayers.Groin" ]
+        color: "#e8b59b"
+        sprite: Mobs/Species/Human/parts.rsi
+        state: groin_m
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
         sprite: Backmen/Mobs/Species/ArachneClassic/arachneClassic.rsi
         state: spider_body_front
@@ -116,26 +129,27 @@
     tags:
     - CanPilot
     - DoorBumpOpener
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
   - type: Bloodstream
     bloodReagent: DemonsBlood
   - type: BloodSucker
     webRequired: true
   - type: Arachne
-  - type: DamageVisuals
-    thresholds: [ 10, 20, 30, 50, 70, 100 ]
-    targetLayers:
-      - "enum.HumanoidVisualLayers.Chest"
-      - "enum.HumanoidVisualLayers.Head"
-      - "enum.HumanoidVisualLayers.LArm"
-      - "enum.HumanoidVisualLayers.RArm"
+  - type: Cocooner
+  #- type: DamageVisuals
+  #  thresholds: [ 10, 20, 30, 50, 70, 100 ]
+  #  targetLayers:
+  #    - "enum.HumanoidVisualLayers.Chest"
+  #    - "enum.HumanoidVisualLayers.Head"
+  #    - "enum.HumanoidVisualLayers.LArm"
+  #    - "enum.HumanoidVisualLayers.RArm"
   - type: MovedByPressure
     pressureResistance: 4
   - type: Barotrauma
     damage:
       types:
-        Blunt: 0.03 #per second, scales with pressure and other constants. Reduced Damage. This allows medicine to heal faster than damage.
+        Blunt: 0.07 #per second, scales with pressure and other constants. Reduced Damage. This allows medicine to heal faster than damage.
   - type: MovementAlwaysTouching
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.0
@@ -170,7 +184,7 @@
   name: ArachneClassic Dummy
   parent: MobHumanDummy
   id: MobArachneClassicDummy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: A dummy ArachneClassic meant to be used in character setup.
   components:
   - type: Sprite
@@ -184,7 +198,11 @@
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
       color: "#e8b59b"
       sprite: Mobs/Species/Human/parts.rsi
-      state: torso_m
+      state: chest_m
+    - map: [ "enum.HumanoidVisualLayers.Groin" ]
+      color: "#e8b59b"
+      sprite: Mobs/Species/Human/parts.rsi
+      state: groin_m
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       sprite: Backmen/Mobs/Species/ArachneClassic/arachneClassic.rsi
       state: spider_body_front
@@ -256,15 +274,25 @@
       slotTexture: uniform
       slotFlags: INNERCLOTHING
       stripTime: 6
-      uiWindowPos: 0,2
+      uiWindowPos: 1,1
       strippingWindowPos: 0,2
       displayName: Jumpsuit
+    - name: outerClothing
+      whitelist:
+        tags:
+          - BroneArachne
+      slotTexture: suit
+      slotFlags: OUTERCLOTHING
+      stripTime: 6
+      uiWindowPos: 0,1
+      strippingWindowPos: 1,2
+      displayName: Suit
   #backmen:underclothing-start
     - name: undershirt
       slotTexture: undershirt
       slotFlags: UNDERSHIRT
       stripTime: 8
-      uiWindowPos: 4,1
+      uiWindowPos: 3,1
       strippingWindowPos: 3,1
       displayName: Undershirt
 #    - name: underpants
@@ -285,41 +313,49 @@
     - name: gloves
       slotTexture: gloves
       slotFlags: GLOVES
-      uiWindowPos: 2,2
+      uiWindowPos: 2,0
       strippingWindowPos: 2,2
       displayName: Gloves
     - name: neck
       slotTexture: neck
       slotFlags: NECK
-      uiWindowPos: 0,1
+      uiWindowPos: 2,1
       strippingWindowPos: 0,1
       displayName: Neck
     - name: mask
       slotTexture: mask
       slotFlags: MASK
-      uiWindowPos: 1,1
+      uiWindowPos: 3,2
       strippingWindowPos: 1,1
       displayName: Mask
     - name: eyes
       slotTexture: glasses
       slotFlags: EYES
       stripTime: 3
-      uiWindowPos: 0,0
+      uiWindowPos: 0,2
       strippingWindowPos: 0,0
       displayName: Eyes
     - name: ears
       slotTexture: ears
       slotFlags: EARS
       stripTime: 3
-      uiWindowPos: 2,0
+      uiWindowPos: 1,2
       strippingWindowPos: 2,0
       displayName: Ears
     - name: head
       slotTexture: head
       slotFlags: HEAD
-      uiWindowPos: 1,0
+      uiWindowPos: 2,2
       strippingWindowPos: 1,0
       displayName: Head
+    - name: suitstorage
+      slotTexture: suit_storage
+      slotFlags:   SUITSTORAGE
+      stripTime: 3
+      uiWindowPos: 1,0
+      strippingWindowPos: 2,5
+      dependsOn: outerClothing
+      displayName: Suit Storage
     - name: pocket1
       slotTexture: pocket
       slotFlags: POCKET
@@ -340,14 +376,6 @@
       dependsOn: jumpsuit
       displayName: Pocket 2
       stripHidden: true
-    - name: suitstorage
-      slotTexture: suit_storage
-      slotFlags:   SUITSTORAGE
-      stripTime: 3
-      uiWindowPos: 2,0
-      strippingWindowPos: 2,5
-      dependsOn: outerClothing
-      displayName: Suit Storage
     - name: id
       slotTexture: id
       slotFlags: IDCARD

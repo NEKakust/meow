@@ -3,3 +3,6 @@
   name: Urist McFluff
   parent: BaseMobMoth
   id: MobMoth
+  components:
+    - type: PotentialPsionic
+    - type: FootPrints

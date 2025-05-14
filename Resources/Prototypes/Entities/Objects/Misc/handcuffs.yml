@@ -2,8 +2,16 @@
   name: handcuffs
   description: Used to detain criminals and other assholes.
   id: Handcuffs
-  parent: BaseItem
+  parent: [BaseItem, BaseSecurityCommandContraband]
   components:
+  # backmen edit start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Backmen/Items/other/Handcuffs/pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Backmen/Items/other/Handcuffs/drop.ogg
+  # backmen edit end
   - type: Item
     size: Small
     storedRotation: 90
@@ -26,6 +34,7 @@
   - type: GuideHelp
     guides:
     - Security
+    - Antagonists
   - type: UseDelay
     delay: 3
 

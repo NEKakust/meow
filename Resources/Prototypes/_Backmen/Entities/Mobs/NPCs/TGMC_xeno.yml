@@ -46,13 +46,6 @@
   - type: Polymorphable
   - type: Buckle
   - type: Insulated
-  - type: BlobSpeak
-    name: speak-vv-xeno
-    channel: Hivemind
-  - type: ReplacementAccent
-    accent: xeno
-  - type: TTS
-    voice: Xenia
   - type: Hands
     showInHands: true
   - type: MobState
@@ -108,6 +101,7 @@
     Blunt: 0.7
     Slash: 0.5
     Piercing: 0.7
+    ArmorPiercing: 0.9
     Heat: 1.8
     Shock: 1.8
     Poison: 0.0
@@ -122,6 +116,7 @@
     Blunt: 0.5
     Slash: 0.3
     Piercing: 0.4
+    ArmorPiercing: 0.7
     Heat: 1.8
     Shock: 1.8
     Poison: 0.0
@@ -155,6 +150,9 @@
   description: Молодой ксеноморф.
   parent: KsenosXenoBase
   components:
+  - type: ActionGrant
+    actions:
+    - ActionViewLaws
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -216,7 +214,6 @@
     raffle:
       settings: default
   - type: Body
-    prototype: Xeno5hand
   - type: InnateTool
     tools:
       - id: WeaponXenoQueenStun
@@ -224,6 +221,18 @@
       - id: XenoRCD
       - id: WeaponXenoHealingSpit
       - id: PinpointerXeno
+  - type: XenoAcidSpiller
+  - type: SolutionContainerManager
+    solutions:
+      udder:
+        maxVol: 250
+        reagents:
+        - ReagentId: SlermQueenPlus
+          Quantity: 30
+  - type: Udder
+    reagentId: SlermQueenPlus
+    quantityPerUpdate: 25
+    growthDelay: 30
   - type: Destructible
     thresholds:
     - trigger:
@@ -288,7 +297,7 @@
   id: XenoLayEgg
   name: Отложить яйцо ксеноморфа
   description: Пригодится в любом гнезде.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     icon: { sprite: Backmen/test/base/rsi/Textures/Misc/Egg.rsi, state: icon }
@@ -311,7 +320,7 @@
     raffle:
       settings: default
   - type: Body
-    prototype: Xeno4hand
+    prototype: XenoBody
   - type: InnateTool
     tools:
       - id: WeaponXenoQueenClaw
@@ -403,7 +412,7 @@
   - type: NameIdentifier
     group: Xeno
   - type: Body
-    prototype: Xeno2hand
+    prototype: XenoBody
   - type: Fixtures
     fixtures:
       fix1:
@@ -439,7 +448,7 @@
     raffle:
       settings: default
   - type: Body
-    prototype: Xeno4hand
+    prototype: XenoBody
   - type: InnateTool
     tools:
       - id: WeaponXenoClaw
@@ -500,7 +509,7 @@
     raffle:
       settings: default
   - type: Body
-    prototype: Xeno4hand
+    prototype: XenoBody
   - type: HTN
     rootTask:
       task: SimpleHumanoidHostileCompound
@@ -560,7 +569,6 @@
     raffle:
       settings: default
   - type: Body
-    prototype: Xeno5hand
   - type: HTN
     rootTask:
       task: SimpleHumanoidHostileCompound
@@ -645,7 +653,7 @@
   - type: NameIdentifier
     group: Xeno
   - type: Body
-    prototype: Xeno3hand
+    prototype: XenoBody
   - type: InnateTool
     tools:
       - id: WeaponXenoClaw
@@ -709,7 +717,7 @@
   - type: NameIdentifier
     group: Xeno
   - type: Body
-    prototype: Xeno2hand
+    prototype: XenoBody
   - type: StealthOnMove
     passiveVisibilityRate: -2
     movementVisibilityRate: 0.1
@@ -723,7 +731,7 @@
   id: ActionHunterInvisibility
   name: action-name-psionic-invisibility
   description: action-description-psionic-invisibility
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: InstantAction
       useDelay: 30
@@ -746,7 +754,7 @@
     raffle:
       settings: default
   - type: Body
-    prototype: Xeno3hand
+    prototype: XenoBody
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: XenolianStrong
@@ -822,7 +830,7 @@
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: running
   - type: Body
-    prototype: Xeno4hand
+    prototype: XenoBody
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: XenolianStrong
@@ -870,110 +878,27 @@
 # BODY PRESETS #
 
 - type: body
-  id: Xeno1hand
+  id: XenoBody
   name: "xeno"
   root: torso
   slots:
     torso:
-      part: TorsoReptilian
-      connections:
-      - hand 1
-    hand 1:
-      part: XenoArm
-
-- type: body
-  id: Xeno2hand
-  name: "xeno"
-  root: torso
-  slots:
-    torso:
-      part: TorsoReptilian
-      connections:
-      - hand 1
-      - hand 2
-    hand 1:
-      part: XenoArm
-    hand 2:
-      part: XenoArm
-
-- type: body
-  id: Xeno3hand
-  name: "xeno"
-  root: torso
-  slots:
-    torso:
-      part: TorsoReptilian
-      connections:
-      - hand 1
-      - hand 2
-      - hand 3
-    hand 1:
-      part: XenoArm
-    hand 2:
-      part: XenoArm
-    hand 3:
-      part: XenoArm
-
-- type: body
-  id: Xeno4hand
-  name: "xeno"
-  root: torso
-  slots:
-    torso:
-      part: TorsoReptilian
-      connections:
-      - hand 1
-      - hand 2
-      - hand 3
-      - hand 4
-    hand 1:
-      part: XenoArm
-    hand 2:
-      part: XenoArm
-    hand 3:
-      part: XenoArm
-    hand 4:
-      part: XenoArm
-
-- type: body
-  id: Xeno5hand
-  name: "xeno"
-  root: torso
-  slots:
-    torso:
-      part: TorsoReptilian
-      connections:
-      - hand 1
-      - hand 2
-      - hand 3
-      - hand 4
-      - hand 5
-    hand 1:
-      part: XenoArm
-    hand 2:
-      part: XenoArm
-    hand 3:
-      part: XenoArm
-    hand 4:
-      part: XenoArm
-    hand 5:
-      part: XenoArm
+      part: ChestReptilian
 
 - type: entity
   id: XenoArm
   name: "кость ксено"
-  parent: PartSilicon
+  parent: [BaseLeftHand, PartSilicon]
   components:
+  - type: BodyPart
+    partType: Hand
+    symmetry: None
   - type: Sprite
-    netsync: false
     sprite: Mobs/Silicon/drone.rsi
     state: "l_hand"
   - type: Icon
     sprite: Mobs/Silicon/drone.rsi
     state: "l_hand"
-  - type: BodyPart
-    partType: Hand
-    symmetry: Left
 
 # WEAPONS #
 
@@ -1136,19 +1061,19 @@
 - type: entity
   id: XenoSpitBullet4
   parent: XenoSpitBullet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: CartridgeAmmo
     deleteOnSpawn: true
     proto: XenoSpitBullet
-    count: 4
-    spread: 12
+    #count: 4
+    #spread: 12
 
 - type: entity
   id: XenoSpitBullet
   name: плевок ксено
   parent: BulletDisablerPractice
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
@@ -1235,7 +1160,7 @@
   id: GasXenoSpitBullet
   name: газовый плевок ксено
   parent: BaseBulletTrigger
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
@@ -1262,7 +1187,7 @@
   id: XenoGas
   name: smoke
   parent: Smoke
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: SolutionContainerManager
     solutions:
@@ -1279,7 +1204,7 @@
   id: FireXenoSpitBullet
   name: плевок ксено
   parent: FoodInjectableBase
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
@@ -1417,7 +1342,7 @@
   id: XenoSpitHealingBullet
   name: феромоны ксено
   parent: BulletDisablerPractice
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
@@ -1464,6 +1389,7 @@
         Burn: -20
         Airloss: -30
     bloodlossModifier: -20
+    healBleedsThreshold: 30
     healingBeginSound:
       path: "/Audio/Items/Medical/ointment_begin.ogg"
     healingEndSound:
@@ -1474,7 +1400,7 @@
 
 - type: stack
   id: XenoHealingStack
-  name: слизь ксено
+  name: stack-xeno-healing
   icon: { sprite: Objects/Specific/Xenoarchaeology/xeno_artifacts.rsi, state: ano09 }
   spawn: XenoHealing
   maxCount: 9999
@@ -1485,7 +1411,7 @@
   id: XenoWeedsAction
   name: Корни
   description: Взращивает липкие корни
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     icon: Backmen/test/base/rsi/Textures/Structures/xeno/weeds.rsi/full.png
@@ -1730,7 +1656,6 @@
       - state: b_checker_piece
   - type: LimitedCharges
     maxCharges: 50
-    charges: 50
   - type: AutoRecharge
     rechargeDuration: 5
   - type: RCD
@@ -1771,6 +1696,14 @@
   description: На вид мерзкое.
   save: false
   components:
+  - type: LanguageSpeaker
+    currentLanguage: Xeno
+  - type: LanguageKnowledge #backmen: languages
+    speaks:
+    - Xeno
+    understands:
+    - Xeno
+    - TauCetiBasic
   - type: ContainerContainer
   - type: ActionsContainer
   - type: Actions
@@ -1808,7 +1741,7 @@
   #  softness: 5
   #  color: "#FF33FF"
   #  autoRot: true
-  - type: GhostTakeoverAvailable
+  #- type: GhostTakeoverAvailable
   - type: GhostRole
     allowMovement: false
     allowSpeech: false
@@ -1818,8 +1751,8 @@
     rules: "Вырасти в полноценного защитника улья."
     raffle:
       settings: default
-  - type: Polymorphable
-    innatePolymorphs: [ EggToLarva ]
+  - type: GhostRoleMobSpawner
+    prototype: KsenosXenoLarva
 
 
 # LOCATOR #
@@ -1856,7 +1789,7 @@
 
 - type: entity
   id: ActionToLarva
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     event: !type:PolymorphActionEvent
@@ -1871,7 +1804,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: LarvaToDrone
@@ -1882,7 +1815,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: LarvaToRunner
@@ -1893,7 +1826,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: DroneToSpitter
@@ -1904,7 +1837,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: RunnerToWarrior
@@ -1915,7 +1848,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: RunnerToHunter
@@ -1926,7 +1859,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 # ABILITIES #
 
@@ -1952,7 +1885,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: false
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: Larva
@@ -1963,7 +1896,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: Drone
@@ -1974,7 +1907,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: Runner
@@ -1985,7 +1918,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: Spitter
@@ -1996,7 +1929,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: Warrior
@@ -2007,7 +1940,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: Praetorian
@@ -2018,7 +1951,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: Ravager
@@ -2029,7 +1962,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30
 
 - type: polymorph
   id: Queen
@@ -2040,4 +1973,4 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    delay: 30
+    cooldown: 30

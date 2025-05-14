@@ -20,11 +20,13 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Diona
-  - type: DamageVisuals
-    damageOverlayGroups:
-      Brute:
-        sprite: Mobs/Effects/brute_damage.rsi
-        color: "#cd7314"
+  #- type: DamageVisuals
+  #  damageOverlayGroups:
+  #    Brute:
+  #      sprite: Mobs/Effects/brute_damage.rsi
+  #      color: "#cd7314"
+  #    Burn:
+  #      sprite: Mobs/Effects/burn_damage.rsi
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -84,11 +86,14 @@
           - MobLayer
   - type: Speech
     speechVerb: Plant
+    allowedEmotes: ['Chirp']
   - type: Vocal
     sounds:
       Male: UnisexDiona
       Female: UnisexDiona
       Unsexed: UnisexDiona
+  - type: TypingIndicator
+    proto: diona
   - type: BodyEmotes
     soundsId: DionaBodyEmotes
   - type: Pacified # Corvax-DionaPacifist
@@ -108,11 +113,20 @@
           32:
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
+  - type: LanguageSpeaker
+    currentLanguage: TauCetiBasic
+  - type: LanguageKnowledge #backmen: languages
+    speaks:
+    - TauCetiBasic
+    - RootSpeak
+    understands:
+    - TauCetiBasic
+    - RootSpeak
 
 - type: entity
   parent: BaseSpeciesDummy
   id: MobDionaDummy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: HumanoidAppearance
     species: Diona

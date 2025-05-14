@@ -19,12 +19,14 @@
           Blunt: 0.7
           Slash: 0.7
           Piercing: 0.7
+          ArmorPiercing: 0.9
           Heat: 0.7
       activeBlockModifier:
         coefficients:
           Blunt: 0.5
           Slash: 0.5
           Piercing: 0.5
+          ArmorPiercing: 0.8
           Heat: 0.5
         flatReductions:
           Blunt: 5
@@ -47,3 +49,54 @@
                 SheetPlasteel1:
                   min: 4
                   max: 4
+
+# Changeling
+- type: entity
+  parent: BaseShield
+  id: ChangelingShield
+  name: oraganic shield
+  description: A large, fleshy shield.
+  suffix: Unremoveable
+  components:
+  - type: Unremoveable
+  - type: Sprite
+    sprite: Backmen/Changeling/shields.rsi
+    state: ling-icon
+  - type: Item
+    sprite: Backmen/Changeling/shields.rsi
+    heldPrefix: ling
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+# InteQ
+- type: entity
+  parent: [RiotLaserShield, BaseMinorContraband]
+  id: InteQLaserShield
+  name: InteQ laser shield
+  description: InteQ shield built for withstanding lasers, but not much else.
+  components:
+    - type: Sprite
+      sprite: Backmen/Objects/Weapons/Melee/inteq_shield.rsi
+      state: inteq_icon
+    - type: Item
+      sprite: Backmen/Objects/Weapons/Melee/inteq_shield.rsi
+      heldPrefix: inteq
+    - type: Reflect
+      reflectProb: 0.95
+      reflects:
+        - Energy

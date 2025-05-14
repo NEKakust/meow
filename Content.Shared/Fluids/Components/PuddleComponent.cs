@@ -19,7 +19,18 @@ namespace Content.Shared.Fluids.Components
 
         [DataField("solution")] public string SolutionName = "puddle";
 
-        [DataField("solutionRef")]
+        /// <summary>
+        /// Default minimum speed someone must be moving to slip for all reagents.
+        /// </summary>
+        [DataField]
+        public float DefaultSlippery = 5.5f;
+
+        [ViewVariables]
         public Entity<SolutionComponent>? Solution;
+
+        // start-backmen: footsteps
+        [DataField]
+        public bool ViscosityAffectsMovement = true;
+        // end-backmen: footsteps
     }
 }

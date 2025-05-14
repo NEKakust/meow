@@ -32,7 +32,7 @@
 
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: MarkerBase
   id: ReinforcementSpawner
 
@@ -64,7 +64,7 @@
 
 - type: reinforcement
   id: BKCCSecOfficer
-  name: Охраник
+  name: Охранник
   job: BKCCSecOfficer
   max: 2
 

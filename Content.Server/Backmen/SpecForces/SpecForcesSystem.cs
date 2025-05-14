@@ -1,8 +1,8 @@
 using System.Linq;
+using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Shared.GameTicking;
 using Robust.Server.GameObjects;
-using Robust.Server.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Content.Server.Spawners.Components;
@@ -14,14 +14,17 @@ using Content.Shared.Storage;
 using Robust.Shared.Utility;
 using System.Threading;
 using Content.Server.Actions;
+using Content.Server.Backmen.Blob;
 using Content.Server.Backmen.Blob.Components;
-using Content.Server.Backmen.Blob.Rule;
 using Content.Server.Backmen.GameTicking.Rules.Components;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.RandomMetadata;
 using Content.Shared.Backmen.CCVar;
 using Content.Shared.Ghost.Roles.Components;
 using Robust.Shared.Configuration;
+using Robust.Shared.EntitySerialization;
+using Robust.Shared.EntitySerialization.Systems;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Serialization.Manager;
 
 namespace Content.Server.Backmen.SpecForces;
@@ -46,6 +49,10 @@ public sealed class SpecForcesSystem : EntitySystem
     private readonly ReaderWriterLockSlim _callLock = new();
     private TimeSpan DelayUsage => TimeSpan.FromMinutes(_configurationManager.GetCVar(CCVars.SpecForceDelay));
 
+    public MapId? ShipyardMap { get; private set; }
+    private float _shuttleIndex;
+    private const float ShuttleSpawnBuffer = 1f;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -56,6 +63,30 @@ public sealed class SpecForcesSystem : EntitySystem
         SubscribeLocalEvent<SpecForceComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<SpecForceComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<BlobChangeLevelEvent>(OnBlobChange);
+    }
+
+    private void SetupShipyard()
+    {
+        if (ShipyardMap != null && _mapManager.MapExists(ShipyardMap.Value))
+            return;
+
+        ShipyardMap = _mapManager.CreateMap();
+
+        _mapManager.SetMapPaused(ShipyardMap.Value, false);
+        _shuttleIndex = 0;
+    }
+    private void CleanupShipyard()
+    {
+        if (ShipyardMap == null || !_mapManager.MapExists(ShipyardMap.Value))
+        {
+            ShipyardMap = null;
+            _shuttleIndex = 0;
+            return;
+        }
+
+        _mapManager.DeleteMap(ShipyardMap.Value);
+        ShipyardMap = null;
+        _shuttleIndex = 0;
     }
 
     [ValidatePrototypeId<SpecForceTeamPrototype>]
@@ -127,6 +158,12 @@ public sealed class SpecForcesSystem : EntitySystem
         }
         try
         {
+            if (!_prototypes.TryIndex(protoId, out var prototype))
+            {
+                Log.Error("Wrong SpecForceTeamPrototype ID!");
+                return false;
+            }
+
             if (_gameTicker.RunLevel != GameRunLevel.InRound)
             {
                 Log.Warning("Can't call SpecForces while not in the round.");
@@ -145,12 +182,6 @@ public sealed class SpecForcesSystem : EntitySystem
 
             LastUsedTime = currentTime;
 
-            if (!_prototypes.TryIndex(protoId, out var prototype))
-            {
-                Log.Error("Wrong SpecForceTeamPrototype ID!");
-                return false;
-            }
-
             var shuttle = SpawnShuttle(prototype.ShuttlePath);
             if (shuttle == null)
             {
@@ -159,12 +190,12 @@ public sealed class SpecForcesSystem : EntitySystem
             }
 
             SpawnGhostRole(prototype, shuttle.Value, forceCountExtra);
-
             DispatchAnnouncement(prototype);
 
             Log.Info($"Successfully called {prototype.ID} SpecForceTeam. Source: {source}");
 
             CalledEvents.Add(new SpecForcesHistory { Event = prototype.SpecForceName, RoundTime = currentTime, WhoCalled = source });
+
             return true;
         }
         finally
@@ -287,17 +318,18 @@ public sealed class SpecForcesSystem : EntitySystem
     /// <returns>Grid's entity of the shuttle.</returns>
     private EntityUid? SpawnShuttle(string shuttlePath)
     {
-        var shuttleMap = _mapManager.CreateMap();
-        var options = new MapLoadOptions {LoadMap = true};
+        SetupShipyard();
 
-        if (!_map.TryLoad(shuttleMap, shuttlePath, out var grids, options))
+
+
+        if (!_map.TryLoadGrid(ShipyardMap!.Value, new ResPath(shuttlePath), out var grid, offset: new Vector2(500f + _shuttleIndex, 1f)))
         {
             return null;
         }
 
-        var mapGrid = grids.FirstOrNull();
+        _shuttleIndex += grid.Value.Comp.LocalAABB.Width + 1;
 
-        return mapGrid ?? null;
+        return grid;
     }
 
     private void DispatchAnnouncement(SpecForceTeamPrototype proto)
@@ -346,5 +378,7 @@ public sealed class SpecForcesSystem : EntitySystem
         {
             _callLock.ExitWriteLock();
         }
+
+        CleanupShipyard();
     }
 }

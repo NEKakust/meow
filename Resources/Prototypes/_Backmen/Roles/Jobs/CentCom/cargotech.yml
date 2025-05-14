@@ -11,6 +11,7 @@
   weight: 1
   requireAdminNotify: true
   joinNotifyCrew: true
+  discordRequired: true
   requirements:
     - !type:DepartmentTimeRequirement
       department: Cargo
@@ -46,7 +47,7 @@
   wageDepartment: CentCom
   wage: 50
 
-- type: statusIcon
+- type: jobIcon
   parent: JobIcon
   id: JobIconCCCargoTech
   icon:
@@ -60,9 +61,13 @@
   name: Centcom Cargo PDA
   description: Light green sign of walking bureaucracy.
   components:
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-centcomcargo
     - type: Pda
       id: IDCardCentComCargoBackmen
-      state: pda-centcomcargo
       penSlot:
         startingItem: PenCentcom
         whitelist:
@@ -81,7 +86,11 @@
   components:
     - type: Sprite
       layers:
-        - state: centcom
+        - state: card_centcom # Backmen
+        - state: sub_department # Backmen
+          color: "#b18644"
+        - state: frame_default # Backmen
+          color: "#b18644"
         - state: idcargotechnician
     - type: PresetIdCard
       job: BKCCCargo

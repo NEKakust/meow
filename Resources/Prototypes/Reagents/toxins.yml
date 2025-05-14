@@ -56,18 +56,19 @@
   metabolisms:
     Poison:
       effects:
+      - !type:Emote
+        emote: Yawn
+        showInChat: true
+        probability: 0.1
       - !type:MovespeedModifier
         walkSpeedModifier: 0.65
         sprintSpeedModifier: 0.65
       - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          reagent: ChloralHydrate
-          min: 10
-        key: ForcedSleep
-        component: ForcedSleeping
-        refresh: false
+        key: Drowsiness
+        component: Drowsiness
+        time: 4
         type: Add
+        refresh: false
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -170,7 +171,6 @@
   flavor: sour
   color: "#48b3b8"
   physicalDesc: reagent-physical-desc-ferrous
-  slippery: false
   metabolisms:
     Drink:
       effects:
@@ -243,6 +243,15 @@
       - !type:Emote
         emote: Scream
         probability: 0.2
+# start-backmen: Disease
+      - !type:ChemCauseDisease
+        conditions:
+        - !type:ReagentThreshold
+          reagent: FluorosulfuricAcid
+          min: 1
+        causeChance: 0.3
+        disease: XenoVirus
+# end-backmen: Disease
   metabolisms:
     Poison:
       metabolismRate: 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
@@ -453,20 +462,20 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:ReagentThreshold
-          min: 1
         - !type:OrganType
           type: Animal # Applying damage to the mobs with lower metabolism capabilities
+        - !type:OrganType # Ataraxia
+          type: AnthroAnimal
         damage:
           types:
             Poison: 0.4
       - !type:ChemVomit
         probability: 0.04 #Scaled for time, not metabolismrate.
         conditions:
-          - !type:ReagentThreshold
-            min: 3
           - !type:OrganType
             type: Animal
+          - !type:OrganType # Ataraxia
+            type: AnthroAnimal
 
 - type: reagent
   id: Amatoxin
@@ -533,6 +542,12 @@
           - !type:OrganType
             type: Animal
             shouldHave: false
+          - !type:OrganType # Ataraxia
+            type: AnthroAnimal
+            shouldHave: true
+          - !type:OrganType
+            type: Vox
+            shouldHave: false
         type: Local
         visualType: MediumCaution
         messages: [ "generic-reagent-effect-sick" ]
@@ -543,21 +558,41 @@
           - !type:OrganType
             type: Animal
             shouldHave: false
+          - !type:OrganType
+            type: Vox
+            shouldHave: false
       - !type:HealthChange
         conditions:
         - !type:OrganType
           type: Animal
           shouldHave: false
+        - !type:OrganType # Ataraxia
+          type: AnthroAnimal
+          shouldHave: true
+        - !type:OrganType
+          type: Vox
+          shouldHave: false
         damage:
           types:
-            Poison: 1
+            Blunt: -0.5
+            Piercing: -0.5
+            Heat: -0.2
       - !type:AdjustReagent
         conditions:
         - !type:OrganType
           type: Animal
           shouldHave: true
+        - !type:OrganType # Ataraxia
+          type: AnthroAnimal
+          shouldHave: false
         reagent: Protein
         amount: 0.5
+      - !type:AdjustReagent
+        conditions:
+        - !type:OrganType
+          type: Vox
+        reagent: Protein
+        amount: 0.25
 
 - type: reagent
   id: Allicin
@@ -577,6 +612,8 @@
           min: 1
         - !type:OrganType
           type: Animal
+        - !type:OrganType # Ataraxia
+          type: AnthroAnimal
         damage:
           types:
             Poison: 0.06
@@ -594,8 +631,8 @@
       - !type:GenericStatusEffect
         key: Pacified
         component: Pacified
-        refresh: false
         type: Add
+        time: 4
 
 - type: reagent
   id: Honk
@@ -620,6 +657,8 @@
           min: 1
         - !type:OrganType
           type: Animal
+        - !type:OrganType # Ataraxia
+          type: AnthroAnimal
         damage:
           types:
             Poison: 0.06
@@ -757,3 +796,19 @@
           shouldHave: false
         walkSpeedModifier: 0.4
         sprintSpeedModifier: 0.4
+
+- type: reagent
+  id: ToxinTrash
+  name: reagent-name-toxintrash
+  group: Toxins
+  desc: reagent-desc-toxintrash
+  flavor: trashy
+  physicalDesc: reagent-physical-desc-nondescript
+  metabolisms:
+    Food:
+      effects:
+      - !type:SatiateHunger
+        factor: 1
+        conditions:
+        - !type:OrganType
+          type: Vox

@@ -68,6 +68,7 @@ namespace Content.Server.NPC.Pathfinding
         private int _portalIndex;
         private readonly Dictionary<int, PathPortal> _portals = new();
 
+        private EntityQuery<Shared.Backmen.Blob.Components.BlobTileComponent> _tilesQuery; // backmen: blob
         private EntityQuery<AccessReaderComponent> _accessQuery;
         private EntityQuery<DestructibleComponent> _destructibleQuery;
         private EntityQuery<DoorComponent> _doorQuery;
@@ -80,6 +81,7 @@ namespace Content.Server.NPC.Pathfinding
         {
             base.Initialize();
 
+            _tilesQuery = GetEntityQuery<Shared.Backmen.Blob.Components.BlobTileComponent>(); // backmen: blob
             _accessQuery = GetEntityQuery<AccessReaderComponent>();
             _destructibleQuery = GetEntityQuery<DestructibleComponent>();
             _doorQuery = GetEntityQuery<DoorComponent>();
@@ -188,8 +190,8 @@ namespace Content.Server.NPC.Pathfinding
         /// </summary>
         public bool TryCreatePortal(EntityCoordinates coordsA, EntityCoordinates coordsB, out int handle)
         {
-            var mapUidA = coordsA.GetMapUid(EntityManager);
-            var mapUidB = coordsB.GetMapUid(EntityManager);
+            var mapUidA = _transform.GetMap(coordsA);
+            var mapUidB = _transform.GetMap(coordsB);
             handle = -1;
 
             if (mapUidA != mapUidB || mapUidA == null)
@@ -197,8 +199,8 @@ namespace Content.Server.NPC.Pathfinding
                 return false;
             }
 
-            var gridUidA = coordsA.GetGridUid(EntityManager);
-            var gridUidB = coordsB.GetGridUid(EntityManager);
+            var gridUidA = _transform.GetGrid(coordsA);
+            var gridUidB = _transform.GetGrid(coordsB);
 
             if (!TryComp<GridPathfindingComponent>(gridUidA, out var gridA) ||
                 !TryComp<GridPathfindingComponent>(gridUidB, out var gridB))
@@ -236,8 +238,8 @@ namespace Content.Server.NPC.Pathfinding
 
             _portals.Remove(handle);
 
-            var gridUidA = portal.CoordinatesA.GetGridUid(EntityManager);
-            var gridUidB = portal.CoordinatesB.GetGridUid(EntityManager);
+            var gridUidA = _transform.GetGrid(portal.CoordinatesA);
+            var gridUidB = _transform.GetGrid(portal.CoordinatesB);
 
             if (!TryComp<GridPathfindingComponent>(gridUidA, out var gridA) ||
                 !TryComp<GridPathfindingComponent>(gridUidB, out var gridB))
@@ -397,7 +399,7 @@ namespace Content.Server.NPC.Pathfinding
         /// </summary>
         public PathPoly? GetPoly(EntityCoordinates coordinates)
         {
-            var gridUid = coordinates.GetGridUid(EntityManager);
+            var gridUid = _transform.GetGrid(coordinates);
 
             if (!TryComp<GridPathfindingComponent>(gridUid, out var comp) ||
                 !TryComp(gridUid, out TransformComponent? xform))
@@ -405,14 +407,14 @@ namespace Content.Server.NPC.Pathfinding
                 return null;
             }
 
-            var localPos = Vector2.Transform(coordinates.ToMapPos(EntityManager, _transform), xform.InvWorldMatrix);
+            var localPos = Vector2.Transform(_transform.ToMapCoordinates(coordinates).Position, _transform.GetInvWorldMatrix(xform));
             var origin = GetOrigin(localPos);
 
             if (!TryGetChunk(origin, comp, out var chunk))
                 return null;
 
             var chunkPos = new Vector2(MathHelper.Mod(localPos.X, ChunkSize), MathHelper.Mod(localPos.Y, ChunkSize));
-            var polys = chunk.Polygons[(int) chunkPos.X * ChunkSize + (int) chunkPos.Y];
+            var polys = chunk.Polygons[(int)chunkPos.X * ChunkSize + (int)chunkPos.Y];
 
             foreach (var poly in polys)
             {
@@ -471,6 +473,13 @@ namespace Content.Server.NPC.Pathfinding
             {
                 flags |= PathFlags.Interact;
             }
+
+            // start-backmen: blob
+            if (blackboard.TryGetValue<bool>(NPCBlackboard.NavBlob, out var blob, EntityManager) && blob)
+            {
+                flags |= PathFlags.Blob;
+            }
+            // end-backmen: blob
 
             return flags;
         }

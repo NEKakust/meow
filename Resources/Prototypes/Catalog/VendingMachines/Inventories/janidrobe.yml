@@ -10,8 +10,10 @@
     ClothingHeadsetService: 2
     ClothingOuterWinterJani: 2
     ClothingNeckScarfStripedPurple: 3
-
+  contrabandInventory:
+    ToyFigurineJanitor: 1
   emaggedInventory:
+    ClothingUniformJumpskirtElegantMaid: 2 # Corvax
     ClothingUniformJumpskirtJanimaid: 2
     ClothingUniformJumpskirtJanimaidmini: 1
     ClothingUniformJumpsuitmaidblack: 1

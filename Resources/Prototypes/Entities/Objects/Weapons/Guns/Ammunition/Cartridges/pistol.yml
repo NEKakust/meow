@@ -1,7 +1,7 @@
 - type: entity
   id: BaseCartridgePistol
   name: cartridge (.35 auto)
-  parent: BaseCartridge
+  parent: [ BaseCartridge, BaseSecurityContraband ]
   abstract: true
   components:
   - type: Tag
@@ -21,7 +21,9 @@
 - type: entity
   id: CartridgePistol
   name: cartridge (.35 auto)
+  description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Standard kinetic ammunition is common and useful in most situations.
   parent: BaseCartridgePistol
+  categories: [ HideSpawnMenu ]
   components:
   - type: CartridgeAmmo
     proto: BulletPistol
@@ -29,7 +31,9 @@
 - type: entity
   id: CartridgePistolPractice
   name: cartridge (.35 auto practice)
+  description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Chalk ammunition is generally non-harmful, used for practice.
   parent: BaseCartridgePistol
+  categories: [ HideSpawnMenu ]
   components:
   - type: CartridgeAmmo
     proto: BulletPistolPractice
@@ -44,7 +48,9 @@
 - type: entity
   id: CartridgePistolIncendiary
   name: cartridge (.35 auto incendiary)
+  description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Incendiary ammunition contains a self-igniting compound that sets the target ablaze.
   parent: BaseCartridgePistol
+  categories: [ HideSpawnMenu ]
   components:
   - type: CartridgeAmmo
     proto: BulletPistolIncendiary
@@ -59,7 +65,9 @@
 - type: entity
   id: CartridgePistolUranium
   name: cartridge (.35 auto uranium)
+  description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Uranium core ammunition features a load of fissile material, irradiating the target from the inside.
   parent: BaseCartridgePistol
+  categories: [ HideSpawnMenu ]
   components:
   - type: CartridgeAmmo
     proto: BulletPistolUranium

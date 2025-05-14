@@ -1,14 +1,15 @@
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, BaseSyndicateContraband]
   id: EmagUnlimited
   suffix: Unlimited
   name: cryptographic sequencer
-  description: The all-in-one hacking solution. The thinking man's lockpick. The iconic EMAG.
+  description: The all-in-one hacking solution. Friend of any syndicate. The iconic EMAG.
   components:
   - type: Emag
   - type: Sprite
     sprite: Objects/Tools/emag.rsi
     state: icon
+    scale: 0.9, 0.9 # Backmen
   - type: Item
     sprite: Objects/Tools/emag.rsi
     storedRotation: -90
@@ -17,9 +18,9 @@
     entries:
     - label: corvax-hidden-desc-Emag-syndicate
       whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+        mindRoles:
+        - TraitorRole
+        - NukeopsRole
     - label: corvax-hidden-desc-Emag-research
       jobRequired:
         - ResearchAssistant

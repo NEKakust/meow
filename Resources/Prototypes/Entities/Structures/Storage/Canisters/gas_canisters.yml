@@ -5,6 +5,7 @@
   name: gas canister
   description: A canister that can contain any type of gas. It can be attached to connector ports using a wrench.
   components:
+    - type: Animateable
     - type: InteractionOutline
     - type: Transform
       noRot: true
@@ -16,7 +17,7 @@
     - type: Appearance
     - type: GenericVisualizer
       visuals:
-        enum.GasPortableVisuals.ConnectedState:
+        enum.AnchorVisuals.Anchored:
           connectedToPort:
             False: { state: can-connector, visible: false }
             True: { state: can-connector, visible: true }
@@ -34,6 +35,9 @@
             1: { state: can-o1, shader: "unshaded" }
             2: { state: can-o2, shader: "unshaded" }
             3: { state: can-o3, shader: "unshaded" }
+    - type: ActivatableUI
+      key: enum.GasCanisterUiKey.Key
+    - type: ActivatableUIRequiresLock
     - type: UserInterface
       interfaces:
         enum.GasCanisterUiKey.Key:
@@ -99,11 +103,14 @@
           components:
             - GasTank
     - type: StaticPrice
-      price: 1000
+      price: 200
     - type: AccessReader
       access: [["Atmospherics"], ["Engineering"], ["Research"]]
     - type: Lock
       locked: false
+    - type: GuideHelp
+      guides:
+      - GasCanisters
 
 - type: entity
   parent: GasCanister
@@ -588,6 +595,8 @@
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
         - !type:DumpCanisterBehavior
+    - type: Lock
+      locked: true
 
 - type: entity
   parent: GasCanister
@@ -611,6 +620,7 @@
       - 0 # Ammonia
       - 0 # N2O
       - 1871.71051 # Frezon
+      - 0 # BZ + ADT-Gas
       temperature: 293.15
   - type: Destructible
     thresholds:
@@ -692,12 +702,12 @@
       materialComposition:
         Steel: 500
     - type: StaticPrice
-      price: 60
+      price: 125
 
 - type: entity
   parent: GasCanisterBrokenBase
   id: StorageCanisterBroken
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: yellow-1
@@ -705,7 +715,7 @@
 - type: entity
   parent: GasCanisterBrokenBase
   id: AirCanisterBroken
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: grey-1
@@ -713,7 +723,7 @@
 - type: entity
   parent: GasCanisterBrokenBase
   id: OxygenCanisterBroken
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: blue-1
@@ -721,7 +731,7 @@
 - type: entity
   parent: GasCanisterBrokenBase
   id: NitrogenCanisterBroken
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: red-1
@@ -729,7 +739,7 @@
 - type: entity
   parent: GasCanisterBrokenBase
   id: CarbonDioxideCanisterBroken
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: black-1
@@ -737,7 +747,7 @@
 - type: entity
   parent: GasCanisterBrokenBase
   id: PlasmaCanisterBroken
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: orange-1
@@ -745,7 +755,7 @@
 - type: entity
   parent: GasCanisterBrokenBase
   id: TritiumCanisterBroken
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: green-1
@@ -754,7 +764,7 @@
   parent: GasCanisterBrokenBase
   id: WaterVaporCanisterBroken
   name: broken water vapor canister
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: water_vapor-1
@@ -762,7 +772,7 @@
 - type: entity
   parent: GasCanisterBrokenBase
   id: AmmoniaCanisterBroken
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: greenys-1
@@ -770,7 +780,7 @@
 - type: entity
   parent: GasCanisterBrokenBase
   id: NitrousOxideCanisterBroken
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: redws-1
@@ -778,7 +788,7 @@
 - type: entity
   parent: GasCanisterBrokenBase
   id: FrezonCanisterBroken
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: frezon-1

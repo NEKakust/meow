@@ -4,6 +4,8 @@
   name: gas mask
   description: A face-covering mask that can be connected to an air supply.
   components:
+  - type: CoveredSlot # Backmen
+    slots: [eyes]
   - type: Sprite
     sprite: Clothing/Mask/gas.rsi
   - type: Clothing
@@ -16,12 +18,15 @@
     - HamsterWearable
     - WhitelistChameleon
   - type: HideLayerClothing
-    slots:
-    - Snout
+    layers:
+      Snout: Mask
+      SnoutOverlay: Mask # Backmen
     hideOnToggle: true
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.1
 
 - type: entity
-  parent: ClothingMaskGas
+  parent: [ClothingMaskGas, BaseSecurityContraband]
   id: ClothingMaskGasSecurity
   name: security gas mask
   description: A standard issue Security gas mask.
@@ -33,15 +38,23 @@
   - type: Clothing
     sprite: Clothing/Mask/gassecurity.rsi
   - type: Armor
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.12
+      BoneDamage: 0.12
+      VeinsDamage: 0
+      NerveDamage: 0
+    coverage: # backmen: armour coverage
+    - Head
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
 
 - type: entity
-  parent: ClothingMaskGas
+  parent: [ClothingMaskGas, BaseSyndicateContraband]
   id: ClothingMaskGasSyndicate
   name: syndicate gas mask
   description: A close-fitting tactical mask that can be connected to an air supply.
@@ -53,12 +66,22 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Armor
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.12
+      BoneDamage: 0.12
+      VeinsDamage: 0
+      NerveDamage: 0
+    coverage: # backmen: armour coverage
+    - Head
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.2
 
 - type: entity
   parent: ClothingMaskGas
@@ -71,12 +94,20 @@
   - type: Clothing
     sprite: Clothing/Mask/gasatmos.rsi
   - type: Armor
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.12
+      BoneDamage: 0.12
+      VeinsDamage: 0
+      NerveDamage: 0.36
+    coverage: # backmen: armour coverage
+    - Head
     modifiers:
       coefficients:
-        Heat: 0.80
+        Heat: 0.6
 
 - type: entity
-  parent: ClothingMaskGasAtmos
+  parent: [ClothingMaskGasAtmos, BaseCommandContraband]
   id: ClothingMaskGasCaptain
   name: captain's gas mask
   description: Nanotrasen cut corners and repainted a spare atmospheric gas mask, but don't tell anyone.
@@ -89,9 +120,9 @@
   - type: IngestionBlocker
 
 - type: entity
-  parent: ClothingMaskGasAtmos
+  parent: [ ClothingMaskGasAtmos, BaseCentcommContraband ]
   id: ClothingMaskGasCentcom
-  name: CentCom gas mask
+  name: CentComm gas mask
   description: Oooh, gold and green. Fancy! This should help as you sit in your office.
   components:
   - type: Sprite
@@ -102,7 +133,7 @@
   - type: IngestionBlocker
 
 - type: entity
-  parent: ClothingMaskGas
+  parent: [ClothingMaskGas, BaseCargoContraband]
   id: ClothingMaskGasExplorer
   name: explorer gas mask
   description: A military-grade gas mask that can be connected to an air supply.
@@ -112,12 +143,20 @@
   - type: Clothing
     sprite: Clothing/Mask/gasexplorer.rsi
   - type: Armor
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.12
+      BoneDamage: 0.12
+      VeinsDamage: 0
+      NerveDamage: 0
+    coverage: # backmen: armour coverage
+    - Head
     modifiers:
       coefficients:
-        Blunt: 0.90
-        Slash: 0.90
-        Piercing: 0.95
-        Heat: 0.95
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.85
+        Heat: 0.85
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -137,6 +176,8 @@
     tags:
     - PetWearable
     - WhitelistChameleon
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.2
 
 - type: entity
   parent: ClothingMaskBreathMedical
@@ -151,12 +192,22 @@
   - type: Clothing
     sprite: Clothing/Mask/medicalsecurity.rsi
   - type: Armor
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.12
+      BoneDamage: 0.12
+      VeinsDamage: 0
+      NerveDamage: 0
+    coverage: # backmen: armour coverage
+    - Head
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.2
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -181,7 +232,7 @@
       Steel: 50
       Plastic: 100
   - type: StaticPrice
-    price: 12.5 # increases in price after decomposed into raw materials
+    price: 30 # increases in price after decomposed into raw materials
 
 - type: entity
   parent: ClothingMaskBase
@@ -203,6 +254,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
 
 - type: entity
   parent: ClothingMaskClownBase
@@ -216,6 +268,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
 
 - type: entity
   parent: ClothingMaskClown
@@ -229,6 +282,32 @@
   - type: Construction
     graph: BananaClownMask
     node: mask
+
+- type: entity
+  parent: [ClothingMaskClown, BaseSecurityContraband]
+  id: ClothingMaskClownSecurity
+  name: security clown wig and mask
+  description: A debatably oxymoronic but protective mask and wig.
+  components:
+  - type: Sprite
+    sprite: Clothing/Mask/clown_security.rsi
+  - type: Clothing
+    sprite: Clothing/Mask/clown_security.rsi
+  - type: Armor
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.12
+      BoneDamage: 0.12
+      VeinsDamage: 0
+      NerveDamage: 0
+    coverage: # backmen: armour coverage
+    - Head
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
 
 - type: entity
   parent: ClothingMaskBase
@@ -245,6 +324,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
 
 - type: entity
   parent: ClothingMaskBase
@@ -265,6 +345,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -284,6 +365,8 @@
   - type: PhysicalComposition
     materialComposition:
       Plastic: 25
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.2
 
 - type: entity
   parent: ClothingMaskBase
@@ -297,10 +380,11 @@
     sprite: Clothing/Mask/muzzle.rsi
   - type: Clothing
     sprite: Clothing/Mask/muzzle.rsi
+    equipDelay: 3
+    unequipDelay: 3
   - type: IngestionBlocker
   - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: mumble
+    accent: MumbleAccent
   - type: Construction
     graph: Muzzle
     node: muzzle
@@ -321,6 +405,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
     hideOnToggle: true
 
 - type: entity
@@ -339,7 +424,7 @@
     accent: StutteringAccent
 
 - type: entity
-  parent: ClothingMaskGasExplorer
+  parent: [ ClothingMaskGas, BaseSecurityContraband ]
   id: ClothingMaskGasSwat
   name: swat gas mask
   description: A elite issue Security gas mask.
@@ -355,10 +440,26 @@
     slots:
     - Hair
     - Snout
+    - SnoutOverlay # Backmen
     hideOnToggle: true
+  - type: Armor
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.24
+      BoneDamage: 0.24
+      VeinsDamage: 0
+      NerveDamage: 0
+    coverage: # backmen: armour coverage
+    - Head
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.75
+        Heat: 0.75
 
 - type: entity
-  parent: ClothingMaskGasExplorer
+  parent: [ ClothingMaskGas, BaseSecurityCargoContraband ]
   id: ClothingMaskGasMerc
   name: mercenary gas mask
   description: Slightly outdated, but reliable military-style gas mask.
@@ -367,9 +468,24 @@
     sprite: Clothing/Mask/merc.rsi
   - type: Clothing
     sprite: Clothing/Mask/merc.rsi
+  - type: Armor
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.12
+      BoneDamage: 0.12
+      VeinsDamage: 0
+      NerveDamage: 0
+    coverage: # backmen: armour coverage
+    - Head
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.85
+        Heat: 0.85
 
 - type: entity
-  parent: ClothingMaskGasSyndicate
+  parent: [ ClothingMaskGas, BaseCentcommContraband ]
   id: ClothingMaskGasERT
   name: ert gas mask
   description: The gas mask of the elite squad of the ERT.
@@ -385,7 +501,27 @@
     slots:
     - Hair
     - Snout
+    - SnoutOverlay # Backmen
     hideOnToggle: true
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Armor
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.24
+      BoneDamage: 0.24
+      VeinsDamage: 0
+      NerveDamage: 0
+    coverage: # backmen: armour coverage
+    - Head
+    modifiers:
+      coefficients:
+        Blunt: 0.75
+        Slash: 0.75
+        Piercing: 0.75
+        Heat: 0.8
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.2
 
 - type: entity
   parent: ClothingMaskGasERT
@@ -398,12 +534,22 @@
   - type: Clothing
     sprite: Clothing/Mask/squadron.rsi
   - type: Armor
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.24
+      BoneDamage: 0.24
+      VeinsDamage: 0
+      NerveDamage: 0
+    coverage: # backmen: armour coverage
+    - Head
     modifiers:
       coefficients:
-        Blunt: 0.80
-        Slash: 0.80
-        Piercing: 0.90
-        Heat: 0.90
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.6
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.2
 
 - type: entity
   parent: ClothingMaskBase
@@ -423,6 +569,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
   - type: IdentityBlocker
 
 - type: entity
@@ -440,6 +587,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
 
 - type: entity
   parent: ClothingMaskBase
@@ -456,6 +604,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
 
 - type: entity
   parent: ClothingMaskBase
@@ -472,6 +621,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
 
 - type: entity
   parent: ClothingMaskBase
@@ -488,6 +638,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
 
 - type: entity
   parent: ClothingMaskBase
@@ -504,6 +655,7 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
 
 - type: entity
   parent: ClothingMaskBase
@@ -520,9 +672,10 @@
   - type: HideLayerClothing
     slots:
     - Snout
+    - SnoutOverlay # Backmen
 
 - type: entity
-  parent: ClothingMaskBase
+  parent: ClothingMaskPullableBase # Backmen-Edit
   id: ClothingMaskNeckGaiter
   name: neck gaiter
   description: Stylish neck gaiter for your neck, can protect from the cosmic wind?...
@@ -536,6 +689,9 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+  - type: BreathMask # Backmen
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.1
 
 - type: entity
   parent: ClothingMaskNeckGaiter
@@ -549,25 +705,25 @@
 
 - type: entity
   parent: ClothingMaskClownBase
-  id: ClothingMaskSexyClown
-  name: sexy clown mask
-  description: Some naughty clowns think this is what the Honkmother looks like.
+  id: ClothingMaskBlushingClown
+  name: blushing clown mask
+  description: A mask for a blushing clown.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/sexyclown.rsi
+    sprite: Clothing/Mask/blushingclown.rsi
   - type: Clothing
-    sprite: Clothing/Mask/sexyclown.rsi
+    sprite: Clothing/Mask/blushingclown.rsi
 
 - type: entity
   parent: ClothingMaskMime
-  id: ClothingMaskSexyMime
-  name: sexy mime mask
+  id: ClothingMaskBlushingMime
+  name: blushing mime mask
   description: Those ruddy cheeks just want to be rubbed.
   components:
   - type: Sprite
-    sprite: Clothing/Mask/sexymime.rsi
+    sprite: Clothing/Mask/blushingmime.rsi
   - type: Clothing
-    sprite: Clothing/Mask/sexymime.rsi
+    sprite: Clothing/Mask/blushingmime.rsi
 
 - type: entity
   parent: ClothingMaskMime
@@ -584,7 +740,7 @@
   parent: ClothingMaskMime
   id: ClothingMaskScaredMime
   name: scared mime mask
-  description: Looks like it would scream if it wasn't a mask
+  description: Looks like it would scream if it wasn't a mask.
   components:
   - type: Sprite
     sprite: Clothing/Mask/scaredmime.rsi
@@ -622,3 +778,43 @@
   - type: EyeProtection
   - type: BreathMask
   - type: IdentityBlocker
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.2
+
+- type: entity
+  parent: ClothingMaskGas
+  id: ClothingMaskWeldingGas
+  name: welding gas mask
+  description: A gas mask with built in welding goggles and face shield. Looks like a skull, clearly designed by a nerd.
+  components:
+  - type: Sprite
+    sprite: Clothing/Mask/welding-gas.rsi
+    state: icon
+  - type: Clothing
+    sprite: Clothing/Mask/welding-gas.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 200
+      Glass: 100
+  - type: StaticPrice
+    price: 100
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: DiseaseProtection #Backmen & Ataraxia anti viral
+    protection: 0.2
+
+# Entity tables
+- type: entityTable
+  id: AnimalMaskTable
+  table: !type:GroupSelector
+    children:
+    - id: ClothingMaskFox
+    - id: ClothingMaskBat
+    - id: ClothingMaskBear
+    - id: ClothingMaskBee
+    - id: ClothingMaskRaven
+    - id: ClothingMaskRat
+    - id: ClothingMaskJackal

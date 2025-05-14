@@ -10,6 +10,8 @@
   - type: Clothing
     sprite: Backmen/Clothing/Head/Masks/mask_orden.rsi
   - type: Armor
+    coverage:
+    - Head
     modifiers:
       coefficients:
         Heat: 0.95
@@ -90,6 +92,8 @@
   - type: Clothing
     sprite: Backmen/Clothing/Head/Masks/germangasmaskbel.rsi
   - type: Armor
+    coverage:
+    - Head
     modifiers:
       coefficients:
         Blunt: 0.90
@@ -121,6 +125,8 @@
   - type: Clothing
     sprite: Backmen/Clothing/Head/Masks/ihsgasmaskheavybel.rsi
   - type: Armor
+    coverage:
+    - Head
     modifiers:
       coefficients:
         Blunt: 0.95
@@ -237,14 +243,16 @@
 - type: entity
   parent: ClothingMaskGasERT
   id: ClothingMaskTacticalGas
-  name: tactical gas mask
-  description: A military-grade gas mask that can be connected to an air supply.
+  name: тактический противогаз
+  description: Противогаз армейского газа, который можно подключить к баллону для дыхания.
   components:
   - type: Sprite
     sprite: Backmen/Clothing/Mask/millitary.rsi
   - type: Clothing
     sprite: Backmen/Clothing/Mask/millitary.rsi
   - type: Armor
+    coverage:
+    - Head
     modifiers:
       coefficients:
         Blunt: 0.90

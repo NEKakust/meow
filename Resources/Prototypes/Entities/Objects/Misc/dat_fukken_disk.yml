@@ -1,9 +1,20 @@
 - type: entity
   name: nuclear authentication disk
-  parent: BaseItem
+  parent: [BaseItem, BaseGrandTheftContraband]
   id: NukeDisk
   description: A nuclear auth disk, capable of arming a nuke if used along with a code. Note from nanotrasen reads "THIS IS YOUR MOST IMPORTANT POSESSION, SECURE DAT FUKKEN DISK!"
   components:
+  # backmen edit start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Backmen/Items/handling/disk_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Backmen/Items/handling/disk_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Backmen/Items/handling/disk_drop.ogg
+  # backmen edit end
   - type: NukeDisk
   - type: SpecialRespawn
     prototype: NukeDisk
@@ -17,21 +28,39 @@
   - type: WarpPoint
     follow: true
     location: nuke disk
+    blacklist:
+      tags:
+      - GhostOnlyWarp
   - type: Tag
     tags:
     - HighRiskItem
+    - GhostOnlyWarp
   - type: StealTarget
     stealGroup: NukeDisk
 
 - type: entity
   name: nuclear authentication disk
-  parent: BaseItem
+  parent: [BaseItem, BaseGrandTheftContraband]
   id: NukeDiskFake
   suffix: Fake
   description: A nuclear auth disk, capable of arming a nuke if used along with a code. Note from nanotrasen reads "THIS IS YOUR MOST IMPORTANT POSESSION, SECURE DAT FUKKEN DISK!"
   components:
+  # backmen edit start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Backmen/Items/handling/disk_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Backmen/Items/handling/disk_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Backmen/Items/handling/disk_drop.ogg
+  # backmen edit end
   - type: Sprite
     sprite: Objects/Misc/nukedisk.rsi
     state: icon
   - type: StaticPrice
     price: 1 # it's worth even less than normal items. Perfection.
+  - type: Tag
+    tags:
+    - FakeNukeDisk

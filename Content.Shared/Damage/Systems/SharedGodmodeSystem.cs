@@ -1,13 +1,17 @@
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Events;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Slippery;
 using Content.Shared.StatusEffect;
+using Content.Shared.Body.Systems; // Shitmed Change
 
 namespace Content.Shared.Damage.Systems;
 
 public abstract class SharedGodmodeSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
+
+    [Dependency] private readonly SharedBodySystem _bodySystem = default!; // Shitmed Change
 
     public override void Initialize()
     {
@@ -21,7 +25,7 @@ public abstract class SharedGodmodeSystem : EntitySystem
 
     private void OnSlipAttempt(EntityUid uid, GodmodeComponent component, SlipAttemptEvent args)
     {
-        args.Cancel();
+        args.NoSlip = true;
     }
 
     private void OnBeforeDamageChanged(EntityUid uid, GodmodeComponent component, ref BeforeDamageChangedEvent args)
@@ -63,6 +67,9 @@ public abstract class SharedGodmodeSystem : EntitySystem
         }
 
         RemComp<GodmodeComponent>(uid);
+
+        foreach (var (id, _) in _bodySystem.GetBodyChildren(uid)) // Shitmed Change
+            DisableGodmode(id);
     }
 
     /// <summary>

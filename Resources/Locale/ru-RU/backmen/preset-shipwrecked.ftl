@@ -1,10 +1,11 @@
 ## Gamemode
 
-shipwrecked-title = Кораблекрушение(выживание)
+shipwrecked-title = Кораблекрушение (выживание)
 shipwrecked-description = Группа путешественников отправляется в путь, чтобы узнать свою историю смерти...
 shipwrecked-too-many-ready-players = Слишком много игроков было готово к игре! Количество готовых игроков { $readyPlayersCount } , но предел для этого режима { $maximumPlayers } .
 shipwrecked-no-one-ready = Нет готовых игроков! Невозможно начать игру с режимом Кораблекрушение.
 shipwrecked-shuttle-announcement = Анонс транспортного шаттла от { $sender }: { $message }
+department-Shipwrecked = мини игры
 department-Shipwrecked-description = Экипаж после кораблекрушения
 
 ## Round End
@@ -12,7 +13,7 @@ department-Shipwrecked-description = Экипаж после кораблекр�
 shipwrecked-list-start = Состояние экипажа после кораблекрушения:
 shipwrecked-list-escaped-name = - [color=white]{ $name }[/color] выжил!
 shipwrecked-list-survived-name = - [color=white]{ $name }[/color] брошен...
-shipwrecked-list-perished-name = - [color=white]{ $name }[/color] погиб во время путешествия. Покойтесь с миром.
+shipwrecked-list-perished-name = - [color=white]{ $name }[/color] погиб во время путешествия. Покойся с миром.
 shipwrecked-list-start-objectives = Состояние цели:
 shipwrecked-list-objective-thrusters-fail = - [color=red]Ни один[/color] из [color=red]{ $totalThrusterCount }[/color] двигателей, не был отремонтирован.
 shipwrecked-list-objective-generator-fail = - Генератор [color=red]так и не был отремонтирован[/color].
@@ -57,7 +58,6 @@ shipwrecked-hecate-report-entering-atmosphere = Вход в атмосферу. 
 shipwrecked-hecate-aftercrash-sitrep = Что ж... это прискорбно. Похоже, мы получили серьезные повреждения. Я сделаю все возможное, чтобы помочь вам. Например можете попросить меня разблокировать генератор или оружие!
 
 ## The Psychopomp
-
 
 # Somewhat general statements not specific to Shipwrecked
 

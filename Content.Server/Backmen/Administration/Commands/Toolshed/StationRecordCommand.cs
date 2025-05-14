@@ -5,8 +5,10 @@ using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Administration;
+using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using Content.Shared.Preferences;
@@ -33,7 +35,7 @@ public sealed class StationRecordCommand : ToolshedCommand
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] EntityUid input,
         [CommandArgument] ValueRef<ICommonSession> playerRef,
-        [CommandArgument] Prototype<JobPrototype> job)
+        [CommandArgument] ProtoId<JobPrototype> job)
     {
         var player = playerRef.Evaluate(ctx);
         if (player is null || player.AttachedEntity is null ||
@@ -79,7 +81,16 @@ public sealed class StationRecordCommand : ToolshedCommand
                     humanoidAppearanceComponent.Age,
                     humanoidAppearanceComponent.Sex,
                     humanoidAppearanceComponent.Gender,
-                    new HumanoidCharacterAppearance(),
+                    new HumanoidCharacterAppearance
+                    {
+                        HairStyleId = "",
+                        HairColor = default,
+                        FacialHairStyleId = "",
+                        FacialHairColor = default,
+                        EyeColor = default,
+                        SkinColor = default,
+                        Markings = []
+                    },
                     SpawnPriorityPreference.None,
                     new Dictionary<ProtoId<JobPrototype>, JobPriority>
                     {
@@ -102,7 +113,7 @@ public sealed class StationRecordCommand : ToolshedCommand
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] IEnumerable<EntityUid> input,
         [CommandArgument] ValueRef<ICommonSession> playerRef,
-        [CommandArgument] Prototype<JobPrototype> job
+        [CommandArgument] ProtoId<JobPrototype> job
     )
         => input.Select(x => Add(ctx, x, playerRef, job));
 

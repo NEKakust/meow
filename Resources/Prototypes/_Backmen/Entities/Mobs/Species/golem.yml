@@ -5,7 +5,11 @@
   abstract: true
   description: Искусственная конструкция, имитирующая жизнь. У этого еще не установлен кристалл души.
   components:
+  - type: LayingDown # backmen: LayingDown
   - type: ComplexInteraction
+  - type: ActionGrant
+    actions:
+    - ActionViewLaws
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -14,6 +18,10 @@
       color: "#e8b59b"
       sprite: Backmen/Mobs/Species/Golem/cult.rsi
       state: cultgolem_chest
+    - map: [ "enum.HumanoidVisualLayers.Groin" ]
+      color: "#e8b59b"
+      sprite: Backmen/Mobs/Species/Golem/cult.rsi
+      state: cultgolem_groin
     - map: [ "enum.HumanoidVisualLayers.Head" ]
       color: "#e8b59b"
       sprite: Backmen/Mobs/Species/Golem/cult.rsi
@@ -84,7 +92,7 @@
     tags:
     - CanPilot
     - DoorBumpOpener
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
   - type: Reactive
     groups:
@@ -226,6 +234,8 @@
   - type: Alerts
   - type: Actions
   - type: Eye
+  - type: ContentEye
+    maxZoom: 0.8, 0.8
   - type: CameraRecoil
   - type: Examiner
   - type: CanHostGuardian
@@ -256,7 +266,16 @@
     guides:
     - AltarsGolemancy
   - type: TTS
-    voice: Oleg
+    voice: Dude
+  - type: LanguageSpeaker
+    currentLanguage: TauCetiBasic
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    - Nekomimetic
+    understands:
+    - TauCetiBasic
+    - Nekomimetic
 
 - type: emoteSounds
   id: GolemEmote
@@ -298,7 +317,11 @@
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
       color: "#e8b59b"
       sprite: Mobs/Species/Diona/parts.rsi
-      state: torso_m
+      state: chest_m
+    - map: [ "enum.HumanoidVisualLayers.Groin" ]
+      color: "#e8b59b"
+      sprite: Mobs/Species/Diona/parts.rsi
+      state: groin_m
     - map: [ "enum.HumanoidVisualLayers.Head" ]
       color: "#e8b59b"
       sprite: Backmen/Mobs/Species/Golem/wood.rsi
@@ -364,7 +387,7 @@
     canResistFire: true
     damage:
       types:
-        Heat: 1.2 #per second, scales with number of fire 'stacks'
+        Heat: 0.8 #per second, scales with number of fire 'stacks'
   - type: PlantHolder
   - type: PlantHolderVisuals
   - type: SolutionContainerManager
@@ -437,7 +460,6 @@
             - FlyingMobMask
           layer:
             - FlyingMobLayer
-    - type: GloveHeatResistance
     - type: Internals
     - type: TypingIndicator
       proto: robot

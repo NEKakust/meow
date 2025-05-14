@@ -8,8 +8,6 @@
     sprite: Backmen/Clothing/Hands/Gloves/ordenhands.rsi
   - type: Clothing
     sprite: Backmen/Clothing/Hands/Gloves/ordenhands.rsi
-  - type: GloveHeatResistance
-    heatResistance: 1400
   - type: Insulated
   - type: Fiber
     fiberMaterial: fibers-durathread
@@ -29,7 +27,7 @@
     equipSound: /Audio/Backmen/Weapons/Melee/bogomol/on.ogg
     unequipSound: /Audio/Backmen/Weapons/Melee/bogomol/off.ogg
   - type: MeleeWeapon
-    attackRate: 2
+    attackRate: 3
     damage:
       types:
         Piercing: 10
@@ -52,6 +50,8 @@
     fiberMaterial: fibers-durathread
   - type: FingerprintMask
   - type: Armor
+    coverage:
+    - Hand
     modifiers:
       coefficients:
         Blunt: 0.90
@@ -61,8 +61,6 @@
   - type: Thieving
     stripTimeReduction: 1
     stealthy: true
-  - type: GloveHeatResistance
-    heatResistance: 1400
   - type: Insulated
 
 - type: entity
@@ -98,8 +96,6 @@
     sprite: Backmen/Clothing/Hands/Gloves/chronogloves.rsi
   - type: Clothing
     sprite: Backmen/Clothing/Hands/Gloves/chronogloves.rsi
-  - type: GloveHeatResistance
-    heatResistance: 1400
   - type: Insulated
   - type: FingerprintMask
   - type: DashAbility
@@ -109,7 +105,7 @@
   id: ActionPhaseDash
   name: phase dash
   description: Teleport to anywhere you can see.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     icon:
@@ -134,6 +130,8 @@
     fiberMaterial: fibers-durathread
   - type: FingerprintMask
   - type: Armor
+    coverage:
+    - Hand
     modifiers:
       coefficients:
         Blunt: 0.90
@@ -143,6 +141,36 @@
   - type: Thieving
     stripTimeReduction: 1
     stealthy: true
-  - type: GloveHeatResistance
-    heatResistance: 1400
   - type: Insulated
+
+- type: entity
+  parent: ClothingHandsGlovesCombat
+  id: ClothingHandsInteQTacticalMaidGloves
+  name: tactical maid gloves
+  description: Tactical maid gloves, every self-respecting maid should be able to discreetly eliminate her goals.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Hands/inteq_maid_gloves.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Hands/inteq_maid_gloves.rsi
+
+- type: entity
+  parent: ClothingHandsGlovesCombat
+  id: ClothingHandsGlovesInteQInfiltrator
+  name: infiltrator gloves
+  description: Specialized combat gloves for carrying people around. Transfers tactical kidnapping and tackling knowledge to the user via the use of nanochips.
+  components:
+  - type: Sprite
+    sprite: Backmen/Clothing/Hands/inteq_infiltrator.rsi
+  - type: Clothing
+    sprite: Backmen/Clothing/Hands/inteq_infiltrator.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: Thieving
+    stripTimeReduction: 1
+    stealthy: true

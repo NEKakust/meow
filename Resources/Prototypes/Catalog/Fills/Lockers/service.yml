@@ -43,6 +43,8 @@
       - id: SprayBottleWater
       - id: ReagentContainerFlour
         amount: 2
+      - id: FoodBoxCloth
+        amount: 1
       - id: ReagentContainerSugar
       - id: FoodCondimentPacketSalt
         amount: 3
@@ -54,7 +56,7 @@
       - id: DrinkMilkCarton
         amount: 2
       - id: AntiPsychicKnife # backmen
-      - id: ClothingHeadCage # backmen
+        prob: 0.05
       - id: DrinkSoyMilkCarton
 
 - type: entity
@@ -81,8 +83,6 @@
         amount: 2
       - id: Plunger
         amount: 2
-      - id: AntiPsychicKnife # backmen
-      - id: ClothingHeadCage # backmen
 
 - type: entity
   id: ClosetLegalFilled
@@ -107,7 +107,7 @@
       - id: ClothingHandsGlovesLeather
       - id: ClothingOuterApronBotanist
       - id: ClothingHeadBandBotany
-      - id: RobustHarvestChemistryBottle
+      - id: ChemistryBottleRobustHarvest
         prob: 0.3
       - id: ClothingBeltPlant
       - id: PlantBag ##Some maps don't have nutrivend
@@ -117,8 +117,6 @@
       - id: ClothingUniformOveralls
       - id: ClothingHeadHatTrucker
         prob: 0.1
-      - id: AntiPsychicKnife # backmen
-      - id: ClothingHeadCage # backmen
 
 - type: entity
   id: LockerBotanistLoot
@@ -141,6 +139,7 @@
   id: ClosetJanitorBombFilled
   parent: ClosetJanitorBomb
   suffix: DO NOT MAP, Filled
+  categories: [ DoNotMap ]
   components:
   - type: StorageFill
     contents:

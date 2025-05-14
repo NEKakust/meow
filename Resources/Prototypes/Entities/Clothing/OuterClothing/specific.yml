@@ -23,9 +23,9 @@
       entries:
       - label: corvax-hidden-desc-Chameleon-syndicate
         whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+          mindRoles:
+          - TraitorRole
+          - NukeopsRole
       - label: corvax-hidden-desc-Chameleon-research
         jobRequired:
           - ResearchAssistant
@@ -33,3 +33,12 @@
           - Scientist
           - Borg
 # Corvax-HiddenDesc-End
+    - type: TemperatureProtection # Same as a basic winter coat.
+      heatingCoefficient: 1.1
+      coolingCoefficient: 0.1
+    - type: Armor
+      modifiers:
+        coefficients:
+          Slash: 0.95
+          Heat: 0.90
+      showArmorOnExamine: false

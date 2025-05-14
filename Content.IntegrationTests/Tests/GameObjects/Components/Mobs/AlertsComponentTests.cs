@@ -1,7 +1,10 @@
 using System.Linq;
 using Content.Client.UserInterface.Systems.Alerts.Controls;
 using Content.Client.UserInterface.Systems.Alerts.Widgets;
+using Content.Server.Administration.Systems;
+using Content.Server.Atmos.Components;
 using Content.Shared.Alert;
+using Content.Shared.Backmen.CCVar;
 using Robust.Client.UserInterface;
 using Robust.Server.Player;
 using Robust.Shared.GameObjects;
@@ -35,7 +38,7 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.Mobs
             {
                 playerUid = serverPlayerManager.Sessions.Single().AttachedEntity.GetValueOrDefault();
 #pragma warning disable NUnit2045 // Interdependent assertions.
-                Assert.That(playerUid, Is.Not.EqualTo(default));
+                Assert.That(playerUid, Is.Not.EqualTo(default(EntityUid)));
                 // Making sure it exists
                 Assert.That(entManager.HasComponent<AlertsComponent>(playerUid));
 #pragma warning restore NUnit2045

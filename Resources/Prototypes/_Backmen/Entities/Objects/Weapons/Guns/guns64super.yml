@@ -27,8 +27,6 @@
         volume: -2
   - type: UseDelay
     delay: 0.7
-  - type: FollowDistance
-    backStrength: 4
 
 - type: entity
   name: M-28 Tactical
@@ -64,8 +62,6 @@
     mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
     radius: 8
-  - type: FollowDistance
-    backStrength: 3
 
 - type: entity
   name: G-36 Tactical
@@ -133,8 +129,6 @@
     angleIncrease: -7
   - type: UseDelay
     delay: 0.2
-  - type: FollowDistance
-    backStrength: 4
 
 - type: entity
   name: MP5 Tactical
@@ -170,8 +164,6 @@
     radius: 8
   - type: UseDelay
     delay: 0.2
-  - type: FollowDistance
-    backStrength: 4
 
 - type: entity
   name: XM1014 Tactical
@@ -200,8 +192,6 @@
     mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
     radius: 8
-  - type: FollowDistance
-    backStrength: 4
 
 - type: entity
   name: AK74-U Tactical
@@ -210,16 +200,16 @@
   suffix: Автомат Tactical
   components:
   - type: Sprite
-    sprite: Backmen/Objects/Weapons/Gunsx64/Rifles/aksu.rsi/bigsuper.rsi
+    sprite: Backmen/Objects/Weapons/Gunsx64/Rifles/aksu/bigsuper.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: Backmen/Objects/Weapons/Gunsx64/Rifles/aksu.rsi/tinysuper.rsi
+    sprite: Backmen/Objects/Weapons/Gunsx64/Rifles/aksu/tinysuper.rsi
   - type: Item
-    sprite: Backmen/Objects/Weapons/Gunsx64/Rifles/aksu.rsi/tinysuper.rsi
+    sprite: Backmen/Objects/Weapons/Gunsx64/Rifles/aksu/tinysuper.rsi
     size: NormalLarge
   - type: BkmGunWieldBonus
     cameraRecoilScalar: -4.5
@@ -234,8 +224,6 @@
         volume: -3
   - type: UseDelay
     delay: 0.1
-  - type: FollowDistance
-    backStrength: 4
 
 - type: entity
   name: P-90 Tactical
@@ -244,16 +232,16 @@
   suffix: Пистолет-пулемёт Tactical
   components:
   - type: Sprite
-    sprite: Backmen/Objects/Weapons/Gunsx64/SMGs/p90.rsi/bigsuper.rsi
+    sprite: Backmen/Objects/Weapons/Gunsx64/SMGs/p90/bigsuper.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: Backmen/Objects/Weapons/Gunsx64/SMGs/p90.rsi/tinysuper.rsi
+    sprite: Backmen/Objects/Weapons/Gunsx64/SMGs/p90/tinysuper.rsi
   - type: Item
-    sprite: Backmen/Objects/Weapons/Gunsx64/SMGs/p90.rsi/tinysuper.rsi
+    sprite: Backmen/Objects/Weapons/Gunsx64/SMGs/p90/tinysuper.rsi
   - type: BkmGunWieldBonus
     cameraRecoilScalar: -4.5
   - type: GunWieldBonus
@@ -267,8 +255,6 @@
         volume: -3
   - type: UseDelay
     delay: 0.1
-  - type: FollowDistance
-    backStrength: 4
 
 - type: entity
   name: RPD Tactical

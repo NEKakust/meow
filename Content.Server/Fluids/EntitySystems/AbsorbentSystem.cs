@@ -1,8 +1,9 @@
 using System.Numerics;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Popups;
+using Content.Shared.Backmen.FootPrint;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Fluids.Components;
@@ -26,7 +27,8 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
     [Dependency] private readonly PuddleSystem _puddleSystem = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
 
@@ -58,14 +60,14 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
         var oldProgress = component.Progress.ShallowClone();
         component.Progress.Clear();
 
-        var water = solution.GetTotalPrototypeQuantity(PuddleSystem.EvaporationReagents);
-        if (water > FixedPoint2.Zero)
+        var mopReagent = solution.GetTotalPrototypeQuantity(_puddleSystem.GetAbsorbentReagents(solution));
+        if (mopReagent > FixedPoint2.Zero)
         {
-            component.Progress[solution.GetColorWithOnly(_prototype, PuddleSystem.EvaporationReagents)] = water.Float();
+            component.Progress[solution.GetColorWithOnly(_prototype, _puddleSystem.GetAbsorbentReagents(solution))] = mopReagent.Float();
         }
 
-        var otherColor = solution.GetColorWithout(_prototype, PuddleSystem.EvaporationReagents);
-        var other = (solution.Volume - water).Float();
+        var otherColor = solution.GetColorWithout(_prototype, _puddleSystem.GetAbsorbentReagents(solution));
+        var other = (solution.Volume - mopReagent).Float();
 
         if (other > 0f)
         {
@@ -112,13 +114,18 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
             && _useDelay.IsDelayed((used, useDelay)))
             return;
 
+        // BACKMEN EDIT START
+        // Footsteps cleaning logic, try to grab from
+        if (TryFootStepInteract(user, used, target, component, useDelay, absorberSoln.Value))
+            return;
+        // BACKMEN EDIT END
+
         // If it's a puddle try to grab from
-        if (!TryPuddleInteract(user, used, target, component, useDelay, absorberSoln.Value))
-        {
-            // If it's refillable try to transfer
-            if (!TryRefillableInteract(user, used, target, component, useDelay, absorberSoln.Value))
-                return;
-        }
+        if (TryPuddleInteract(user, used, target, component, useDelay, absorberSoln.Value))
+            return;
+
+        // If it's refillable try to transfer
+        TryRefillableInteract(user, used, target, component, useDelay, absorberSoln.Value);
     }
 
     /// <summary>
@@ -170,9 +177,9 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
         }
 
         var refillableSolution = refillableSoln.Comp.Solution;
-        var transferAmount = component.PickupAmount < refillableSolution.AvailableVolume ?
-            component.PickupAmount :
-            refillableSolution.AvailableVolume;
+        var transferAmount = component.PickupAmount < refillableSolution.AvailableVolume
+            ? component.PickupAmount
+            : refillableSolution.AvailableVolume;
 
         if (transferAmount <= 0)
         {
@@ -181,7 +188,7 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
         }
 
         // Prioritize transferring non-evaporatives if absorbent has any
-        var contaminants = _solutionContainerSystem.SplitSolutionWithout(absorbentSoln, transferAmount, PuddleSystem.EvaporationReagents);
+        var contaminants = _solutionContainerSystem.SplitSolutionWithout(absorbentSoln, transferAmount, _puddleSystem.GetAbsorbentReagents(absorbentSoln.Comp.Solution));
         if (contaminants.Volume > 0)
         {
             _solutionContainerSystem.TryAddSolution(refillableSoln, contaminants);
@@ -206,7 +213,7 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
         Entity<SolutionComponent> absorbentSoln,
         Entity<SolutionComponent> refillableSoln)
     {
-        var contaminantsFromAbsorbent = _solutionContainerSystem.SplitSolutionWithout(absorbentSoln, component.PickupAmount, PuddleSystem.EvaporationReagents);
+        var contaminantsFromAbsorbent = _solutionContainerSystem.SplitSolutionWithout(absorbentSoln, component.PickupAmount, _puddleSystem.GetAbsorbentReagents(absorbentSoln.Comp.Solution));
 
         var absorbentSolution = absorbentSoln.Comp.Solution;
         if (contaminantsFromAbsorbent.Volume == FixedPoint2.Zero && absorbentSolution.AvailableVolume == FixedPoint2.Zero)
@@ -218,12 +225,12 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
             return false;
         }
 
-        var waterPulled = component.PickupAmount < absorbentSolution.AvailableVolume ?
-            component.PickupAmount :
-            absorbentSolution.AvailableVolume;
+        var waterPulled = component.PickupAmount < absorbentSolution.AvailableVolume
+            ? component.PickupAmount
+            : absorbentSolution.AvailableVolume;
 
         var refillableSolution = refillableSoln.Comp.Solution;
-        var waterFromRefillable = refillableSolution.SplitSolutionWithOnly(waterPulled, PuddleSystem.EvaporationReagents);
+        var waterFromRefillable = refillableSolution.SplitSolutionWithOnly(waterPulled, _puddleSystem.GetAbsorbentReagents(refillableSoln.Comp.Solution));
         _solutionContainerSystem.UpdateChemicals(refillableSoln);
 
         if (waterFromRefillable.Volume == FixedPoint2.Zero && contaminantsFromAbsorbent.Volume == FixedPoint2.Zero)
@@ -285,7 +292,7 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
 
         // Check if we have any evaporative reagents on our absorber to transfer
         var absorberSolution = absorberSoln.Comp.Solution;
-        var available = absorberSolution.GetTotalPrototypeQuantity(PuddleSystem.EvaporationReagents);
+        var available = absorberSolution.GetTotalPrototypeQuantity(_puddleSystem.GetAbsorbentReagents(absorberSolution));
 
         // No material
         if (available == FixedPoint2.Zero)
@@ -297,8 +304,8 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
         var transferMax = absorber.PickupAmount;
         var transferAmount = available > transferMax ? transferMax : available;
 
-        var puddleSplit = puddleSolution.SplitSolutionWithout(transferAmount, PuddleSystem.EvaporationReagents);
-        var absorberSplit = absorberSolution.SplitSolutionWithOnly(puddleSplit.Volume, PuddleSystem.EvaporationReagents);
+        var puddleSplit = puddleSolution.SplitSolutionWithout(transferAmount, _puddleSystem.GetAbsorbentReagents(puddleSolution));
+        var absorberSplit = absorberSolution.SplitSolutionWithOnly(puddleSplit.Volume, _puddleSystem.GetAbsorbentReagents(absorberSolution));
 
         // Do tile reactions first
         var transform = Transform(target);
@@ -325,4 +332,71 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
 
         return true;
     }
+
+    // BACKMEN EDIT START
+    [ValidatePrototypeId<ReagentPrototype>]
+    private const string WaterSolutionId = "Water";
+    private bool TryFootStepInteract(EntityUid user, EntityUid used, EntityUid target, AbsorbentComponent absorber, UseDelayComponent? useDelay, Entity<SolutionComponent> absorberSoln)
+    {
+        if (!HasComp<FootPrintComponent>(target)) // Perform a check if it was a footprint that was clicked on
+            return false;
+
+        var soundPlayed = false;
+
+        var footPrints = new HashSet<Entity<FootPrintComponent>>();
+        _lookup.GetEntitiesInRange(Transform(target).Coordinates, 0.25f, footPrints, LookupFlags.Dynamic | LookupFlags.Uncontained);
+
+        foreach (var (footstepUid, comp) in footPrints)
+        {
+            if (!_solutionContainerSystem.ResolveSolution(footstepUid, comp.SolutionName, ref comp.Solution, out var targetStepSolution) || targetStepSolution.Volume <= 0)
+                continue;
+
+            if (_puddleSystem.CanFullyEvaporate(targetStepSolution))
+                continue; // no spam
+
+            var absorberSolution = absorberSoln.Comp.Solution;
+            var available = absorberSolution.GetTotalPrototypeQuantity(WaterSolutionId);
+
+            // No material
+            if (available == FixedPoint2.Zero)
+            {
+                _popups.PopupEntity(Loc.GetString("mopping-system-no-water", ("used", used)), user, user);
+                return true;
+            }
+
+            var transferMax = absorber.PickupAmount;
+            var transferAmount = available > transferMax ? transferMax : available;
+
+            var puddleSplit = targetStepSolution.SplitSolutionWithout(transferAmount, WaterSolutionId);
+            var absorberSplit = absorberSolution.SplitSolutionWithOnly(puddleSplit.Volume, WaterSolutionId);
+
+            var transform = Transform(target);
+            var gridUid = transform.GridUid;
+            if (TryComp(gridUid, out MapGridComponent? mapGrid))
+            {
+                var tileRef = _mapSystem.GetTileRef(gridUid.Value, mapGrid, transform.Coordinates);
+                _puddleSystem.DoTileReactions(tileRef, absorberSplit);
+            }
+
+            _solutionContainerSystem.AddSolution(comp.Solution.Value, absorberSplit);
+            _solutionContainerSystem.AddSolution(absorberSoln, puddleSplit);
+
+            if (!soundPlayed)
+            {
+                soundPlayed = true; // to prevent sound spam
+                _audio.PlayPvs(absorber.PickupSound, target);
+            }
+
+            if (useDelay != null)
+                _useDelay.TryResetDelay((used, useDelay));
+        }
+        var userXform = Transform(user);
+        var targetPos = _transform.GetWorldPosition(target);
+        var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
+        localPos = userXform.LocalRotation.RotateVec(localPos);
+
+        _melee.DoLunge(user, used, Angle.Zero, localPos, null, false);
+        return true;
+    }
+    // BACKMEN EDIT END
 }

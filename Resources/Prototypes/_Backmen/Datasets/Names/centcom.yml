@@ -1,94 +1,48 @@
-- type: dataset
+- type: localizedDataset
   id: NameSpetsRXBZZ
   values:
-  - Оперативник
+    prefix: names-spets-rxbzz-
+    count: 1
 
-- type: dataset
+- type: localizedDataset
   id: NamesOFCs
   values:
-  - Полковник
-  - Подполковник
-  - Майор
+    prefix: names-ofcs-
+    count: 3
 
-- type: dataset
+- type: localizedDataset
   id: NamesSGTs
   values:
-  - Старший Лейтенант
-  - Лейтенант
-  - Капитан
+    prefix: names-sgts-
+    count: 3
 
-- type: dataset
+- type: localizedDataset
   id: NamesCPLs
   values:
-  - Капрал
-  - Сержант
-  - Старший Сержант
+    prefix: names-cpls-
+    count: 3
 
-- type: dataset
+- type: localizedDataset
   id: NamesPVTs
   values:
-  - Рядовой
-  - Рядовой
-  - Рядовой
-  - Рядовой
-  - Рядовой
-  - Ефрейтор
-  - Ефрейтор
-  - Ефрейтор
+    prefix: names-pvts-
+    count: 2
 
-- type: dataset
+
+- type: localizedDataset
   id: NameSpets
   values:
-  - DipCol
-  - BitCop
-  - Jazz
-  - Yololo
-  - Baycon
-  - Quest
-  - Pod
-  - Nail
-  - Pesok
-  - QSP
-  - Fiery
-  - Limo
-  - Maxvel
-  - Wield
-  - Nompad
-  - Henry
-  - Stick
-  - Crazy
-  - Diamond
-  - Jojo
-  - Isaac
-  - Klark
-  - Burn
-  - Jakarta
-  - Normandy
-  - Aquamarine
-  - Albatross
-  - Barracuda
-  - Curly
-  - Fighting Bob
-  - Robust
-  - Walter
-  - Angel
-  - Atkins
-  - Attila
-  - Kraut
-  - Balthazar
-  - Joker
-  - Doctor
-  - Patriot
-  - Professor
-  - Gomes
-  - Phoenix
+    prefix: name-spets-dataset-
+    count: 43
 
-- type: dataset
+- type: localizedDataset
   id: NameSpetsCommander
   values:
-  - Commander
+    prefix: name-spets-commander-dataset-
+    count: 1
 
-- type: dataset
+- type: localizedDataset
   id: NameSpetsOperative
   values:
-  - Operative
+    prefix: name-spets-operative-dataset-
+    count: 1

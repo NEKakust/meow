@@ -68,8 +68,7 @@
   - type: Wieldable
   - type: UseDelay
     delay: 1.5
-  - type: FollowDistance
-    backStrength: 2
+  - type: Telescope # backmen: immersive
 
 - type: entity
   name: SR-127 Bauer bolt action rifle
@@ -134,8 +133,7 @@
   - type: Wieldable
   - type: UseDelay
     delay: 1.3
-  - type: FollowDistance
-    backStrength: 1
+  - type: Telescope # backmen: immersive
 
 - type: entity
   name: Kardashev-Mosin
@@ -150,14 +148,20 @@
     sprite: Backmen/Objects/Weapons/Gunsx64/Snipers/mosin/tiny.rsi
   - type: Item
     sprite: Backmen/Objects/Weapons/Gunsx64/Snipers/mosin/tiny.rsi
+  - type: BallisticAmmoProvider
+    capacity: 10
+    proto: CartridgeRifleLight762
+    cycleable: false
+    whitelist:
+      tags:
+      - CartridgeRifle762
   - type: Gun
     fireRate: 0.8
   - type: Wieldable
   - type: UseDelay
     delay: 0.8
   - type: GunRequiresWield
-  - type: FollowDistance
-    backStrength: 3
+  - type: Telescope # backmen: immersive
 
 - type: entity
   name: M1 Garand
@@ -172,6 +176,12 @@
     sprite: Backmen/Objects/Weapons/Gunsx64/Snipers/garand/tiny.rsi
   - type: Item
     sprite: Backmen/Objects/Weapons/Gunsx64/Snipers/garand/tiny.rsi
+  - type: BallisticAmmoProvider
+    capacity: 10
+    proto: CartridgeRifleLight762UEG
+    whitelist:
+      tags:
+      - CartridgeRifle762UEG
   - type: Gun
     fireRate: 0.8
     soundGunshot:
@@ -182,14 +192,13 @@
   - type: UseDelay
     delay: 0.8
   - type: GunRequiresWield
-  - type: FollowDistance
-    backStrength: 3
+  - type: Telescope # backmen: immersive
 
 - type: entity
   name: Kardashev-Mosin AI
   parent: BaseWeaponSniper
   id: WeaponSniperMosinAI
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: A weapon for hunting, or endless trench warfare. Uses .30 rifle ammo.
   components:
   - type: Sprite
@@ -210,7 +219,7 @@
   name: Kardashev-Mosin AI Sniper
   parent: BaseWeaponSniper
   id: WeaponSniperMosinAISniper
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: A weapon for hunting, or endless trench warfare. Uses .30 rifle ammo.
   components:
   - type: Sprite
@@ -256,3 +265,37 @@
       - CartridgeAntitank
     capacity: 1
     proto: CartridgeAntitank
+
+- type: entity
+  name: Remington 700
+  parent: BaseWeaponSniper
+  id: WeaponSniperRemington700
+  suffix: Винтовка
+  description: Remington 700 охотничая винтовка под калибр 308 винчестер, был сделан по реплике чертежей Earth Armories сторонними компаниями, каркас винтовки исполнен из пластика.
+  components:
+  - type: Sprite
+    sprite: Backmen/Objects/Weapons/Gunsx64/Snipers/remington700/big.rsi
+  - type: Clothing
+    sprite: Backmen/Objects/Weapons/Gunsx64/Snipers/remington700/tiny.rsi
+  - type: Item
+    sprite: Backmen/Objects/Weapons/Gunsx64/Snipers/remington700/tiny.rsi
+  - type: Gun
+    fireRate: 0.8
+    soundGunshot:
+      path: /Audio/Weapons/Guns64/Snipers/dmr37.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns64/Snipers/sniper_empty.ogg
+  - type: BallisticAmmoProvider
+    capacity: 3
+    proto: Cartridge308win
+    whitelist:
+      tags:
+      - CartridgeRifle300win
+  - type: PumpAction
+    sound: /Audio/Weapons/Guns64/Snipers/kt42_cocked.ogg
+  - type: Wieldable
+  - type: UseDelay
+    delay: 2.8
+  - type: UseDelayOnShoot
+  - type: GunRequiresWield
+  - type: Telescope # Ataraxia

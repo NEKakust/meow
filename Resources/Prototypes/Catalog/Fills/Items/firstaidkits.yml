@@ -35,6 +35,7 @@
       - id: Gauze
       - id: PillCanisterIron
       - id: PillCanisterCopper
+      - id: Tourniquet
 
 - type: entity
   id: MedkitToxinFilled
@@ -71,7 +72,7 @@
     contents:
       - id: SyringePhalanximine
       - id: RadAutoInjector
-      - id: EmergencyMedipen
+      - id: PillCanisterPotassiumIodide
       - id: PillCanisterHyronalin
 
 - type: entity
@@ -83,6 +84,8 @@
     contents:
       - id: MedicatedSuture
       - id: RegenerativeMesh
+      - id: Tourniquet
+        amount: 2
       - id: Bloodpack
         amount: 2
 
@@ -96,6 +99,7 @@
       - id: MedicatedSuture
       - id: RegenerativeMesh
       - id: SyringeEphedrine
+      - id: SyringeSaline
       - id: BruteAutoInjector
       - id: BurnAutoInjector
 

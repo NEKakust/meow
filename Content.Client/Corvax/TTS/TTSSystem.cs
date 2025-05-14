@@ -64,7 +64,7 @@ public sealed class TTSSystem : EntitySystem
 
     public void RequestGlobalTTS(Content.Shared.Backmen.TTS.VoiceRequestType text, string voiceId)
     {
-        RaiseNetworkEvent(new RequestGlobalTTSEvent(text, voiceId));
+        RaiseNetworkEvent(new RequestPreviewTTSEvent(voiceId));
     }
 
     private void OnTtsVolumeChanged(float volume)
@@ -90,11 +90,11 @@ public sealed class TTSSystem : EntitySystem
         {
             var sourceUid = GetEntity(ev.SourceUid.Value);
             if(sourceUid.IsValid())
-                _audio.PlayEntity(audioResource.AudioStream, sourceUid, audioParams);
+                _audio.PlayEntity(audioResource.AudioStream, sourceUid, null, audioParams);
         }
         else
         {
-            _audio.PlayGlobal(audioResource.AudioStream, audioParams);
+            _audio.PlayGlobal(audioResource.AudioStream, null, audioParams);
         }
 
         _contentRoot.RemoveFile(filePath);

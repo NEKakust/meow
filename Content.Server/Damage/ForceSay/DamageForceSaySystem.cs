@@ -1,5 +1,7 @@
+using Content.Shared.Backmen.Surgery.Wounds;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Events;
 using Content.Shared.Damage.ForceSay;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
@@ -30,6 +32,7 @@ public sealed class DamageForceSaySystem : EntitySystem
         // so that we don't accidentally raise one for damage before one for mobstate
         // (this won't double raise, because of the cooldown)
         SubscribeLocalEvent<DamageForceSayComponent, DamageChangedEvent>(OnDamageChanged, after: new []{ typeof(MobThresholdSystem)} );
+        SubscribeLocalEvent<DamageForceSayComponent, WoundsDeltaChanged>(OnWoundsChanged, after: new []{ typeof(MobThresholdSystem)} ); // Backmen edit
         SubscribeLocalEvent<DamageForceSayComponent, SleepStateChangedEvent>(OnSleep);
     }
 
@@ -47,7 +50,7 @@ public sealed class DamageForceSaySystem : EntitySystem
         }
     }
 
-    private void TryForceSay(EntityUid uid, DamageForceSayComponent component, bool useSuffix=true, string? suffixOverride = null)
+    private void TryForceSay(EntityUid uid, DamageForceSayComponent component, bool useSuffix=true)
     {
         if (!TryComp<ActorComponent>(uid, out var actor))
             return;
@@ -57,7 +60,13 @@ public sealed class DamageForceSaySystem : EntitySystem
             _timing.CurTime < component.NextAllowedTime)
             return;
 
-        var suffix = Loc.GetString(suffixOverride ?? component.ForceSayStringPrefix + _random.Next(1, component.ForceSayStringCount));
+        var ev = new BeforeForceSayEvent(component.ForceSayStringDataset);
+        RaiseLocalEvent(uid, ev);
+
+        if (!_prototype.TryIndex(ev.Prefix, out var prefixList))
+            return;
+
+        var suffix = Loc.GetString(_random.Pick(prefixList.Values));
 
         // set cooldown & raise event
         component.NextAllowedTime = _timing.CurTime + component.Cooldown;
@@ -80,7 +89,7 @@ public sealed class DamageForceSaySystem : EntitySystem
         if (!args.FellAsleep)
             return;
 
-        TryForceSay(uid, component, true, "damage-force-say-sleep");
+        TryForceSay(uid, component);
         AllowNextSpeech(uid);
     }
 
@@ -111,6 +120,31 @@ public sealed class DamageForceSaySystem : EntitySystem
 
         TryForceSay(uid, component);
     }
+
+    // Backmen edit start
+    private void OnWoundsChanged(EntityUid uid, DamageForceSayComponent component, WoundsDeltaChanged args)
+    {
+        if (args.TotalDelta < component.DamageThreshold)
+            return;
+
+        if (component.ValidDamageGroups != null)
+        {
+            var totalApplicableDamage = FixedPoint2.Zero;
+            foreach (var (group, value) in args.WoundsDelta)
+            {
+                if (group.Comp.DamageGroup != null && !component.ValidDamageGroups.Contains(group.Comp.DamageGroup.ID))
+                    continue;
+
+                totalApplicableDamage += value;
+            }
+
+            if (totalApplicableDamage < component.DamageThreshold)
+                return;
+        }
+
+        TryForceSay(uid, component);
+    }
+    // Backmen edit end
 
     private void OnMobStateChanged(EntityUid uid, DamageForceSayComponent component, MobStateChangedEvent args)
     {

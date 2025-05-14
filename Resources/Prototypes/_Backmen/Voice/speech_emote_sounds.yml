@@ -26,6 +26,10 @@
       collection: FelinidGrowls
     Weh:
       collection: Weh
+    BCatMeow:
+      collection: BCatMeowSound
+    Hiss: # Backmen
+      collection: ReptilianHisses
 
 - type: emoteSounds
   id: FemaleFelinid
@@ -54,6 +58,10 @@
       collection: FelinidGrowls
     Weh:
       collection: Weh
+    BCatMeow:
+      collection: BCatMeowSound
+    Hiss: # Backmen
+      collection: ReptilianHisses
 
 # species
 - type: emoteSounds
@@ -107,3 +115,81 @@
       collection: HarpyChirps
     Weh:
       collection: Weh
+    BCatMeow:
+      collection: BCatMeowSound
+
+- type: emoteSounds
+  id: MaleFoxes
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FoxesScream
+    Laugh:
+      collection: FoxesLaugh
+    Growl:
+      collection: Growl
+    Howl:
+      collection: FoxesHowl
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: FoxesCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+    Purrs:
+      collection: FoxesPurrs
+    Hiss: # Backmen
+      collection: ReptilianHisses
+
+- type: emoteSounds
+  id: FemaleFoxes
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FoxesScream
+    Laugh:
+      collection: FoxesLaugh
+    Growl:
+      collection: Growl
+    Howl:
+      collection: FoxesHowl
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FoxesCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+    Purrs:
+      collection: FoxesPurrs
+    Hiss: # Backmen
+      collection: ReptilianHisses

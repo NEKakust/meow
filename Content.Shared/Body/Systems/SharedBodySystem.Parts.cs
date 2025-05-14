@@ -1,14 +1,19 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
+using Content.Shared.Humanoid;
+using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Linq;
+using Content.Shared.Backmen.Surgery.Body.Events;
+using Content.Shared.Backmen.Surgery.Body.Organs;
+using Content.Shared.Backmen.Targeting;
+using Robust.Shared.Random;
 
 namespace Content.Shared.Body.Systems;
 
@@ -21,25 +26,91 @@ public partial class SharedBodySystem
         // If you modify this also see the Body partial for root parts.
         SubscribeLocalEvent<BodyPartComponent, EntInsertedIntoContainerMessage>(OnBodyPartInserted);
         SubscribeLocalEvent<BodyPartComponent, EntRemovedFromContainerMessage>(OnBodyPartRemoved);
+
+        // Shitmed Change Start
+        SubscribeLocalEvent<BodyPartComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<BodyPartComponent, ComponentRemove>(OnBodyPartRemove);
     }
 
+    private void OnMapInit(Entity<BodyPartComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.PartType == BodyPartType.Chest)
+        {
+            _slots.AddItemSlot(ent, ent.Comp.ContainerName, ent.Comp.ItemInsertionSlot);
+            Dirty(ent, ent.Comp);
+        }
+
+        if (ent.Comp.OnAdd is not null || ent.Comp.OnRemove is not null)
+            EnsureComp<BodyPartEffectComponent>(ent);
+
+        foreach (var connection in ent.Comp.Children.Keys)
+        {
+            Containers.EnsureContainer<ContainerSlot>(ent, GetPartSlotContainerId(connection));
+        }
+    }
+
+    private void OnBodyPartRemove(Entity<BodyPartComponent> ent, ref ComponentRemove args)
+    {
+        if (ent.Comp.PartType == BodyPartType.Chest)
+            _slots.RemoveItemSlot(ent, ent.Comp.ItemInsertionSlot);
+    }
+
+    /// <summary>
+    ///     Shitmed Change: This function handles dropping the items in an entity's slots if they lose all of a given part.
+    ///     Such as their hands, feet, head, etc.
+    /// </summary>
+    public void DropSlotContents(Entity<BodyPartComponent> partEnt)
+    {
+        if (partEnt.Comp.Body is null
+            || !TryComp<InventoryComponent>(partEnt.Comp.Body, out var inventory) || // Prevent error for non-humanoids
+            GetBodyPartCount(partEnt.Comp.Body.Value, partEnt.Comp.PartType) != 1
+            || !TryGetPartSlotContainerName(partEnt.Comp.PartType, out var containerNames))
+            return;
+
+        foreach (var containerName in containerNames)
+        {
+            _inventorySystem.DropSlotContents(partEnt.Comp.Body.Value, containerName, inventory);
+        }
+
+    }
+
+    // Shitmed Change End
     private void OnBodyPartInserted(Entity<BodyPartComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         // Body part inserted into another body part.
         var insertedUid = args.Entity;
         var slotId = args.Container.ID;
 
-        if (ent.Comp.Body is null)
+        var body = ent.Comp.Body;
+        if (body is null)
             return;
 
-        if (TryComp(insertedUid, out BodyPartComponent? part))
-        {
-            AddPart(ent.Comp.Body.Value, (insertedUid, part), slotId);
-            RecursiveBodyUpdate((insertedUid, part), ent.Comp.Body.Value);
-        }
 
-        if (TryComp(insertedUid, out OrganComponent? organ))
-            AddOrgan((insertedUid, organ), ent.Comp.Body.Value, ent);
+        if (TryComp(insertedUid, out BodyPartComponent? part) && slotId.Contains(PartSlotContainerIdPrefix + GetSlotFromBodyPart(part))) // Shitmed Change
+        {
+            AddPart(body.Value, (insertedUid, part), slotId);
+            RecursiveBodyUpdate((insertedUid, part), body.Value);
+        }
+#if DEBUG
+        else if(HasComp<BodyPartComponent>(insertedUid))
+        {
+            DebugTools.Assert(
+                slotId.Contains(PartSlotContainerIdPrefix + GetSlotFromBodyPart(part)),
+                $"BodyPartComponent has not been inserted ({Prototype(args.Entity)?.ID}) into {Prototype(ent.Comp.Body!.Value)?.ID}" +
+                $" прототип должен иметь подключение начиная с {GetSlotFromBodyPart(part)} (сейчас {slotId.Replace(PartSlotContainerIdPrefix,"")})");
+        }
+#endif
+
+        if (TryComp(insertedUid, out OrganComponent? organ) && slotId.Contains(OrganSlotContainerIdPrefix + organ.SlotId.ToLower(CultureInfo.InvariantCulture))) // Shitmed Change
+        {
+            AddOrgan((insertedUid, organ), body.Value, ent);
+        }
+#if DEBUG
+        else if(HasComp<OrganComponent>(insertedUid))
+        {
+            DebugTools.Assert($"OrganComponent has not been inserted ({Prototype(args.Entity)?.ID}) into {Prototype(ent.Comp.Body!.Value)?.ID}");
+        }
+#endif
     }
 
     private void OnBodyPartRemoved(Entity<BodyPartComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -48,17 +119,31 @@ public partial class SharedBodySystem
         var removedUid = args.Entity;
         var slotId = args.Container.ID;
 
-        DebugTools.Assert(!TryComp(removedUid, out BodyPartComponent? b) || b.Body == ent.Comp.Body);
-        DebugTools.Assert(!TryComp(removedUid, out OrganComponent? o) || o.Body == ent.Comp.Body);
-
-        if (TryComp(removedUid, out BodyPartComponent? part) && part.Body is not null)
+        // Shitmed Change Start
+        if (TryComp(removedUid, out BodyPartComponent? part))
         {
-            RemovePart(part.Body.Value, (removedUid, part), slotId);
-            RecursiveBodyUpdate((removedUid, part), null);
+            if (!slotId.Contains(PartSlotContainerIdPrefix + GetSlotFromBodyPart(part)))
+                return;
+
+            DebugTools.Assert(part.Body == ent.Comp.Body);
+
+            if (part.Body is not null)
+            {
+                RemovePart(part.Body.Value, (removedUid, part), slotId);
+                RecursiveBodyUpdate((removedUid, part), null);
+            }
         }
 
         if (TryComp(removedUid, out OrganComponent? organ))
+        {
+            if (!slotId.Contains(OrganSlotContainerIdPrefix + organ.SlotId))
+                return;
+
+            DebugTools.Assert(organ.Body == ent.Comp.Body);
+
             RemoveOrgan((removedUid, organ), ent);
+        }
+        // Shitmed Change End
     }
 
     private void RecursiveBodyUpdate(Entity<BodyPartComponent> ent, EntityUid? bodyUid)
@@ -93,6 +178,8 @@ public partial class SharedBodySystem
             }
         }
 
+        // The code for RemovePartEffect() should live here, because it literally is the point of this recursive function.
+        // But the debug asserts at the top plus existing tests need refactoring for this. So we'll be lazy.
         foreach (var slotId in ent.Comp.Children.Keys)
         {
             if (!Containers.TryGetContainer(ent, GetPartSlotContainerId(slotId), out var container))
@@ -117,6 +204,9 @@ public partial class SharedBodySystem
         var ev = new BodyPartAddedEvent(slotId, partEnt);
         RaiseLocalEvent(bodyEnt, ref ev);
 
+        var ev1 = new BodyPartAddedEvent(slotId, partEnt);
+        RaiseLocalEvent(partEnt, ref ev1);
+
         AddLeg(partEnt, bodyEnt);
     }
 
@@ -127,13 +217,14 @@ public partial class SharedBodySystem
     {
         Resolve(bodyEnt, ref bodyEnt.Comp, logMissing: false);
         Dirty(partEnt, partEnt.Comp);
-        partEnt.Comp.Body = null;
 
         var ev = new BodyPartRemovedEvent(slotId, partEnt);
         RaiseLocalEvent(bodyEnt, ref ev);
 
+        var ev1 = new BodyPartRemovedEvent(slotId, partEnt);
+        RaiseLocalEvent(partEnt, ref ev1);
+
         RemoveLeg(partEnt, bodyEnt);
-        PartRemoveDamage(bodyEnt, partEnt);
     }
 
     private void AddLeg(Entity<BodyPartComponent> legEnt, Entity<BodyComponent?> bodyEnt)
@@ -141,12 +232,12 @@ public partial class SharedBodySystem
         if (!Resolve(bodyEnt, ref bodyEnt.Comp, logMissing: false))
             return;
 
-        if (legEnt.Comp.PartType == BodyPartType.Leg)
-        {
-            bodyEnt.Comp.LegEntities.Add(legEnt);
-            UpdateMovementSpeed(bodyEnt);
-            Dirty(bodyEnt, bodyEnt.Comp);
-        }
+        if (legEnt.Comp.PartType != BodyPartType.Leg)
+            return;
+
+        bodyEnt.Comp.LegEntities.Add(legEnt);
+        UpdateMovementSpeed(bodyEnt);
+        Dirty(bodyEnt, bodyEnt.Comp);
     }
 
     private void RemoveLeg(Entity<BodyPartComponent> legEnt, Entity<BodyComponent?> bodyEnt)
@@ -154,33 +245,13 @@ public partial class SharedBodySystem
         if (!Resolve(bodyEnt, ref bodyEnt.Comp, logMissing: false))
             return;
 
-        if (legEnt.Comp.PartType == BodyPartType.Leg)
-        {
-            bodyEnt.Comp.LegEntities.Remove(legEnt);
-            UpdateMovementSpeed(bodyEnt);
-            Dirty(bodyEnt, bodyEnt.Comp);
-
-            if (!bodyEnt.Comp.LegEntities.Any())
-            {
-                Standing.Down(bodyEnt);
-            }
-        }
-    }
-
-    private void PartRemoveDamage(Entity<BodyComponent?> bodyEnt, Entity<BodyPartComponent> partEnt)
-    {
-        if (!Resolve(bodyEnt, ref bodyEnt.Comp, logMissing: false))
+        if (legEnt.Comp.PartType != BodyPartType.Leg)
             return;
 
-        if (!_timing.ApplyingState
-            && partEnt.Comp.IsVital
-            && !GetBodyChildrenOfType(bodyEnt, partEnt.Comp.PartType, bodyEnt.Comp).Any()
-        )
-        {
-            // TODO BODY SYSTEM KILL : remove this when wounding and required parts are implemented properly
-            var damage = new DamageSpecifier(Prototypes.Index<DamageTypePrototype>("Bloodloss"), 300);
-            Damageable.TryChangeDamage(bodyEnt, damage);
-        }
+        bodyEnt.Comp.LegEntities.Remove(legEnt);
+        UpdateMovementSpeed(bodyEnt);
+        Dirty(bodyEnt, bodyEnt.Comp);
+        Standing.Down(bodyEnt);
     }
 
     /// <summary>
@@ -189,7 +260,7 @@ public partial class SharedBodySystem
     /// </summary>
     public EntityUid? GetParentPartOrNull(EntityUid uid)
     {
-        if (!Containers.TryGetContainingContainer(uid, out var container))
+        if (!Containers.TryGetContainingContainer((uid, null, null), out var container))
             return null;
 
         var parent = container.Owner;
@@ -205,7 +276,7 @@ public partial class SharedBodySystem
     /// </summary>
     public (EntityUid Parent, string Slot)? GetParentPartAndSlotOrNull(EntityUid uid)
     {
-        if (!Containers.TryGetContainingContainer(uid, out var container))
+        if (!Containers.TryGetContainingContainer((uid, null, null), out var container))
             return null;
 
         var slotId = GetPartSlotContainerIdFromContainer(container.ID);
@@ -235,7 +306,7 @@ public partial class SharedBodySystem
         parentUid = null;
         parentComponent = null;
 
-        if (Containers.TryGetContainingContainer(partUid, out var container) &&
+        if (Containers.TryGetContainingContainer((partUid, null, null), out var container) &&
             TryComp(container.Owner, out parentComponent))
         {
             parentUid = container.Owner;
@@ -254,13 +325,14 @@ public partial class SharedBodySystem
         EntityUid partUid,
         string slotId,
         BodyPartType partType,
+        BodyPartSymmetry symmetry = BodyPartSymmetry.None,
         BodyPartComponent? part = null)
     {
         if (!Resolve(partUid, ref part, logMissing: false))
             return null;
 
         Containers.EnsureContainer<ContainerSlot>(partUid, GetPartSlotContainerId(slotId));
-        var partSlot = new BodyPartSlot(slotId, partType);
+        var partSlot = new BodyPartSlot(slotId, partType, symmetry);
         part.Children.Add(slotId, partSlot);
         Dirty(partUid, part);
         return partSlot;
@@ -275,6 +347,7 @@ public partial class SharedBodySystem
         string slotId,
         BodyPartType partType,
         [NotNullWhen(true)] out BodyPartSlot? slot,
+        BodyPartSymmetry symmetry = BodyPartSymmetry.None,
         BodyPartComponent? part = null)
     {
         slot = null;
@@ -286,7 +359,7 @@ public partial class SharedBodySystem
         }
 
         Containers.EnsureContainer<ContainerSlot>(partId.Value, GetPartSlotContainerId(slotId));
-        slot = new BodyPartSlot(slotId, partType);
+        slot = new BodyPartSlot(slotId, partType, symmetry);
 
         if (!part.Children.TryAdd(slotId, slot.Value))
             return false;
@@ -300,10 +373,11 @@ public partial class SharedBodySystem
         string slotId,
         EntityUid childId,
         BodyPartType partType,
+        BodyPartSymmetry symmetry = BodyPartSymmetry.None,
         BodyPartComponent? parent = null,
         BodyPartComponent? child = null)
     {
-        return TryCreatePartSlot(parentId, slotId, partType, out _, parent)
+        return TryCreatePartSlot(parentId, slotId, partType, out _, symmetry, parent)
                && AttachPart(parentId, slotId, childId, parent, child);
     }
 
@@ -401,6 +475,53 @@ public partial class SharedBodySystem
             && Containers.Insert(partId, body.RootContainer);
     }
 
+    /// <summary>
+    ///     Returns true if this parentId supports attaching a new part to the specified slot.
+    /// </summary>
+    public bool CanAttachToSlot(
+        EntityUid parentId,
+        string slotId,
+        BodyPartComponent? parentPart = null)
+    {
+        return Resolve(parentId, ref parentPart, logMissing: false)
+               && parentPart.Children.ContainsKey(slotId);
+    }
+
+    // backmen edit start
+    /// <summary>
+    /// Returns true if the partId can be detached from the parentId in the specified slot.
+    /// </summary>
+    public bool CanDetachPart(
+        EntityUid parentId,
+        BodyPartSlot slot,
+        EntityUid partId,
+        BodyPartComponent? parentPart = null,
+        BodyPartComponent? part = null)
+    {
+        return Resolve(partId, ref part, logMissing: false)
+               && Resolve(parentId, ref parentPart, logMissing: false)
+               && CanDetachPart(parentId, slot.Id, partId, parentPart, part);
+    }
+
+    /// <summary>
+    /// Returns true if we can detach the specified partId from the parentId in the specified slot.
+    /// </summary>
+    public bool CanDetachPart(
+        EntityUid parentId,
+        string slotId,
+        EntityUid partId,
+        BodyPartComponent? parentPart = null,
+        BodyPartComponent? part = null)
+    {
+        return Resolve(partId, ref part, logMissing: false)
+               && Resolve(parentId, ref parentPart, logMissing: false)
+               && parentPart.Children.TryGetValue(slotId, out var parentSlotData)
+               && part.PartType == parentSlotData.Type
+               && Containers.TryGetContainer(parentId, GetPartSlotContainerId(slotId), out var container)
+               && Containers.CanRemove(partId, container);
+    }
+    // backmen edit end
+
     #endregion
 
     #region Attach/Detach
@@ -444,8 +565,70 @@ public partial class SharedBodySystem
             return false;
         }
 
+        part.ParentSlot = slot;
+
+        // start-backmen: surgery
+        if (HasComp<HumanoidAppearanceComponent>(part.Body)
+            && !HasComp<BodyPartAppearanceComponent>(partId)
+            && !TerminatingOrDeleted(parentPartId)
+            && !TerminatingOrDeleted(partId)) // Saw some exceptions involving these due to the spawn menu.
+            EnsureComp<BodyPartAppearanceComponent>(partId);
+
         return Containers.Insert(partId, container);
     }
+
+    // backmen edit start
+    /// <summary>
+    /// Detaches a body part from the specified body part parent.
+    /// </summary>
+    public bool DetachPart(
+        EntityUid parentPartId,
+        string slotId,
+        EntityUid partId,
+        BodyPartComponent? parentPart = null,
+        BodyPartComponent? part = null)
+    {
+        return Resolve(parentPartId, ref parentPart, logMissing: false)
+               && parentPart.Children.TryGetValue(slotId, out var slot)
+               && DetachPart(parentPartId, slot, partId, parentPart, part);
+    }
+
+    /// <summary>
+    /// Detaches a body part from the specified body part parent.
+    /// </summary>
+    public bool DetachPart(
+        EntityUid parentPartId,
+        BodyPartSlot slot,
+        EntityUid partId,
+        BodyPartComponent? parentPart = null,
+        BodyPartComponent? part = null)
+    {
+        if (!Resolve(parentPartId, ref parentPart, logMissing: false)
+            || !Resolve(partId, ref part, logMissing: false)
+            || !CanDetachPart(parentPartId, slot.Id, partId, parentPart, part)
+            || !parentPart.Children.ContainsKey(slot.Id))
+        {
+            return false;
+        }
+
+        if (!Containers.TryGetContainer(parentPartId, GetPartSlotContainerId(slot.Id), out var container))
+        {
+            DebugTools.Assert($"Unable to find body slot {slot.Id} for {ToPrettyString(parentPartId)}");
+            return false;
+        }
+
+        //parentPart.Children.Remove(slot.Id);
+
+        // start-backmen: surgery
+        if (HasComp<HumanoidAppearanceComponent>(part.Body)
+            && !HasComp<BodyPartAppearanceComponent>(partId)
+            && !TerminatingOrDeleted(parentPartId)
+            && !TerminatingOrDeleted(partId)) // Saw some exceptions involving these due to the spawn menu.
+            EnsureComp<BodyPartAppearanceComponent>(partId);
+
+        return Containers.Remove(partId, container);
+    }
+    // backmen edit end
 
     #endregion
 
@@ -480,6 +663,108 @@ public partial class SharedBodySystem
         Movement.ChangeBaseSpeed(bodyId, walkSpeed, sprintSpeed, acceleration, movement);
     }
 
+    public TargetBodyPart? GetRandomBodyPart(EntityUid target,
+        EntityUid attacker,
+        TargetingComponent? targetComp = null,
+        TargetingComponent? attackerComp = null)
+    {
+        if (!Resolve(target, ref targetComp) || !Resolve(attacker, ref attackerComp))
+            return null;
+
+        var totalWeight = targetComp.TargetOdds[attackerComp.Target].Values.Sum();
+        var randomValue = _random.NextFloat() * totalWeight;
+
+        foreach (var (part, weight) in targetComp.TargetOdds[attackerComp.Target])
+        {
+            if (randomValue <= weight)
+                return part;
+            randomValue -= weight;
+        }
+
+        return TargetBodyPart.Chest; // Default to torso if something goes wrong
+    }
+
+    public TargetBodyPart? GetRandomBodyPart(EntityUid target,
+        TargetBodyPart targetPart = TargetBodyPart.Chest,
+        TargetingComponent? targetComp = null)
+    {
+        if (!Resolve(target, ref targetComp))
+            return null;
+
+        var totalWeight = targetComp.TargetOdds[targetPart].Values.Sum();
+        var randomValue = _random.NextFloat() * totalWeight;
+
+        foreach (var (part, weight) in targetComp.TargetOdds[targetPart])
+        {
+            if (randomValue <= weight)
+                return part;
+            randomValue -= weight;
+        }
+
+        return targetPart;
+    }
+
+    public TargetBodyPart? GetRandomBodyPart(EntityUid target)
+    {
+        var toPick = GetBodyChildren(target).ToList();
+        return toPick.Count == 0 ? null : GetTargetBodyPart(_random.PickAndTake(toPick));
+    }
+
+    public TargetBodyPart? GetTargetBodyPart(Entity<BodyPartComponent> part)
+    {
+        return GetTargetBodyPart(part.Comp.PartType, part.Comp.Symmetry);
+    }
+
+    public TargetBodyPart? GetTargetBodyPart(BodyPartComponent part)
+    {
+        return GetTargetBodyPart(part.PartType, part.Symmetry);
+    }
+
+    /// <summary>
+    /// Converts Enums from BodyPartType to their Targeting system equivalent.
+    /// </summary>
+    public TargetBodyPart? GetTargetBodyPart(BodyPartType type, BodyPartSymmetry symmetry)
+    {
+        return (type, symmetry) switch
+        {
+            (BodyPartType.Head, _) => TargetBodyPart.Head,
+            (BodyPartType.Chest, _) => TargetBodyPart.Chest,
+            (BodyPartType.Groin, _) => TargetBodyPart.Groin,
+            (BodyPartType.Arm, BodyPartSymmetry.Left) => TargetBodyPart.LeftArm,
+            (BodyPartType.Arm, BodyPartSymmetry.Right) => TargetBodyPart.RightArm,
+            (BodyPartType.Hand, BodyPartSymmetry.Left) => TargetBodyPart.LeftHand,
+            (BodyPartType.Hand, BodyPartSymmetry.Right) => TargetBodyPart.RightHand,
+            (BodyPartType.Leg, BodyPartSymmetry.Left) => TargetBodyPart.LeftLeg,
+            (BodyPartType.Leg, BodyPartSymmetry.Right) => TargetBodyPart.RightLeg,
+            (BodyPartType.Foot, BodyPartSymmetry.Left) => TargetBodyPart.LeftFoot,
+            (BodyPartType.Foot, BodyPartSymmetry.Right) => TargetBodyPart.RightFoot,
+            _ => null,
+        };
+    }
+
+    /// <summary>
+    /// Converts Enums from Targeting system to their BodyPartType equivalent.
+    /// </summary>
+    public (BodyPartType Type, BodyPartSymmetry Symmetry) ConvertTargetBodyPart(TargetBodyPart? targetPart)
+    {
+        return targetPart switch
+        {
+            TargetBodyPart.Head => (BodyPartType.Head, BodyPartSymmetry.None),
+            TargetBodyPart.Chest => (BodyPartType.Chest, BodyPartSymmetry.None),
+            TargetBodyPart.Groin => (BodyPartType.Groin, BodyPartSymmetry.None),
+            TargetBodyPart.LeftArm => (BodyPartType.Arm, BodyPartSymmetry.Left),
+            TargetBodyPart.LeftHand => (BodyPartType.Hand, BodyPartSymmetry.Left),
+            TargetBodyPart.RightArm => (BodyPartType.Arm, BodyPartSymmetry.Right),
+            TargetBodyPart.RightHand => (BodyPartType.Hand, BodyPartSymmetry.Right),
+            TargetBodyPart.LeftLeg => (BodyPartType.Leg, BodyPartSymmetry.Left),
+            TargetBodyPart.LeftFoot => (BodyPartType.Foot, BodyPartSymmetry.Left),
+            TargetBodyPart.RightLeg => (BodyPartType.Leg, BodyPartSymmetry.Right),
+            TargetBodyPart.RightFoot => (BodyPartType.Foot, BodyPartSymmetry.Right),
+            _ => (BodyPartType.Chest, BodyPartSymmetry.None)
+        };
+
+    }
+
     #endregion
 
     #region Queries
@@ -492,10 +777,8 @@ public partial class SharedBodySystem
         if (!Resolve(partId, ref part, logMissing: false))
             yield break;
 
-        foreach (var slotId in part.Organs.Keys)
+        foreach (var containerSlotId in part.Organs.Keys.Select(GetOrganContainerId))
         {
-            var containerSlotId = GetOrganContainerId(slotId);
-
             if (!Containers.TryGetContainer(partId, containerSlotId, out var container))
                 continue;
 
@@ -656,11 +939,12 @@ public partial class SharedBodySystem
     public IEnumerable<(EntityUid Id, BodyPartComponent Component)> GetBodyChildrenOfType(
         EntityUid bodyId,
         BodyPartType type,
-        BodyComponent? body = null)
+        BodyComponent? body = null,
+        BodyPartSymmetry? symmetry = null)
     {
         foreach (var part in GetBodyChildren(bodyId, body))
         {
-            if (part.Component.PartType == type)
+            if (part.Component.PartType == type && (symmetry == null || part.Component.Symmetry == symmetry))
                 yield return part;
         }
     }
@@ -672,28 +956,28 @@ public partial class SharedBodySystem
     /// <param name="uid">The part entity id to check on.</param>
     /// <param name="part">The part to check for organs on.</param>
     /// <typeparam name="T">The component to check for.</typeparam>
-    public List<(T Comp, OrganComponent Organ)> GetBodyPartOrganComponents<T>(
+    public List<(EntityUid Owner, T Comp, OrganComponent Organ)> GetBodyPartOrganComponents<T>(
         EntityUid uid,
         BodyPartComponent? part = null)
         where T : IComponent
     {
         if (!Resolve(uid, ref part))
-            return new List<(T Comp, OrganComponent Organ)>();
+            return new List<(EntityUid owner, T Comp, OrganComponent Organ)>();
 
         var query = GetEntityQuery<T>();
-        var list = new List<(T Comp, OrganComponent Organ)>();
+        var list = new List<(EntityUid Owner, T Comp, OrganComponent Organ)>();
 
         foreach (var organ in GetPartOrgans(uid, part))
         {
             if (query.TryGetComponent(organ.Id, out var comp))
-                list.Add((comp, organ.Component));
+                list.Add((organ.Id, comp, organ.Component));
         }
 
         return list;
     }
 
     /// <summary>
-    ///     Tries to get a list of ValueTuples of <see cref="T"/> and OrganComponent on each organs
+    ///     Tries to get a list of ValueTuples of <see cref="T"/> and OrganComponent on each organ
     ///     in the given part.
     /// </summary>
     /// <param name="uid">The part entity id to check on.</param>
@@ -703,7 +987,7 @@ public partial class SharedBodySystem
     /// <returns>Whether any were found.</returns>
     public bool TryGetBodyPartOrganComponents<T>(
         EntityUid uid,
-        [NotNullWhen(true)] out List<(T Comp, OrganComponent Organ)>? comps,
+        [NotNullWhen(true)] out List<(EntityUid Owner, T Comp, OrganComponent Organ)>? comps,
         BodyPartComponent? part = null)
         where T : IComponent
     {
@@ -723,6 +1007,98 @@ public partial class SharedBodySystem
     }
 
     /// <summary>
+    ///     Tries to get a list of ValueTuples of EntityUid and OrganComponent on each organ
+    ///     in the given part.
+    /// </summary>
+    /// <param name="uid">The part entity id to check on.</param>
+    /// <param name="type">The type of component to check for.</param>
+    /// <param name="organs">Organs found in a body part.</param>
+    /// <param name="part">The part to check for organs on.</param>
+    /// <returns>Whether any were found.</returns>
+    /// <remarks>
+    ///     This method is somewhat of a cop out to the fact that we can't use reflection to generically
+    ///     get the type of component on runtime due to sandboxing. So we simply do a HasComp check for each organ.
+    /// </remarks>
+    public bool TryGetBodyPartOrgans(
+        EntityUid uid,
+        Type type,
+        [NotNullWhen(true)] out List<(EntityUid Id, OrganComponent Organ)>? organs,
+        BodyPartComponent? part = null)
+    {
+        if (!Resolve(uid, ref part))
+        {
+            organs = null;
+            return false;
+        }
+
+        var list = new List<(EntityUid Id, OrganComponent Organ)>();
+
+        foreach (var organ in GetPartOrgans(uid, part))
+        {
+            if (HasComp(organ.Id, type))
+                list.Add((organ.Id, organ.Component));
+        }
+
+        if (list.Count != 0)
+        {
+            organs = list;
+            return true;
+        }
+
+        organs = null;
+        return false;
+    }
+
+    public bool TryGetPartSlotContainerName(BodyPartType partType, out HashSet<string> containerNames)
+    {
+        containerNames = partType switch
+        {
+            BodyPartType.Hand => ["gloves"],
+            BodyPartType.Foot => ["shoes"],
+            BodyPartType.Head => ["eyes", "ears", "head", "mask"],
+            _ => [],
+        };
+        return containerNames.Count > 0;
+    }
+
+    public bool TryGetPartFromSlotContainer(string slot, out BodyPartType? partType)
+    {
+        partType = slot switch
+        {
+            "gloves" => BodyPartType.Hand,
+            "shoes" => BodyPartType.Foot,
+            "eyes" or "ears" or "head" or "mask" => BodyPartType.Head,
+            _ => null,
+        };
+        return partType is not null;
+    }
+
+    public int GetBodyPartCount(EntityUid bodyId, BodyPartType partType, BodyComponent? body = null)
+    {
+        return !Resolve(bodyId, ref body, logMissing: false) ? 0 : GetBodyChildren(bodyId, body).Count(part => part.Component.PartType == partType);
+    }
+
+    /// <summary>
+    /// ЕБАНЫЙ ПИЗДЕЦ
+    /// ФУНКЦИЯ ГОВНА!
+    /// </summary>
+    /// <param name="part"></param>
+    /// <returns></returns>
+    [Obsolete]
+    public string GetSlotFromBodyPart(BodyPartComponent? part)
+    {
+        var slotName = "";
+
+        if (part is null)
+            return slotName;
+
+        slotName = part.SlotId != "" ? part.SlotId : part.PartType.ToString().ToLower();
+        return part.Symmetry != BodyPartSymmetry.None ? $"{part.Symmetry.ToString().ToLower()} {slotName}" : slotName;
+    }
+
+    // Shitmed Change End
+
+    /// <summary>
     /// Gets the parent body part and all immediate child body parts for the partId.
     /// </summary>
     public IEnumerable<EntityUid> GetBodyPartAdjacentParts(
@@ -735,14 +1111,9 @@ public partial class SharedBodySystem
         if (TryGetParentBodyPart(partId, out var parentUid, out _))
             yield return parentUid.Value;
 
-        foreach (var slotId in part.Children.Keys)
+        foreach (var containedEnt in part.Children.Keys.Select(slotId => Containers.GetContainer(partId, GetPartSlotContainerId(slotId))).SelectMany(container => container.ContainedEntities))
         {
-            var container = Containers.GetContainer(partId, GetPartSlotContainerId(slotId));
-
-            foreach (var containedEnt in container.ContainedEntities)
-            {
-                yield return containedEnt;
-            }
+            yield return containedEnt;
         }
     }
 

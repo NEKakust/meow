@@ -3,9 +3,32 @@
   parent: Clothing
   id: ClothingShoesBase
   components:
+  - type: CoveredSlot # Backmen
+    slots: [socks]
+  # backmen edit start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Backmen/Items/handling/generic_small_pickup.ogg
+      params:
+        volume: -5
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Backmen/Items/handling/shoes_drop.ogg
+      params:
+        volume: -5
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Backmen/Items/handling/boots_drop.ogg
+      params:
+        volume: -5
   - type: Clothing
     slots:
     - FEET
+    equipSound:
+      collection: GenericEquip
+      params:
+        volume: -5
+  # backmen edit end
   - type: Sprite
     state: icon
   - type: Item
@@ -23,7 +46,7 @@
     tags:
     - ClothMade
     - WhitelistChameleon
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
 
 - type: entity
   abstract: true
@@ -51,6 +74,13 @@
           tags:
           - Knife
           - Sidearm
+  - type: Armor
+    coverage: # backmen: armour coverage
+    - Foot
+    modifiers:
+      coefficients:
+        Blunt: 0.40
+        Slash: 0.40
 
 - type: entity
   abstract: true
@@ -69,4 +99,5 @@
   description: Fluffy boots to help survive even the coldest of winters.
   components:
   - type: TemperatureProtection
-    coefficient: 0.2
+    heatingCoefficient: 1.025
+    coolingCoefficient: 0.5
